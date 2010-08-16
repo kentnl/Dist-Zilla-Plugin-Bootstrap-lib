@@ -2,15 +2,52 @@ use strict;
 use warnings;
 ## no critic ( NamingConventions::Capitalization )
 package Dist::Zilla::Plugin::Bootstrap::lib;
+BEGIN {
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01000003';
+}
 ## use critic;
 
 # ABSTRACT: A minimal boot-strapping for Dist::Zilla Plug-ins.
 
+
+
+
+
+use File::Spec;
+my $lib;
+BEGIN { $lib = File::Spec->catdir( File::Spec->curdir(), 'lib' ); }
+use Carp;
+use lib "$lib";
+Carp::carp("[Bootstrap::lib] $lib added to \@INC");
+
+
+sub log_debug { return 1; }
+
+
+sub plugin_name { return 'Bootstrap::lib' }
+
+
+sub dump_config { return }
+
+
+sub register_component { return }
+
+1;
+
+__END__
+=pod
+
+=head1 NAME
+
+Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla Plug-ins.
+
+=head1 VERSION
+
+version 0.01000003
+
 =head1 SYNOPSIS
 
     [Bootstrap::lib]
-
-=cut
 
 =head1 DESCRIPTION
 
@@ -20,7 +57,19 @@ at the point of its inclusion, so that you can use
 plug-ins you're writing for L<< C<Dist::Zilla>|Dist::Zilla >>, to release
 the plug-in itself.
 
-=cut
+=head1 METHODS
+
+=head2 log_debug
+    1;
+
+=head2 plugin_name
+    'Bootstrap::lib'
+
+=head2 dump_config
+    sub { }
+
+=head2 register_component
+    sub { }
 
 =head1 USE CASES
 
@@ -29,7 +78,6 @@ This module really is only useful in the case where you need to use something li
     dzil -Ilib
 
 For I<every> call to L<< C<Dist::Zilla>|Dist::Zilla >>, and this is mainly a convenience.
-=cut
 
 =head1 PRECAUTIONS
 
@@ -57,37 +105,16 @@ I wrote this plug-in, mostly because I was boiler-plating the code into every di
 it became annoying, especially having to update the code across distributions to handle
 L<< C<Dist::Zilla>|Dist::Zilla >> C<API> changes.
 
+=head1 AUTHOR
+
+Kent Fredric <kentnl@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-use File::Spec;
-my $lib;
-BEGIN { $lib = File::Spec->catdir( File::Spec->curdir(), 'lib' ); }
-use Carp;
-use lib "$lib";
-Carp::carp("[Bootstrap::lib] $lib added to \@INC");
-
-=method log_debug
-    1;
-=cut
-
-sub log_debug { return 1; }
-
-=method plugin_name
-    'Bootstrap::lib'
-=cut
-
-sub plugin_name { return 'Bootstrap::lib' }
-
-=method dump_config
-    sub { }
-=cut
-
-sub dump_config { return }
-
-=method register_component
-    sub { }
-=cut
-
-sub register_component { return }
-
-1;

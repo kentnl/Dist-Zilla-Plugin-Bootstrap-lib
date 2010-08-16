@@ -1,0 +1,66 @@
+NAME
+    Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for
+    Dist::Zilla Plug-ins.
+
+VERSION
+    version 0.01000003
+
+SYNOPSIS
+        [Bootstrap::lib]
+
+DESCRIPTION
+    This module does the very simple task of injecting the distributions
+    'lib' directory into @INC at the point of its inclusion, so that you can
+    use plug-ins you're writing for "Dist::Zilla", to release the plug-in
+    itself.
+
+METHODS
+  log_debug
+    1;
+  plugin_name
+    'Bootstrap::lib'
+  dump_config
+    sub { }
+  register_component
+    sub { }
+USE CASES
+    This module really is only useful in the case where you need to use
+    something like
+
+        dzil -Ilib
+
+    For *every* call to "Dist::Zilla", and this is mainly a convenience.
+
+PRECAUTIONS
+  DO NOT
+    DO NOT use this library from inside a bundle. It will not likely work as
+    expected, and you DO NOT want to bootstrap everything in all cases.
+
+  NO VERSION
+    At present, using this module in conjunction with a module with no
+    explicitly defined version in the source will result in the *executed*
+    instance of that plug-in *also* having NO VERSION.
+
+    This may have a workaround in the future, but no guarantees.
+
+  NOT REALLY A PLUG-IN
+    This is really just an inglorious hack masquerading as a plug-in. In
+    order to be useful for *all* plug-ins that you may want to normally use
+    with "Dist::Zilla", we subvert the entire plug-in system and do all our
+    work during "require".
+
+  GOOD LUCK
+    I wrote this plug-in, mostly because I was boiler-plating the code into
+    every dist I had that needed it, and it became annoying, especially
+    having to update the code across distributions to handle "Dist::Zilla"
+    "API" changes.
+
+AUTHOR
+    Kent Fredric <kentnl@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
