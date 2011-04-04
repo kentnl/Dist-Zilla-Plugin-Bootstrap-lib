@@ -1,5 +1,20 @@
 Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.01000003 2010-08-17 06:24:12 Pacific/Auckland
-          First version.
+0.01023600 2011-04-04T15:58:33Z
+ - Retooling release only.
+
+ [Dependencies::Devel]
+ - Advertises development pluginbundles.
+
+ [Packaging]
+ - Move to @Author::KENTNL
+ - ship .perltidyrc
+ - CPAN::Changes-ize it.
+
+ [Tests]
+ - Added cpan-changes tests.
+ - Dropped Portability tests.
+
+0.01000003 2010-08-16T18:24:12Z
+ - First version.
 

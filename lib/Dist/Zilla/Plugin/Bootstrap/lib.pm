@@ -3,7 +3,7 @@ use warnings;
 ## no critic ( NamingConventions::Capitalization )
 package Dist::Zilla::Plugin::Bootstrap::lib;
 BEGIN {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01000003';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01023600';
 }
 ## use critic;
 
@@ -43,7 +43,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.01000003
+version 0.01023600
 
 =head1 SYNOPSIS
 
@@ -111,7 +111,7 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2011 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
