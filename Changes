@@ -13,11 +13,11 @@ Revision history for {{$dist->name}}
  - runtime requires : warnings
 
  [Dependencies::Removed]
- - test requires : English 
+ - test requires : English
 
  [Internals]
  - Packages declare $AUTHOR
- - $VERSION declaration moved out of BEGIN 
+ - $VERSION declaration moved out of BEGIN
 
  [Packaging]
  - Update LICENSE ( Year, Indent, Address )
