@@ -1,5 +1,31 @@
 Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.01023601 2012-02-02T19:41:29Z
+ - Maintenance Release
+
+ [Dependencies::Changed]
+ - develop suggests : Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0 ->
+   v1.2.0
+
+ [Dependencies::New]
+ - runtime requires : perl 5.006
+ - runtime requires : strict
+ - runtime requires : warnings
+
+ [Dependencies::Removed]
+ - test requires : English
+
+ [Internals]
+ - Packages declare $AUTHOR
+ - $VERSION declaration moved out of BEGIN
+
+ [Packaging]
+ - Update LICENSE ( Year, Indent, Address )
+ - Move extra tests to xt/
+ - Move Git URLS' to https://
+ - add x_authority
+ - Moved to git versions.
+
 0.01023600 2011-04-04T15:58:33Z
  - Retooling release only.
 
