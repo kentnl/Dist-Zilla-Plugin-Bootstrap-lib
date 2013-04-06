@@ -54,18 +54,18 @@ sub register_component {
         return;
     }
     
-    $logger->log([ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ]);
+    $logger->log_debug([ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ]);
     
    my ( @candidates ) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
     if ( @candidates != 1  and !$payload->{fallback} ){
         $logger->log([ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ]);
-        $logger->log([ 'candidate: %s', $_->basename ]) for @candidates;
+        $logger->log_debug([ 'candidate: %s', $_->basename ]) for @candidates;
         return;
     }
     if ( @candidates != 1  and $payload->{fallback} ){
         $logger->log([ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ]);
-        $logger->log([ 'candidate: %s', $_->basename ]) for @candidates;
+        $logger->log_debug([ 'candidate: %s', $_->basename ]) for @candidates;
         lib->import($cwd->child('lib')->stringify);
         return;
     }
