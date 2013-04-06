@@ -1,5 +1,23 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.02000000 2013-04-06T09:38:52Z
+ [!Noteworthy Changes]
+ - @INC mutation now done slightly later at C<register_component>, which lets us get payload parameters out,
+   while still executing the real work long before anything else. Though execution order still matters profusely.
+ - 3 new parameters,
+ - `try_built` tries to use a previous build instead of a "undef version" based bootstrap
+ - `fallback = 1` enables `try_built` to fall back to the `bootstrap lib` form ( this is the default )
+ - `no_fallback = 1` disables `fallback`
+
+ [Dependencies::Removed / runtime requires]
+ - File::Spec
+ - Carp
+
+ [Dependencies::Added / runtime requires]
+ - Path::Tiny
+ - Cwd
+
+
 0.01023602 2013-04-06T08:37:50Z
  - Maintenance Release
 
