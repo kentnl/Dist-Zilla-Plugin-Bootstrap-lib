@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.02000100 2013-04-06T09:53:45Z
  [Bugs]
  - 2 fallback conditions were accidentally using the same logic, so only one would ever work.
  - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted in a "fallthrough" to system.
