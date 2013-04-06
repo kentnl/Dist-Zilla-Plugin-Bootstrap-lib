@@ -70,8 +70,9 @@ sub register_component {
     lib->import( $cwd->child('lib')->stringify );
     return;
   }
-  $logger->log( [ 'bootstrapping %s', $candidates[0]->child('lib')->stringify ] );
-  lib->import( $candidates[0]->stringify );
+  my $found = $candidates[0]->child('lib');
+  $logger->log( [ 'bootstrapping %s', $found->stringify ] );
+  lib->import( $found->stringify );
 
   return
 
