@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000000';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000100';
 }
 ## use critic;
 
@@ -59,19 +59,20 @@ sub register_component {
 
   my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
-  if ( @candidates != 1 and not $payload->{fallback} ) {
+  if ( scalar @candidates != 1 and not $payload->{fallback} ) {
     $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
     $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
     return;
   }
-  if ( @candidates != 1 and not $payload->{fallback} ) {
+  if ( scalar @candidates != 1 and $payload->{fallback} ) {
     $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
     $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
     lib->import( $cwd->child('lib')->stringify );
     return;
   }
-  $logger->log( [ 'bootstrapping %s', $candidates[0]->stringify ] );
-  lib->import( $candidates[0]->stringify );
+  my $found = $candidates[0]->child('lib');
+  $logger->log( [ 'bootstrapping %s', $found->stringify ] );
+  lib->import( $found->stringify );
 
   return
 
@@ -89,7 +90,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.02000000
+version 0.02000100
 
 =head1 SYNOPSIS
 

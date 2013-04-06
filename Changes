@@ -1,5 +1,10 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.02000100 2013-04-06T09:53:45Z
+ [Bugs]
+ - 2 fallback conditions were accidentally using the same logic, so only one would ever work.
+ - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted in a "fallthrough" to system.
+
 0.02000000 2013-04-06T09:38:52Z
  [!Noteworthy Changes]
  - @INC mutation now done slightly later at C<register_component>, which lets us get payload parameters out,

@@ -19,7 +19,7 @@ name: Dist-Zilla-Plugin-Bootstrap-lib
 provides:
   Dist::Zilla::Plugin::Bootstrap::lib:
     file: lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
-    version: 0.02000000
+    version: 0.02000100
 requires:
   Cwd: 0
   Path::Tiny: 0
@@ -30,7 +30,7 @@ resources:
   bugtracker: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib/issues
   homepage: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib
   repository: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib.git
-version: 0.02000000
+version: 0.02000100
 x_BuiltWith:
   modules:
     Cwd: 3.40
