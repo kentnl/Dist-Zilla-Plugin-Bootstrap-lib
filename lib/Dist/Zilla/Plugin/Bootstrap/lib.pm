@@ -59,13 +59,6 @@ L<< C<Dist::Zilla>|Dist::Zilla >> C<API> changes.
 
 =cut
 
-use File::Spec;
-my $lib;
-BEGIN { $lib = File::Spec->catdir( File::Spec->curdir(), 'lib' ); }
-use Carp;
-use lib "$lib";
-Carp::carp("[Bootstrap::lib] $lib added to \@INC");
-
 =method log_debug
     1;
 =cut
@@ -88,6 +81,55 @@ sub dump_config { return }
     sub { }
 =cut
 
-sub register_component { return }
+sub register_component {
+  my ( $plugin_class, $name, $payload, $section ) = @_;
+  my $zilla  = $section->sequence->assembler->zilla;
+  my $logger = $zilla->chrome->logger->proxy(
+    {
+      proxy_prefix => '[' . $name . '] ',
+    }
+  );
+  my $distname = $zilla->name;
+  $logger->log_debug( [ 'online, %s v%s', $plugin_class, $plugin_class->VERSION || 0 ] );
+
+  $payload->{try_built} = undef if not exists $payload->{try_built};
+
+  if ( $payload->{try_built} ) {
+    $payload->{fallback} = 1     if not exists $payload->{fallback};
+    $payload->{fallback} = undef if exists $payload->{no_fallback};
+  }
+
+  require Cwd;
+  require Path::Tiny;
+  require lib;
+  my $cwd = Path::Tiny::path(Cwd::cwd);
+
+  if ( not $payload->{try_built} ) {
+    $logger->log( [ 'bootstrapping %s', $cwd->child('lib')->stringify ] );
+    lib->import( $cwd->child('lib')->stringify );
+    return;
+  }
+
+  $logger->log( [ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ] );
+
+  my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
+
+  if ( @candidates != 1 and !$payload->{fallback} ) {
+    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
+    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+    return;
+  }
+  if ( @candidates != 1 and $payload->{fallback} ) {
+    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
+    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+    lib->import( $cwd->child('lib')->stringify );
+    return;
+  }
+  $logger->log( [ 'bootstrapping %s', $candidates[0]->stringify ] );
+  lib->import( $candidates[0]->stringify );
+
+  return
+
+}
 
 1;
