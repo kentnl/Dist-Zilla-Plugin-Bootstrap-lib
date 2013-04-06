@@ -1,4 +1,39 @@
-Revision history for Dist-Zilla-Plugin-Bootstrap-lib
+﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
+
+0.01023602 2013-04-06T08:37:50Z
+ - Maintenance Release
+
+ [Dependencies::Added / develop requires]
+ - Pod::Coverage::TrustPod
+ - Test::CPAN::Meta
+ - Test::POD 1.41
+ - Test::POD::Coverage 1.08
+ - version 0.9901
+
+ [Dependencies::Changed / build requires]
+ - Module::Build 0.3601 → 0.4004
+
+ [Dependencies::Changed / configure requires]
+ - Module::Build 0.3601 → 0.4004
+
+ [Dependencies::Changed / develop recommends]
+ - Dist::Zilla::PluginBundle::Author::KENTNL::Lite 0.01009803 → v1.3.0
+
+ [Dependencies::Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL v1.2.0 → v1.7.2
+
+ [Dependencies::Changed / test requires]
+ - Test::More 0.88 → 0.98
+
+ [Documentation]
+ - Update Ⓒ year.
+ - Add README.mkdn
+
+ [Meta]
+ - bugtracker to github issues
+
+ [Packaging]
+ - utilise Module::Build 0.4004
 
 0.01023601 2012-02-02T19:41:29Z
  - Maintenance Release

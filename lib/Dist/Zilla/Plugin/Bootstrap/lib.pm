@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01023601';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01023602';
 }
 ## use critic;
 
@@ -38,6 +38,7 @@ sub register_component { return }
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -46,7 +47,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.01023601
+version 0.01023602
 
 =head1 SYNOPSIS
 
@@ -114,10 +115,9 @@ Kent Fredric <kentnl@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
