@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.0102';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01023602';
 }
 ## use critic;
 
@@ -34,28 +34,38 @@ sub register_component {
     });
     my $distname = $zilla->name;
     $logger->log([ 'online, %s v%s', $plugin_class, $plugin_class->VERSION || 0 ]);
+        
+    $payload->{try_built} = undef if not exists $payload->{try_built};
 
     #require Data::Dump;
-    $payload->{fallback} = 1 if not exists $payload->{fallback};
-    $payload->{fallback} = undef if exists $payload->{nofallback};
+    if ( $payload->{try_built} ) {
+        $payload->{fallback} = 1 if not exists $payload->{fallback};
+        $payload->{fallback} = undef if exists $payload->{no_fallback};
+    }
     #$logger->log([ 'config = %s', Data::Dump::pp($payload)] );
-
-
-    require Scalar::Util;
-    $logger->log([ 'zilla isa %s', Scalar::Util::blessed($zilla) ]);
     require Cwd;
     require Path::Tiny;
-    my $cwd = Path::Tiny::path(Cwd::cwd);
-    $logger->log([ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ]);
     require lib;
-    my ( @candidates ) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
+    my $cwd = Path::Tiny::path(Cwd::cwd);
+
+    if ( not $payload->{try_built} ) {
+        $logger->log(['bootstrapping %s', $cwd->child('lib')->stringify]);
+        lib->import( $cwd->child('lib')->stringify );
+        return;
+    }
+    
+    $logger->log([ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ]);
+    
+   my ( @candidates ) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
     if ( @candidates != 1  and !$payload->{fallback} ){
-        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback disabled. not bootstrapping', scalar @candidates ])
+        $logger->log([ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ]);
+        $logger->log([ 'candidate: %s', $_->basename ]) for @candidates;
         return;
     }
     if ( @candidates != 1  and $payload->{fallback} ){
-        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback to boostrapping lib/', scalar @candidates ]);
+        $logger->log([ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ]);
+        $logger->log([ 'candidate: %s', $_->basename ]) for @candidates;
         lib->import($cwd->child('lib')->stringify);
         return;
     }
@@ -79,7 +89,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.0102
+version 0.01023602
 
 =head1 SYNOPSIS
 

@@ -17,7 +17,7 @@ my %module_build_args = (
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Bootstrap-lib",
-  "dist_version" => "0.0102",
+  "dist_version" => "0.01023602",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Bootstrap::lib",
   "recommends" => {},
@@ -25,7 +25,6 @@ my %module_build_args = (
   "requires" => {
     "Cwd" => 0,
     "Path::Tiny" => 0,
-    "Scalar::Util" => 0,
     "perl" => "5.006",
     "strict" => 0,
     "warnings" => 0
