@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000000';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000001';
 }
 ## use critic;
 
@@ -70,7 +70,7 @@ sub register_component {
     lib->import( $cwd->child('lib')->stringify );
     return;
   }
-  $logger->log( [ 'bootstrapping %s', $candidates[0]->stringify ] );
+  $logger->log( [ 'bootstrapping %s', $candidates[0]->child('lib')->stringify ] );
   lib->import( $candidates[0]->stringify );
 
   return
@@ -89,7 +89,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.02000000
+version 0.02000001
 
 =head1 SYNOPSIS
 
