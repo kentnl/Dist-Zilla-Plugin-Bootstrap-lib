@@ -33,7 +33,7 @@ sub register_component {
         proxy_prefix  => '[' . $name  . '] ',
     });
     my $distname = $zilla->name;
-    $logger->log([ 'online, %s v%s', $plugin_class, $plugin_class->VERSION || 0 ]);
+    $logger->log_debug([ 'online, %s v%s', $plugin_class, $plugin_class->VERSION || 0 ]);
         
     $payload->{try_built} = undef if not exists $payload->{try_built};
 
@@ -54,7 +54,7 @@ sub register_component {
         return;
     }
     
-    $logger->log_debug([ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ]);
+    $logger->log([ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ]);
     
    my ( @candidates ) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
