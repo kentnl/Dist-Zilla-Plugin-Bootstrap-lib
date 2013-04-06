@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.02000000 2013-04-06T09:35:44Z
+0.02000000 2013-04-06T09:36:20Z
  [!Noteworthy Changes]
  - @INC mutation now done slightly later at C<register_component>, which lets us get payload parameters out,
    while still executing the real work long before anything else. Though execution order still matters profusely.
