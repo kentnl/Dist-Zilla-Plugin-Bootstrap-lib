@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01023602';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.0102';
 }
 ## use critic;
 
@@ -15,13 +15,6 @@ BEGIN {
 
 
 
-
-use File::Spec;
-my $lib;
-BEGIN { $lib = File::Spec->catdir( File::Spec->curdir(), 'lib' ); }
-use Carp;
-use lib "$lib";
-Carp::carp("[Bootstrap::lib] $lib added to \@INC");
 
 
 sub log_debug { return 1; }
@@ -33,7 +26,45 @@ sub plugin_name { return 'Bootstrap::lib' }
 sub dump_config { return }
 
 
-sub register_component { return }
+sub register_component { 
+    my ( $plugin_class, $name, $payload, $section ) = @_;
+    my $zilla = $section->sequence->assembler->zilla;
+    my $logger = $zilla->chrome->logger->proxy({
+        proxy_prefix  => '[' . $name  . '] ',
+    });
+    my $distname = $zilla->name;
+    $logger->log([ 'online, %s v%s', $plugin_class, $plugin_class->VERSION || 0 ]);
+
+    #require Data::Dump;
+    $payload->{fallback} = 1 if not exists $payload->{fallback};
+    $payload->{fallback} = undef if exists $payload->{nofallback};
+    #$logger->log([ 'config = %s', Data::Dump::pp($payload)] );
+
+
+    require Scalar::Util;
+    $logger->log([ 'zilla isa %s', Scalar::Util::blessed($zilla) ]);
+    require Cwd;
+    require Path::Tiny;
+    my $cwd = Path::Tiny::path(Cwd::cwd);
+    $logger->log([ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ]);
+    require lib;
+    my ( @candidates ) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
+
+    if ( @candidates != 1  and !$payload->{fallback} ){
+        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback disabled. not bootstrapping', @candidates ])
+    }
+    if ( @candidates != 1  and $payload->{fallback} ){
+        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback to boostrapping lib/', @candidates ]);
+        lib->import($cwd->child('lib')->stringify);
+        return;
+    }
+    $logger->log(['bootstrapping %s', $candidates[0]->stringify ]);
+    lib->import($candidates[0]->stringify);
+    
+
+    return 
+
+}
 
 1;
 
@@ -47,7 +78,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.01023602
+version 0.0102
 
 =head1 SYNOPSIS
 
