@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000000';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01023603';
 }
 ## use critic;
 
@@ -89,13 +89,13 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.02000000
+version 0.01023603
 
 =head1 SYNOPSIS
 
     [Bootstrap::lib]
     try_built   = 1  ; try using an existing built distribution named Dist-Name-*
-    no_fallback = 1  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap 
+    no_fallback = 1  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap
                      ; using lib/ instead
 
 =head1 DESCRIPTION
@@ -122,7 +122,7 @@ the plug-in itself.
 
 =head1 USE CASES
 
-=head2 Simple single-phase self-dependency 
+=head2 Simple single-phase self-dependency
 
 This module really is only useful in the case where you need to use something like
 
@@ -156,7 +156,7 @@ Will do what you want.
 
 =head2 2-step self-dependency
 
-There's a 3rd useful case which is a hybrid of the 2, where you /can/ build from your own sources without needing a preinstalled version, 
+There's a 3rd useful case which is a hybrid of the 2, where you /can/ build from your own sources without needing a preinstalled version,
 just you don't want that for release code ( ie: $VERSION being undef in code that is run during release is "bad" )
 
     [Bootstrap::lib]
@@ -184,11 +184,11 @@ On its own,
 At present, using this module in conjunction with a module with no explicitly defined version in the
 source will result in the I<executed> instance of that plug-in I<also> having B<NO VERSION>.
 
-If this is a problem for you, then its suggested you try either variation of using 
+If this is a problem for you, then its suggested you try either variation of using
 
     [Bootstrap::lib]
     try_built = 1
-    ; no_fallback = 1   # 
+    ; no_fallback = 1   #
 
 =head2 SUCKS AT GUESSING
 
@@ -199,8 +199,8 @@ if there are "zero" versions readily available.
 
 This is mostly because there is no way to determine the "current" version we are building for, because the point in the execution
 cycle is so early, no version plugins are likely to be even instantiated yet, and some version plugins are dependent on incredibly
-complex precursors ( like git ), so by even trying to garner the version we're currently building, we could be prematurly cutting off 
-a vast majority of modules from even being able to bootstrap. 
+complex precursors ( like git ), so by even trying to garner the version we're currently building, we could be prematurly cutting off
+a vast majority of modules from even being able to bootstrap.
 
 Even as it is, us using C<< zilla->name >> means that if your dist relies on some process to divine its name, the module that does this must
 
@@ -214,7 +214,7 @@ Even as it is, us using C<< zilla->name >> means that if your dist relies on som
 
 The only way of working around that I can envision is adding parameters to C<Bootstrap::lib> to specifiy the dist name and version name...
 but if you're going to do that, you may as well stop using external plugins to discover that, and hardcode those values in dist.ini
-to start with. 
+to start with.
 
 =head2 GOOD LUCK
 
