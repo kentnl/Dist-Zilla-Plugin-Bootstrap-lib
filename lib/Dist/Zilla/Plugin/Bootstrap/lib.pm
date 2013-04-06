@@ -6,12 +6,11 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000000';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.01023603';
 }
 ## use critic;
 
 # ABSTRACT: A minimal boot-strapping for Dist::Zilla Plug-ins.
-
 
 
 
@@ -90,11 +89,14 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.02000000
+version 0.01023603
 
 =head1 SYNOPSIS
 
     [Bootstrap::lib]
+    try_built   = 1  ; try using an existing built distribution named Dist-Name-*
+    no_fallback = 1  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap 
+                     ; using lib/ instead
 
 =head1 DESCRIPTION
 
@@ -120,11 +122,51 @@ the plug-in itself.
 
 =head1 USE CASES
 
+=head2 Simple single-phase self-dependency 
+
 This module really is only useful in the case where you need to use something like
 
     dzil -Ilib
 
 For I<every> call to L<< C<Dist::Zilla>|Dist::Zilla >>, and this is mainly a convenience.
+
+For that
+
+    [Bootstrap::lib]
+
+on its own will do the right thing.
+
+=head2 Installed-Only self-dependency
+
+The other useful case is when you would normally do
+
+    dzil build                 # pass 1 that generates Foo-1.234 with a pre-installed Foo-1.233
+    dzil -IFoo-1.234/lib build # pass 2 that generates Foo-1.234 with Foo-1.234
+
+For that
+
+    [Bootstap::lib]
+    try_built   = 1
+    no_fallback = 1
+
+Will do what you want.
+
+    dzil build   # pass1 -> creates Foo-1.234 without bootstrapping
+    dzil build   # pass2 -> creates Foo-1.234 boot-strapped from the previous build
+
+=head2 2-step self-dependency
+
+There's a 3rd useful case which is a hybrid of the 2, where you /can/ build from your own sources without needing a preinstalled version, 
+just you don't want that for release code ( ie: $VERSION being undef in code that is run during release is "bad" )
+
+    [Bootstrap::lib]
+    try_built = 1
+    fallback  = 1
+
+Then
+
+    dzil build  # pass1 -> creates Foo-1.234 from bootstrapped $root/lib
+    dzil build  # pass2 -> creates Foo-1.234 from bootstrapped $root/Foo-1.234
 
 =head1 PRECAUTIONS
 
@@ -135,16 +177,44 @@ to bootstrap everything in all cases.
 
 =head2 NO VERSION
 
+On its own,
+
+    [Bootstrap::lib]
+
 At present, using this module in conjunction with a module with no explicitly defined version in the
 source will result in the I<executed> instance of that plug-in I<also> having B<NO VERSION>.
 
-This may have a workaround in the future, but no guarantees.
+If this is a problem for you, then its suggested you try either variation of using 
 
-=head2 NOT REALLY A PLUG-IN
+    [Bootstrap::lib]
+    try_built = 1
+    ; no_fallback = 1   # 
 
-This is really just an inglorious hack masquerading as a plug-in. In order to be useful for I<all> plug-ins
-that you may want to normally use with L<< C<Dist::Zilla>|Dist::Zilla >>, we subvert the entire plug-in
-system and do all our work during C<require>.
+=head2 SUCKS AT GUESSING
+
+The core mechanism behind C<try_built> relies on looking in your project directory for a previous build directory of some kind.
+
+And there's no way for it to presently pick a "best" version when there are more than one, or magically provide a better solution
+if there are "zero" versions readily available.
+
+This is mostly because there is no way to determine the "current" version we are building for, because the point in the execution
+cycle is so early, no version plugins are likely to be even instantiated yet, and some version plugins are dependent on incredibly
+complex precursors ( like git ), so by even trying to garner the version we're currently building, we could be prematurly cutting off 
+a vast majority of modules from even being able to bootstrap. 
+
+Even as it is, us using C<< zilla->name >> means that if your dist relies on some process to divine its name, the module that does this must
+
+=over 4
+
+=item * be loaded and decared prior to C<Bootstrap::lib> in the C<dist.ini>
+
+=item * not itself be the module you are presently developing/bootstrapping
+
+=back
+
+The only way of working around that I can envision is adding parameters to C<Bootstrap::lib> to specifiy the dist name and version name...
+but if you're going to do that, you may as well stop using external plugins to discover that, and hardcode those values in dist.ini
+to start with. 
 
 =head2 GOOD LUCK
 
