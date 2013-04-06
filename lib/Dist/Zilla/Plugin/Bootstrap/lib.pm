@@ -121,6 +121,12 @@ Even as it is, us using C<< zilla->name >> means that if your dist relies on som
 
 The only way of working around that I can envision is adding parameters to C<Bootstrap::lib> to specify the dist name and version name... but if you're going to do that, you may as well stop using external plugins to discover that, and hard-code those values in C<dist.ini> to start with.
 
+=head2 STILL NOT REALLY A PLUGIN
+
+Though the interface is getting more plugin-like every day, all of the behaviour is still implemented at construction time, practically as soon as the underlying Config::MVP engine has parsed it from the configuration.
+
+As such, it is completely removed from the real plugin execution phases, and unlike real plugins which appear on the plugin stash, this module does not appear there.
+
 =head2 GOOD LUCK
 
 I wrote this plug-in, mostly because I was boiler-plating the code into every dist I had that needed it, and
