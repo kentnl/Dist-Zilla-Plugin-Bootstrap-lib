@@ -37,12 +37,11 @@ sub register_component {
         
     $payload->{try_built} = undef if not exists $payload->{try_built};
 
-    #require Data::Dump;
     if ( $payload->{try_built} ) {
         $payload->{fallback} = 1 if not exists $payload->{fallback};
         $payload->{fallback} = undef if exists $payload->{no_fallback};
     }
-    #$logger->log([ 'config = %s', Data::Dump::pp($payload)] );
+
     require Cwd;
     require Path::Tiny;
     require lib;
