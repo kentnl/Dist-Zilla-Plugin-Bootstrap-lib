@@ -60,9 +60,9 @@ USE CASES
 
   2-step self-dependency
     There's a 3rd useful case which is a hybrid of the 2, where you /can/
-    build from your own sources without needing a preinstalled version, just
-    you don't want that for release code ( ie: $VERSION being undef in code
-    that is run during release is "bad" )
+    build from your own sources without needing a pre-installed version,
+    just you don't want that for release code ( e.g.: $VERSION being "undef"
+    in code that is run during release is "bad" )
 
         [Bootstrap::lib]
         try_built = 1
@@ -107,20 +107,20 @@ PRECAUTIONS
     so early, no version plugins are likely to be even instantiated yet, and
     some version plugins are dependent on incredibly complex precursors (
     like git ), so by even trying to garner the version we're currently
-    building, we could be prematurly cutting off a vast majority of modules
+    building, we could be prematurely cutting off a vast majority of modules
     from even being able to bootstrap.
 
     Even as it is, us using "zilla->name" means that if your dist relies on
     some process to divine its name, the module that does this must
 
-    *   be loaded and decared prior to "Bootstrap::lib" in the "dist.ini"
+    *   be loaded and declared prior to "Bootstrap::lib" in the "dist.ini"
 
     *   not itself be the module you are presently developing/bootstrapping
 
     The only way of working around that I can envision is adding parameters
-    to "Bootstrap::lib" to specifiy the dist name and version name... but if
+    to "Bootstrap::lib" to specify the dist name and version name... but if
     you're going to do that, you may as well stop using external plugins to
-    discover that, and hardcode those values in dist.ini to start with.
+    discover that, and hard-code those values in "dist.ini" to start with.
 
   GOOD LUCK
     I wrote this plug-in, mostly because I was boiler-plating the code into

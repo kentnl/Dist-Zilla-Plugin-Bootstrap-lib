@@ -156,8 +156,8 @@ Will do what you want.
 
 =head2 2-step self-dependency
 
-There's a 3rd useful case which is a hybrid of the 2, where you /can/ build from your own sources without needing a preinstalled version,
-just you don't want that for release code ( ie: $VERSION being undef in code that is run during release is "bad" )
+There's a 3rd useful case which is a hybrid of the 2, where you /can/ build from your own sources without needing a pre-installed version,
+just you don't want that for release code ( e.g.: $VERSION being C<undef> in code that is run during release is "bad" )
 
     [Bootstrap::lib]
     try_built = 1
@@ -199,22 +199,20 @@ if there are "zero" versions readily available.
 
 This is mostly because there is no way to determine the "current" version we are building for, because the point in the execution
 cycle is so early, no version plugins are likely to be even instantiated yet, and some version plugins are dependent on incredibly
-complex precursors ( like git ), so by even trying to garner the version we're currently building, we could be prematurly cutting off
+complex precursors ( like git ), so by even trying to garner the version we're currently building, we could be prematurely cutting off
 a vast majority of modules from even being able to bootstrap.
 
 Even as it is, us using C<< zilla->name >> means that if your dist relies on some process to divine its name, the module that does this must
 
 =over 4
 
-=item * be loaded and decared prior to C<Bootstrap::lib> in the C<dist.ini>
+=item * be loaded and declared prior to C<Bootstrap::lib> in the C<dist.ini>
 
 =item * not itself be the module you are presently developing/bootstrapping
 
 =back
 
-The only way of working around that I can envision is adding parameters to C<Bootstrap::lib> to specifiy the dist name and version name...
-but if you're going to do that, you may as well stop using external plugins to discover that, and hardcode those values in dist.ini
-to start with.
+The only way of working around that I can envision is adding parameters to C<Bootstrap::lib> to specify the dist name and version name... but if you're going to do that, you may as well stop using external plugins to discover that, and hard-code those values in C<dist.ini> to start with.
 
 =head2 GOOD LUCK
 
