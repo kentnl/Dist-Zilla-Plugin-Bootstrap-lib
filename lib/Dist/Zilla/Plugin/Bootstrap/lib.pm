@@ -16,6 +16,8 @@ BEGIN {
 
 
 
+use Cwd qw( cwd );
+
 
 sub log_debug { return 1; }
 
@@ -44,10 +46,9 @@ sub register_component {
     $payload->{fallback} = undef if exists $payload->{no_fallback};
   }
 
-  require Cwd;
   require Path::Tiny;
   require lib;
-  my $cwd = Path::Tiny::path(Cwd::cwd);
+  my $cwd = Path::Tiny::path(cwd);
 
   if ( not $payload->{try_built} ) {
     $logger->log( [ 'bootstrapping %s', $cwd->child('lib')->stringify ] );
