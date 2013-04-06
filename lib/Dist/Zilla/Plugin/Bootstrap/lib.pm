@@ -51,10 +51,11 @@ sub register_component {
     my ( @candidates ) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
     if ( @candidates != 1  and !$payload->{fallback} ){
-        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback disabled. not bootstrapping', @candidates ])
+        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback disabled. not bootstrapping', scalar @candidates ])
+        return;
     }
     if ( @candidates != 1  and $payload->{fallback} ){
-        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback to boostrapping lib/', @candidates ]);
+        $logger->log([ 'candidates for bootstrap != 1 ( %n ), and fallback to boostrapping lib/', scalar @candidates ]);
         lib->import($cwd->child('lib')->stringify);
         return;
     }
