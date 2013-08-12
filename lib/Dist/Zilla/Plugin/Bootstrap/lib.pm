@@ -25,7 +25,13 @@ sub log_debug { return 1; }
 sub plugin_name { return 'Bootstrap::lib' }
 
 
-sub dump_config { return }
+sub dump_config { 
+    return {
+        q{} . __PACKAGE__ , {
+
+        }
+    }
+}
 
 
 sub register_component {
