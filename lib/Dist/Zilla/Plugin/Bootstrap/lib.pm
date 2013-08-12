@@ -17,7 +17,7 @@ BEGIN {
 
 use Cwd qw( cwd );
 use Moo;
-
+with 'Dist::Zilla::Role::ConfigDumper';
 
 sub log_debug { return 1; }
 
