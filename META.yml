@@ -22,7 +22,7 @@ provides:
     version: v0.2.12
 requires:
   Cwd: 0
-  Dist::Zilla::Role::ConfigDumper: 0
+  Dist::Zilla::Role::Plugin: 0
   Moose: 0
   Path::Tiny: 0
   lib: 0
@@ -40,7 +40,7 @@ x_BuiltWith:
     Cwd: 3.40
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.8.0
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
-    Dist::Zilla::Role::ConfigDumper: 4.300035
+    Dist::Zilla::Role::Plugin: 4.300035
     Module::Build: 0.4007
     Moose: 2.1005
     Path::Tiny: 0.027
