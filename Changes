@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.2.12 2013-08-12T05:05:57Z
+
 0.02000100 2013-04-06T09:53:45Z
  [Bugs]
  - 2 fallback conditions were accidentally using the same logic, so only one would ever work.

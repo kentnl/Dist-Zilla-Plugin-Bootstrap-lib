@@ -7,33 +7,35 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "Module::Build" => "0.4004"
+    "Module::Build" => "0.4007"
   },
   "configure_requires" => {
-    "Module::Build" => "0.4004"
+    "Module::Build" => "0.4007"
   },
   "dist_abstract" => "A minimal boot-strapping for Dist::Zilla Plug-ins.",
   "dist_author" => [
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Bootstrap-lib",
-  "dist_version" => "0.02000100",
+  "dist_version" => "0.2.12",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Bootstrap::lib",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Cwd" => 0,
+    "Moo" => 0,
     "Path::Tiny" => 0,
-    "perl" => "5.006",
+    "lib" => 0,
+    "perl" => "v5.10.0",
     "strict" => 0,
     "warnings" => 0
   },
   "script_files" => [],
   "test_requires" => {
-    "File::Find" => 0,
-    "File::Temp" => 0,
-    "Test::More" => "0.98"
+    "Capture::Tiny" => 0,
+    "Test::More" => "0.98",
+    "blib" => 0
   }
 );
 
