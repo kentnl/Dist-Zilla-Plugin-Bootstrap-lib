@@ -136,7 +136,8 @@ L<< C<Dist::Zilla>|Dist::Zilla >> C<API> changes.
 =cut
 
 use Cwd qw( cwd );
-
+use Moose;
+with 'Dist::Zilla::Role::Plugin';
 =method log_debug
     1;
 =cut
@@ -153,7 +154,13 @@ sub plugin_name { return 'Bootstrap::lib' }
     sub { }
 =cut
 
-sub dump_config { return }
+sub dump_config { 
+    return {
+        q{} . __PACKAGE__ , {
+
+        }
+    }
+}
 
 =method register_component
     sub { }
@@ -205,7 +212,7 @@ sub register_component {
   my $found = $candidates[0]->child('lib');
   $logger->log( [ 'bootstrapping %s', $found->stringify ] );
   lib->import( $found->stringify );
-
+  push @{ $zilla->plugins }, $class->new();
   return
 
 }
