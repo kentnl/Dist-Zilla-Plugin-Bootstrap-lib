@@ -55,7 +55,7 @@ sub register_component {
     return;
   }
 
-  $logger->log( [ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ] );
+  $logger->log_debug( [ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ] );
 
   my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
@@ -71,7 +71,7 @@ sub register_component {
     return;
   }
   my $found = $candidates[0]->child('lib');
-  $logger->log( [ 'bootstrapping %s', $found->stringify ] );
+  $logger->log_debug( [ 'bootstrapping %s', $found->stringify ] );
   lib->import( $found->stringify );
 
   require Scalar::Util;
