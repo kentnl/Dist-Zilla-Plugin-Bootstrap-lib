@@ -237,7 +237,22 @@ sub register_component {
     $bootstrap_path = _try_bootstrap_built({ cwd => $cwd, logger => $logger, fallback => $payload->{fallback} , distname => $distname });
   }
 
-  return;
+  return unless defined $bootstrap_path;
+
+  my $root = Path::Tiny::path($bootstrap_path);
+
+  my $it = $root->iterator({ recurse => 1 });
+
+  while ( my $file = $it->() ) {
+      next unless $file->basename =~ /\.pm$/;
+      my $rpath = $file->relative($root)->stringify;
+      if ( exists $INC{$rpath} ) {
+          $logger->log([ "%s was not bootstrapped. You need to move Bootstrap::lib higher", $rpath]);
+      }
+  }
+
+  return 1;
+
 }
 
 1;
