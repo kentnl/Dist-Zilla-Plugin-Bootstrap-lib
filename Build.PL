@@ -17,26 +17,24 @@ my %module_build_args = (
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Bootstrap-lib",
-  "dist_version" => "0.2.12",
+  "dist_version" => "0.02000101",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Bootstrap::lib",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Cwd" => 0,
-    "Dist::Zilla::Role::Plugin" => 0,
-    "Moose" => 0,
     "Path::Tiny" => 0,
     "lib" => 0,
-    "perl" => "v5.10.0",
+    "perl" => "5.006",
     "strict" => 0,
     "warnings" => 0
   },
   "script_files" => [],
   "test_requires" => {
-    "Capture::Tiny" => 0,
-    "Test::More" => "0.98",
-    "blib" => 0
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
+    "Test::More" => "0.98"
   }
 );
 

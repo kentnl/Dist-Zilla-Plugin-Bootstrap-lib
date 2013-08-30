@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.2.12';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000101';
 }
 ## use critic;
 
@@ -16,8 +16,7 @@ BEGIN {
 
 
 use Cwd qw( cwd );
-use Moose;
-with 'Dist::Zilla::Role::Plugin';
+
 
 sub log_debug { return 1; }
 
@@ -25,13 +24,7 @@ sub log_debug { return 1; }
 sub plugin_name { return 'Bootstrap::lib' }
 
 
-sub dump_config { 
-    return {
-        q{} . __PACKAGE__ , {
-
-        }
-    }
-}
+sub dump_config { return }
 
 
 sub register_component {
@@ -80,7 +73,7 @@ sub register_component {
   my $found = $candidates[0]->child('lib');
   $logger->log( [ 'bootstrapping %s', $found->stringify ] );
   lib->import( $found->stringify );
-  push @{ $zilla->plugins }, $class->new();
+
   return
 
 }
@@ -97,7 +90,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.2.12
+version 0.02000101
 
 =head1 SYNOPSIS
 
