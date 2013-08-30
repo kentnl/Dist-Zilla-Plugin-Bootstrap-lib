@@ -1,6 +1,35 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.03000000 2013-08-30T23:41:13Z
+0.02000101 2013-08-30T23:44:04Z
+ [!Major]
+ - Less noisy in general usage.
+ - Now warns if paths that would be boostraped contain modules that are
+   already loaded in %INC ( closes gh #1 )
+ - Tests regenerated with newer tools
+
+ [Dependencies::Added / develop requires]
+ - Test::CPAN::Changes 0.19
+ - Test::Kwalitee 1.08
+
+ [Dependencies::Added / runtime requires]
+ - lib
+
+ [Dependencies::Added / test requires]
+ - IO::Handle
+ - IPC::Open3
+
+ [Dependencies::Changed / build requires]
+ - Module::Build 0.4004 → 0.4007
+
+ [Dependencies::Changed / configure requires]
+ - Module::Build 0.4004 → 0.4007
+
+ [Dependencies::Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL v1.7.2 → v1.8.3
+
+ [Dependencies::Removed / test requires]
+ - File::Find
+ - File::Temp
 
 0.02000100 2013-04-06T09:53:45Z
  [Bugs]
