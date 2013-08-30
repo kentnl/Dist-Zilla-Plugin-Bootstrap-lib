@@ -107,14 +107,16 @@ sub register_component {
 
   return unless defined $bootstrap_path;
 
-  for my $module ( sort keys %INC ) {
-      my $module_path = $INC{$module};
-      next unless $module_path =~ /\//;
-      warn $module_path;
-      if ( $module_path =~ /^\Q$cwd\E/ ) {
-          warn "Module $module is already loaded, will not be bootstrapped";
-      }
+  my $root = Path::Tiny::path($bootstrap_path);
+
+  my $it = $root->iterator();
+  for my $file ( $it->() ) {
+      next unless $file->basename =~ /\.pm$/;
+      my $rpath = $file->relative($root)->stringify;
+      warn "$rpath";
   }
+
+  return 1;
 #  my $fatal = 0;
 #  for my $module ( grep { $_ ne 'Dist::Zilla::Plugin::Bootstrap::lib' } List::MoreUtils::uniq @{ $payload->{check_modules} } ) {
 #      if ( Class::Load::is_class_loaded( $module ) ) {
