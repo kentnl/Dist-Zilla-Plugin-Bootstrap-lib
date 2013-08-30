@@ -110,7 +110,7 @@ sub register_component {
   my $root = Path::Tiny::path($bootstrap_path);
 
   my $it = $root->iterator({ recurse => 1 });
-  for my $file ( $it->() ) {
+  while ( my $file = $it->() ) {
 #      next unless $file->basename =~ /\.pm$/;
       my $rpath = $file->relative($root)->stringify;
       $logger->log("$rpath");
