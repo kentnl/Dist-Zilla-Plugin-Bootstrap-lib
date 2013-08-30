@@ -112,10 +112,10 @@ sub register_component {
   my $it = $root->iterator({ recurse => 1 });
 
   while ( my $file = $it->() ) {
-      next unless $file->basename =~ /\.pm$/;
+      next unless $file->basename =~ /[.]pm$/msx;
       my $rpath = $file->relative($root)->stringify;
       if ( exists $INC{$rpath} ) {
-          $logger->log([ "%s was not bootstrapped. You need to move Bootstrap::lib higher", $rpath]);
+          $logger->log([ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath]);
       }
   }
 
