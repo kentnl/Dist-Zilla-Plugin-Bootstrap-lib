@@ -95,6 +95,13 @@ sub register_component {
     $payload->{fallback} = undef if exists $payload->{no_fallback};
   }
 
+  $payload->{check_self} = 1 if not exists $payload->{check_self};
+
+  if ( $payload->{check_self} ) {
+      my $self_module = $distname;
+      $self_module =~ s/-/::/g;
+      push @{ $payload->{check_modules} }, $self_module;
+  }
 
   require Path::Tiny;
   my $cwd = Path::Tiny::path(cwd);
@@ -106,16 +113,30 @@ sub register_component {
   }
 
   require Scalar::Util;
+  my $loaded_plugins = {};
   my $warned = 0;
   my $num_plugins = scalar @{ $zilla->plugins };
   for my $plugin ( @{ $zilla->plugins } ) {
+    my $modname = Scalar::Util::blessed($plugin);
+    $loaded_plugins->{$modname} = 1;
     if ( not $warned ) {
         $logger->log(['Warning: Did not boostrap %d plugin%s. -v for details', $num_plugins, ( $num_plugins == 1 ? '' : 's' ) ]);
         $warned = 1;
     }
-    my $modname = Scalar::Util::blessed($plugin);
     $logger->log_debug( ['Plugin Not bootstrapped: %s ( %s )', $plugin->plugin_name , $modname ] );
   }
+
+  my $fatal = 0;
+  for my $module ( @{ $payload->{check_modules} } ) {
+      if ( exists $loaded_plugins->{$module} ) {
+          $logger->log(['Module required for bootstrap "%s" loaded prior to Bootstrap::lib', $module ]);
+          $fatal++;
+      }
+  }
+  if ( $fatal > 0 ) {
+      $logger->log_fatal(['%d module(s) required for bootstrap via "check_module" were not bootstrapped', $fatal ]);
+  }
+
   return
 
 }
