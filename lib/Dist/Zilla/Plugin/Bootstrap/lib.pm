@@ -110,11 +110,12 @@ sub register_component {
   my $root = Path::Tiny::path($bootstrap_path);
 
   my $it = $root->iterator({ recurse => 1 });
+
   while ( my $file = $it->() ) {
       next unless $file->basename =~ /\.pm$/;
       my $rpath = $file->relative($root)->stringify;
       if ( exists $INC{$rpath} ) {
-          warn "Already Loaded: $rpath";
+          $logger->log([ "%s was not bootstrapped. You need to move Bootstrap::lib higher"], $rpath);
       }
   }
 
