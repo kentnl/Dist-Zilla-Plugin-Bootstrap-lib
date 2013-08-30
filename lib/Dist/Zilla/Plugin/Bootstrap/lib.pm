@@ -127,7 +127,9 @@ sub register_component {
     $logger->log_debug( ['Plugin Not bootstrapped: %s ( %s )', $plugin->plugin_name , $modname ] );
   }
 
-  $logger->log_debug(['Checking modules are not loaded: %s', join q<,>, @{$payload->{check_modules}}]);
+  $logger->log_debug(['Checking modules are not loaded: %s', join q<, >, @{$payload->{check_modules}}]);
+  $logger->log_debug(['Checking loaded modules are: %s', join q<, >, keys %$loaded_plugins ]);
+
   my $fatal = 0;
   for my $module ( @{ $payload->{check_modules} } ) {
       if ( exists $loaded_plugins->{$module} ) {
