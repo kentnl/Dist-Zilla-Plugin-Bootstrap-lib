@@ -78,7 +78,7 @@ sub register_component {
   my $warned = 0;
   for my $plugin ( @{ $zilla->plugins } ) {
     if ( not $warned ) {
-        $logger->log(['Warning: There were plugins loaded prior to Bootstrap::lib, which may not be bootstrapped as intended']);
+        $logger->log(['Warning: [Bootstrap::lib] not applied for %d plugins.', scalar @{ $zilla->plugins } ]);
         $warned = 1;
     }
     my $modname = Scalar::Util::blessed($plugin);
