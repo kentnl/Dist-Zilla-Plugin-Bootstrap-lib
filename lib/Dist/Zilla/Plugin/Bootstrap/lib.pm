@@ -27,6 +27,53 @@ sub plugin_name { return 'Bootstrap::lib' }
 sub dump_config { return }
 
 
+sub _bootstrap_dir {
+    my ($dir) = @_;
+    require lib;
+    return lib->import( $dir );
+}
+
+sub _bootstrap_source_lib {
+    my ( $config ) = @_ ; 
+
+    my $cwd = $config->{cwd};
+    my $logger = $config->{logger};
+
+    my $libdir = $cwd->child('lib')->stringify;
+    $logger->log( [ 'bootstrapping %s', $libdir ] );
+    return _boostrap_dir( $libdir );
+}
+
+sub _try_bootstrap_built {
+    my ( $config ) = @_;
+
+    my $logger   = $config->{logger};
+    my $distname = $config->{distname};
+    my $cwd      = $config->{cwd};
+    my $fallback = $config->{fallback};
+
+    my $libdir = $cwd->child( $distname )->stringify;
+
+    $logger->log_debug( [ 'trying to bootstrap %s-*', $libdir ]);
+
+    my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
+
+    if ( scalar @candidates != 1 and not $fallback ) {
+        $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
+        $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+        return;
+    }
+    if ( scalar @candidates != 1 and $fallback ) {
+        $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
+        $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+        return _bootstrap_dir( $cwd->child('lib')->stringify );
+    }
+
+    my $found = $candidates[0]->child('lib');
+    $logger->log( [ 'bootstrapping %s', $found->stringify ] );
+    _bootstrap_dir( $found->stringify );
+}
+
 sub register_component {
   my ( $plugin_class, $name, $payload, $section ) = @_;
   my $zilla  = $section->sequence->assembler->zilla;
@@ -46,33 +93,13 @@ sub register_component {
   }
 
   require Path::Tiny;
-  require lib;
   my $cwd = Path::Tiny::path(cwd);
 
   if ( not $payload->{try_built} ) {
-    $logger->log( [ 'bootstrapping %s', $cwd->child('lib')->stringify ] );
-    lib->import( $cwd->child('lib')->stringify );
-    return;
+    _bootstrap_source_lib({ cwd => $cwd, logger => $logger });
+  } else {
+    _try_bootstrap_built({ cwd => $cwd, logger => $logger, fallback => $payload->{fallback} , distname => $distname });
   }
-
-  $logger->log_debug( [ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ] );
-
-  my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
-
-  if ( scalar @candidates != 1 and not $payload->{fallback} ) {
-    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
-    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-    return;
-  }
-  if ( scalar @candidates != 1 and $payload->{fallback} ) {
-    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
-    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-    lib->import( $cwd->child('lib')->stringify );
-    return;
-  }
-  my $found = $candidates[0]->child('lib');
-  $logger->log_debug( [ 'bootstrapping %s', $found->stringify ] );
-  lib->import( $found->stringify );
 
   require Scalar::Util;
   my $warned = 0;
