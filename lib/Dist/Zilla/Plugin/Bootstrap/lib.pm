@@ -120,12 +120,12 @@ sub register_component {
   my $fatal = 0;
   for my $module ( grep { $_ ne 'Dist::Zilla::Plugin::Bootstrap::lib' } List::MoreUtils::uniq @{ $payload->{check_modules} } ) {
       if ( Class::Load::is_class_loaded( $module ) ) {
-          $logger->log(['Module required for bootstrap "%s" loaded prior to Bootstrap::lib', $module ]);
+          $logger->log(['"%s" loaded prior to bootstrapping', $module ]);
           $fatal++;
       }
   }
   if ( $fatal > 0 ) {
-      $logger->log_fatal(['%d module(s) required for bootstrap via "check_module" were not bootstrapped', $fatal ]);
+      $logger->log(['%d module(s) specified via "check_module" loaded prior to bootstrapping', $fatal ]);
   }
 
   return
