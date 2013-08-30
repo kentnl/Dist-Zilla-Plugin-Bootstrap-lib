@@ -113,7 +113,9 @@ sub register_component {
   while ( my $file = $it->() ) {
       next unless $file->basename =~ /\.pm$/;
       my $rpath = $file->relative($root)->stringify;
-      $logger->log("$rpath");
+      if ( exists $INC{$rpath} ) {
+          warn "Already Loaded: $rpath";
+      }
   }
 
   return 1;
