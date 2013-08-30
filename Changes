@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.02000101 2013-08-30T23:44:04Z
+0.03000000 2013-08-30T23:44:24Z
  [!Major]
  - Less noisy in general usage.
  - Now warns if paths that would be boostraped contain modules that are
