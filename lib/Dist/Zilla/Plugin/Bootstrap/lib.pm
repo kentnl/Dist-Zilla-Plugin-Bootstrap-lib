@@ -106,7 +106,7 @@ sub register_component {
   my $num_plugins = scalar @{ $zilla->plugins };
   for my $plugin ( @{ $zilla->plugins } ) {
     if ( not $warned ) {
-        $logger->log(['Warning: Did not boostrap %d plugin%s.', $num_plugins, ( $num_plugins == 1 ? '' : 's' ) ]);
+        $logger->log(['Warning: Did not boostrap %d plugin%s. -v for details', $num_plugins, ( $num_plugins == 1 ? '' : 's' ) ]);
         $warned = 1;
     }
     my $modname = Scalar::Util::blessed($plugin);
