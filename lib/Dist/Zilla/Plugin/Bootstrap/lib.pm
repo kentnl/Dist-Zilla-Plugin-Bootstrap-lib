@@ -111,7 +111,7 @@ sub register_component {
 
   my $it = $root->iterator({ recurse => 1 });
   while ( my $file = $it->() ) {
-#      next unless $file->basename =~ /\.pm$/;
+      next unless $file->basename =~ /\.pm$/;
       my $rpath = $file->relative($root)->stringify;
       $logger->log("$rpath");
   }
