@@ -113,7 +113,7 @@ sub register_component {
   for my $file ( $it->() ) {
       next unless $file->basename =~ /\.pm$/;
       my $rpath = $file->relative($root)->stringify;
-      warn "$rpath";
+      $logger->log("$rpath");
   }
 
   return 1;
