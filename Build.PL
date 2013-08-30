@@ -7,17 +7,17 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "Module::Build" => "0.4004"
+    "Module::Build" => "0.4007"
   },
   "configure_requires" => {
-    "Module::Build" => "0.4004"
+    "Module::Build" => "0.4007"
   },
   "dist_abstract" => "A minimal boot-strapping for Dist::Zilla Plug-ins.",
   "dist_author" => [
     "Kent Fredric <kentnl\@cpan.org>"
   ],
   "dist_name" => "Dist-Zilla-Plugin-Bootstrap-lib",
-  "dist_version" => "0.02000100",
+  "dist_version" => "0.03000000",
   "license" => "perl",
   "module_name" => "Dist::Zilla::Plugin::Bootstrap::lib",
   "recommends" => {},
@@ -25,14 +25,15 @@ my %module_build_args = (
   "requires" => {
     "Cwd" => 0,
     "Path::Tiny" => 0,
+    "lib" => 0,
     "perl" => "5.006",
     "strict" => 0,
     "warnings" => 0
   },
   "script_files" => [],
   "test_requires" => {
-    "File::Find" => 0,
-    "File::Temp" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
     "Test::More" => "0.98"
   }
 );

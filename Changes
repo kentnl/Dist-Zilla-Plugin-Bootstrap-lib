@@ -1,27 +1,63 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.03000000 2013-08-30T23:46:07Z
+ [!Major]
+ - Less noisy in general usage.
+ - Now warns if paths that would be boostraped contain modules that are
+   already loaded in %INC ( closes gh #1 )
+ - Tests regenerated with newer tools
+
+ [Dependencies::Added / develop requires]
+ - Test::CPAN::Changes 0.19
+ - Test::Kwalitee 1.08
+
+ [Dependencies::Added / runtime requires]
+ - lib
+
+ [Dependencies::Added / test requires]
+ - IO::Handle
+ - IPC::Open3
+
+ [Dependencies::Changed / build requires]
+ - Module::Build 0.4004 → 0.4007
+
+ [Dependencies::Changed / configure requires]
+ - Module::Build 0.4004 → 0.4007
+
+ [Dependencies::Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL v1.7.2 → v1.8.3
+
+ [Dependencies::Removed / test requires]
+ - File::Find
+ - File::Temp
+
 0.02000100 2013-04-06T09:53:45Z
  [Bugs]
- - 2 fallback conditions were accidentally using the same logic, so only one would ever work.
- - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted in a "fallthrough" to system.
+ - 2 fallback conditions were accidentally using the same logic, so only
+   one would ever work.
+ - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted
+   in a "fallthrough" to system.
 
 0.02000000 2013-04-06T09:38:52Z
  [!Noteworthy Changes]
- - @INC mutation now done slightly later at C<register_component>, which lets us get payload parameters out,
-   while still executing the real work long before anything else. Though execution order still matters profusely.
+ - @INC mutation now done slightly later at C<register_component>, which
+   lets us get payload parameters out, while still executing the real work
+   long before anything else. Though execution order still matters
+   profusely.
  - 3 new parameters,
- - `try_built` tries to use a previous build instead of a "undef version" based bootstrap
- - `fallback = 1` enables `try_built` to fall back to the `bootstrap lib` form ( this is the default )
+ - `try_built` tries to use a previous build instead of a "undef version"
+   based bootstrap
+ - `fallback = 1` enables `try_built` to fall back to the `bootstrap lib`
+   form ( this is the default )
  - `no_fallback = 1` disables `fallback`
-
- [Dependencies::Removed / runtime requires]
- - File::Spec
- - Carp
 
  [Dependencies::Added / runtime requires]
  - Path::Tiny
  - Cwd
 
+ [Dependencies::Removed / runtime requires]
+ - File::Spec
+ - Carp
 
 0.01023602 2013-04-06T08:37:50Z
  - Maintenance Release

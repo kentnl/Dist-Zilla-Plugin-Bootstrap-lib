@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.02000100';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000000';
 }
 ## use critic;
 
@@ -27,6 +27,54 @@ sub plugin_name { return 'Bootstrap::lib' }
 sub dump_config { return }
 
 
+sub _bootstrap_dir {
+  my ($dir) = @_;
+  require lib;
+  lib->import($dir);
+  return $dir;
+}
+
+sub _bootstrap_source_lib {
+  my ($config) = @_;
+
+  my $cwd    = $config->{cwd};
+  my $logger = $config->{logger};
+
+  my $libdir = $cwd->child('lib')->stringify;
+  $logger->log( [ 'bootstrapping %s', $libdir ] );
+  return _boostrap_dir($libdir);
+}
+
+sub _try_bootstrap_built {
+  my ($config) = @_;
+
+  my $logger   = $config->{logger};
+  my $distname = $config->{distname};
+  my $cwd      = $config->{cwd};
+  my $fallback = $config->{fallback};
+
+  my $libdir = $cwd->child($distname)->stringify;
+
+  $logger->log_debug( [ 'trying to bootstrap %s-*', $libdir ] );
+
+  my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
+
+  if ( scalar @candidates != 1 and not $fallback ) {
+    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
+    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+    return;
+  }
+  if ( scalar @candidates != 1 and $fallback ) {
+    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
+    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+    return _bootstrap_dir( $cwd->child('lib')->stringify );
+  }
+
+  my $found = $candidates[0]->child('lib');
+  $logger->log( [ 'bootstrapping %s', $found->stringify ] );
+  return _bootstrap_dir( $found->stringify );
+}
+
 sub register_component {
   my ( $plugin_class, $name, $payload, $section ) = @_;
   my $zilla  = $section->sequence->assembler->zilla;
@@ -46,35 +94,33 @@ sub register_component {
   }
 
   require Path::Tiny;
-  require lib;
   my $cwd = Path::Tiny::path(cwd);
 
+  my $bootstrap_path;
+
   if ( not $payload->{try_built} ) {
-    $logger->log( [ 'bootstrapping %s', $cwd->child('lib')->stringify ] );
-    lib->import( $cwd->child('lib')->stringify );
-    return;
+    $bootstrap_path = _bootstrap_source_lib( { cwd => $cwd, logger => $logger } );
+  }
+  else {
+    $bootstrap_path =
+      _try_bootstrap_built( { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname } );
   }
 
-  $logger->log( [ 'trying to bootstrap %s-*', $cwd->child($distname)->stringify ] );
+  return unless defined $bootstrap_path;
 
-  my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
+  my $root = Path::Tiny::path($bootstrap_path);
 
-  if ( scalar @candidates != 1 and not $payload->{fallback} ) {
-    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
-    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-    return;
+  my $it = $root->iterator( { recurse => 1 } );
+
+  while ( my $file = $it->() ) {
+    next unless $file->basename =~ /[.]pm$/msx;
+    my $rpath = $file->relative($root)->stringify;
+    if ( exists $INC{$rpath} ) {
+      $logger->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
+    }
   }
-  if ( scalar @candidates != 1 and $payload->{fallback} ) {
-    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
-    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-    lib->import( $cwd->child('lib')->stringify );
-    return;
-  }
-  my $found = $candidates[0]->child('lib');
-  $logger->log( [ 'bootstrapping %s', $found->stringify ] );
-  lib->import( $found->stringify );
 
-  return
+  return 1;
 
 }
 
@@ -90,7 +136,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.02000100
+version 0.03000000
 
 =head1 SYNOPSIS
 
