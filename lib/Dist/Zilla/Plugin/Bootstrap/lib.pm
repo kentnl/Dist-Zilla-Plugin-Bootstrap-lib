@@ -27,13 +27,11 @@ sub plugin_name { return 'Bootstrap::lib' }
 sub dump_config { return }
 
 
-sub mvp_multivalue_args { return qw(check_modules) }
-sub mvp_aliases         { return { check_module => check_modules => }}
-
 sub _bootstrap_dir {
     my ($dir) = @_;
     require lib;
-    return lib->import( $dir );
+    lib->import( $dir );
+    return $dir;
 }
 
 sub _bootstrap_source_lib {
@@ -74,7 +72,7 @@ sub _try_bootstrap_built {
 
     my $found = $candidates[0]->child('lib');
     $logger->log( [ 'bootstrapping %s', $found->stringify ] );
-    _bootstrap_dir( $found->stringify );
+    return _bootstrap_dir( $found->stringify );
 }
 
 
@@ -96,39 +94,38 @@ sub register_component {
     $payload->{fallback} = undef if exists $payload->{no_fallback};
   }
 
-  $payload->{check_self} = 1 if not exists $payload->{check_self};
-
-  if ( $payload->{check_self} ) {
-      my $self_module = $distname;
-      $self_module =~ s/-/::/g;
-      push @{ $payload->{check_modules} }, $self_module;
-  }
-
   require Path::Tiny;
   my $cwd = Path::Tiny::path(cwd);
 
+  my $bootstrap_path;
+
   if ( not $payload->{try_built} ) {
-    _bootstrap_source_lib({ cwd => $cwd, logger => $logger });
+    $bootstrap_path = _bootstrap_source_lib({ cwd => $cwd, logger => $logger });
   } else {
-    _try_bootstrap_built({ cwd => $cwd, logger => $logger, fallback => $payload->{fallback} , distname => $distname });
+    $bootstrap_path = _try_bootstrap_built({ cwd => $cwd, logger => $logger, fallback => $payload->{fallback} , distname => $distname });
   }
 
-  require Class::Load;
-  require List::MoreUtils;
+  return unless defined $bootstrap_path;
 
-
-  my $fatal = 0;
-  for my $module ( grep { $_ ne 'Dist::Zilla::Plugin::Bootstrap::lib' } List::MoreUtils::uniq @{ $payload->{check_modules} } ) {
-      if ( Class::Load::is_class_loaded( $module ) ) {
-          $logger->log(['"%s" loaded prior to bootstrapping', $module ]);
-          $fatal++;
+  for my $module ( sort keys %INC ) {
+      my $module_path = $INC{$module};
+      next unless $module_path =~ /\//;
+      if ( $module_path =~ /^\Q$cwd\E/ ) {
+          warn "Module $module is already loaded, will not be bootstrapped";
       }
   }
-  if ( $fatal > 0 ) {
-      $logger->log(['%d module(s) specified via "check_module" loaded prior to bootstrapping', $fatal ]);
-  }
-
-  return
+#  my $fatal = 0;
+#  for my $module ( grep { $_ ne 'Dist::Zilla::Plugin::Bootstrap::lib' } List::MoreUtils::uniq @{ $payload->{check_modules} } ) {
+#      if ( Class::Load::is_class_loaded( $module ) ) {
+#          $logger->log(['"%s" loaded prior to bootstrapping', $module ]);
+#          $fatal++;
+#      }
+#  }
+#  if ( $fatal > 0 ) {
+#      $logger->log(['%d module(s) specified via "check_module" loaded prior to bootstrapping', $fatal ]);
+#  }
+#
+#  return
 
 }
 

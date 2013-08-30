@@ -21,9 +21,7 @@ provides:
     file: lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
     version: 0.02000101
 requires:
-  Class::Load: 0
   Cwd: 0
-  List::MoreUtils: 0
   Path::Tiny: 0
   lib: 0
   perl: 5.006
@@ -36,13 +34,11 @@ resources:
 version: 0.02000101
 x_BuiltWith:
   modules:
-    Class::Load: 0.20
     Cwd: 3.40
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.8.3
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
     IO::Handle: 1.34
     IPC::Open3: 1.13
-    List::MoreUtils: 0.33
     Module::Build: 0.4007
     Path::Tiny: 0.031
     Pod::Coverage::TrustPod: 0.100002
