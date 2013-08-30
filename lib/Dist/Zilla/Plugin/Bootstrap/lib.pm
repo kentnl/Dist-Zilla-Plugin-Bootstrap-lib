@@ -74,6 +74,9 @@ sub register_component {
   $logger->log( [ 'bootstrapping %s', $found->stringify ] );
   lib->import( $found->stringify );
 
+  for my $plugin ( @{ $zilla->plugins } ) {
+    $logger->log( ['Plugin Not bootstrapped: %s', $plugin->name ); 
+  }
   return
 
 }
