@@ -113,26 +113,13 @@ sub register_component {
     _try_bootstrap_built({ cwd => $cwd, logger => $logger, fallback => $payload->{fallback} , distname => $distname });
   }
 
-  require Scalar::Util;
-  my $loaded_plugins = {};
-  my $warned = 0;
-  my $num_plugins = scalar @{ $zilla->plugins };
-  for my $plugin ( @{ $zilla->plugins } ) {
-    my $modname = Scalar::Util::blessed($plugin);
-    $loaded_plugins->{$modname} = 1;
-    if ( not $warned ) {
-        $logger->log(['Warning: Did not boostrap %d plugin%s. -v for details', $num_plugins, ( $num_plugins == 1 ? '' : 's' ) ]);
-        $warned = 1;
-    }
-    $logger->log_debug( ['Plugin Not bootstrapped: %s ( %s )', $plugin->plugin_name , $modname ] );
-  }
+  require Class::Load;
+  require List::MoreUtils;
 
-  $logger->log_debug(['Checking modules are not loaded: %s', join q<, >, @{$payload->{check_modules}}]);
-  $logger->log_debug(['Checking loaded modules are: %s', join q<, >, keys %$loaded_plugins ]);
 
   my $fatal = 0;
-  for my $module ( @{ $payload->{check_modules} } ) {
-      if ( exists $loaded_plugins->{$module} ) {
+  for my $module ( grep { $_ ne 'Dist::Zilla::Plugin::Bootstrap::lib' } List::MoreUtils::uniq @{ $payload->{check_modules} } ) {
+      if ( Class::Load::is_class_loaded( $module ) ) {
           $logger->log(['Module required for bootstrap "%s" loaded prior to Bootstrap::lib', $module ]);
           $fatal++;
       }
