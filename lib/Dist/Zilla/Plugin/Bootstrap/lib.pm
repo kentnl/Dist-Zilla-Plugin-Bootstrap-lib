@@ -35,7 +35,7 @@ sub _bootstrap_dir {
 }
 
 sub _bootstrap_source_lib {
-    my ( $config ) = @_ ; 
+    my ( $config ) = @_ ;
 
     my $cwd = $config->{cwd};
     my $logger = $config->{logger};
@@ -120,18 +120,6 @@ sub register_component {
   }
 
   return 1;
-#  my $fatal = 0;
-#  for my $module ( grep { $_ ne 'Dist::Zilla::Plugin::Bootstrap::lib' } List::MoreUtils::uniq @{ $payload->{check_modules} } ) {
-#      if ( Class::Load::is_class_loaded( $module ) ) {
-#          $logger->log(['"%s" loaded prior to bootstrapping', $module ]);
-#          $fatal++;
-#      }
-#  }
-#  if ( $fatal > 0 ) {
-#      $logger->log(['%d module(s) specified via "check_module" loaded prior to bootstrapping', $fatal ]);
-#  }
-#
-#  return
 
 }
 
