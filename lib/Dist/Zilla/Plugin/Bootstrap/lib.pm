@@ -110,6 +110,7 @@ sub register_component {
   for my $module ( sort keys %INC ) {
       my $module_path = $INC{$module};
       next unless $module_path =~ /\//;
+      warn $module_path;
       if ( $module_path =~ /^\Q$cwd\E/ ) {
           warn "Module $module is already loaded, will not be bootstrapped";
       }
