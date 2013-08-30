@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.03000000 2013-08-30T23:46:07Z
  [!Major]
  - Less noisy in general usage.
  - Now warns if paths that would be boostraped contain modules that are
