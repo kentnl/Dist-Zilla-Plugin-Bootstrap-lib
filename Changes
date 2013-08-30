@@ -1,29 +1,34 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.03000000 2013-08-30T23:39:30Z
+0.03000000 2013-08-30T23:41:13Z
 
 0.02000100 2013-04-06T09:53:45Z
  [Bugs]
- - 2 fallback conditions were accidentally using the same logic, so only one would ever work.
- - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted in a "fallthrough" to system.
+ - 2 fallback conditions were accidentally using the same logic, so only
+   one would ever work.
+ - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted
+   in a "fallthrough" to system.
 
 0.02000000 2013-04-06T09:38:52Z
  [!Noteworthy Changes]
- - @INC mutation now done slightly later at C<register_component>, which lets us get payload parameters out,
-   while still executing the real work long before anything else. Though execution order still matters profusely.
+ - @INC mutation now done slightly later at C<register_component>, which
+   lets us get payload parameters out, while still executing the real work
+   long before anything else. Though execution order still matters
+   profusely.
  - 3 new parameters,
- - `try_built` tries to use a previous build instead of a "undef version" based bootstrap
- - `fallback = 1` enables `try_built` to fall back to the `bootstrap lib` form ( this is the default )
+ - `try_built` tries to use a previous build instead of a "undef version"
+   based bootstrap
+ - `fallback = 1` enables `try_built` to fall back to the `bootstrap lib`
+   form ( this is the default )
  - `no_fallback = 1` disables `fallback`
-
- [Dependencies::Removed / runtime requires]
- - File::Spec
- - Carp
 
  [Dependencies::Added / runtime requires]
  - Path::Tiny
  - Cwd
 
+ [Dependencies::Removed / runtime requires]
+ - File::Spec
+ - Carp
 
 0.01023602 2013-04-06T08:37:50Z
  - Maintenance Release
