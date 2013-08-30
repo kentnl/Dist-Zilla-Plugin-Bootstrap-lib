@@ -27,7 +27,8 @@ sub plugin_name { return 'Bootstrap::lib' }
 sub dump_config { return }
 
 
-sub mvp_multivalue_args { return qw(check_module) }
+sub mvp_multivalue_args { return qw(check_modules) }
+sub mvp_aliases         { return { check_module => check_modules => }}
 
 sub _bootstrap_dir {
     my ($dir) = @_;
