@@ -81,10 +81,8 @@ sub register_component {
         $logger->log(['Warning: There were plugins loaded prior to Bootstrap::lib, which may not be bootstrapped as intended']);
         $warned = 1;
     }
-    $logger->log_debug( ['Plugin Not bootstrapped: %s', $plugin->plugin_name ] );
-    if ( my $class = Scalar::Util::blessed($plugin) ) {
-        next 
-    }
+    my $modname = Scalar::Util::blessed($plugin);
+    $logger->log_debug( ['Plugin Not bootstrapped: %s ( %s )', $plugin->plugin_name , $modname ] );
   }
   return
 
