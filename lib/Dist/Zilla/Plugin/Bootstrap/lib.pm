@@ -27,6 +27,8 @@ sub plugin_name { return 'Bootstrap::lib' }
 sub dump_config { return }
 
 
+sub mvp_multivalue_args { return qw(check_module) }
+
 sub _bootstrap_dir {
     my ($dir) = @_;
     require lib;
@@ -74,6 +76,7 @@ sub _try_bootstrap_built {
     _bootstrap_dir( $found->stringify );
 }
 
+
 sub register_component {
   my ( $plugin_class, $name, $payload, $section ) = @_;
   my $zilla  = $section->sequence->assembler->zilla;
@@ -91,6 +94,7 @@ sub register_component {
     $payload->{fallback} = 1     if not exists $payload->{fallback};
     $payload->{fallback} = undef if exists $payload->{no_fallback};
   }
+
 
   require Path::Tiny;
   my $cwd = Path::Tiny::path(cwd);
