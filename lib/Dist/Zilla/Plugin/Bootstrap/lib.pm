@@ -74,8 +74,17 @@ sub register_component {
   $logger->log( [ 'bootstrapping %s', $found->stringify ] );
   lib->import( $found->stringify );
 
+  require Scalar::Util;
+  my $warned = 0;
   for my $plugin ( @{ $zilla->plugins } ) {
-    $logger->log( ['Plugin Not bootstrapped: %s', $plugin->plugin_name ] ); 
+    if ( not $warned ) {
+        $logger->log(['Warning: There were plugins loaded prior to Bootstrap::lib, which may not be bootstrapped as intended']);
+        $warned = 1;
+    }
+    $logger->log_debug( ['Plugin Not bootstrapped: %s', $plugin->plugin_name ] );
+    if ( my $class = Scalar::Util::blessed($plugin) ) {
+        next 
+    }
   }
   return
 

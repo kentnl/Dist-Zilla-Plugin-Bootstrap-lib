@@ -56,6 +56,7 @@ eval { $v .= pmver('IPC::Open3','any version') };
 eval { $v .= pmver('Module::Build','0.4007') };
 eval { $v .= pmver('Path::Tiny','any version') };
 eval { $v .= pmver('Pod::Coverage::TrustPod','any version') };
+eval { $v .= pmver('Scalar::Util','any version') };
 eval { $v .= pmver('Test::CPAN::Changes','0.19') };
 eval { $v .= pmver('Test::CPAN::Meta','any version') };
 eval { $v .= pmver('Test::Kwalitee','1.08') };

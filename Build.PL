@@ -25,6 +25,7 @@ my %module_build_args = (
   "requires" => {
     "Cwd" => 0,
     "Path::Tiny" => 0,
+    "Scalar::Util" => 0,
     "lib" => 0,
     "perl" => "5.006",
     "strict" => 0,
