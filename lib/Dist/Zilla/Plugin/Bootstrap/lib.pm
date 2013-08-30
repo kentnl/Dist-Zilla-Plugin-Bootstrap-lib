@@ -160,53 +160,52 @@ sub dump_config { return }
 =cut
 
 sub _bootstrap_dir {
-    my ($dir) = @_;
-    require lib;
-    lib->import( $dir );
-    return $dir;
+  my ($dir) = @_;
+  require lib;
+  lib->import($dir);
+  return $dir;
 }
 
 sub _bootstrap_source_lib {
-    my ( $config ) = @_ ;
+  my ($config) = @_;
 
-    my $cwd = $config->{cwd};
-    my $logger = $config->{logger};
+  my $cwd    = $config->{cwd};
+  my $logger = $config->{logger};
 
-    my $libdir = $cwd->child('lib')->stringify;
-    $logger->log( [ 'bootstrapping %s', $libdir ] );
-    return _boostrap_dir( $libdir );
+  my $libdir = $cwd->child('lib')->stringify;
+  $logger->log( [ 'bootstrapping %s', $libdir ] );
+  return _boostrap_dir($libdir);
 }
 
 sub _try_bootstrap_built {
-    my ( $config ) = @_;
+  my ($config) = @_;
 
-    my $logger   = $config->{logger};
-    my $distname = $config->{distname};
-    my $cwd      = $config->{cwd};
-    my $fallback = $config->{fallback};
+  my $logger   = $config->{logger};
+  my $distname = $config->{distname};
+  my $cwd      = $config->{cwd};
+  my $fallback = $config->{fallback};
 
-    my $libdir = $cwd->child( $distname )->stringify;
+  my $libdir = $cwd->child($distname)->stringify;
 
-    $logger->log_debug( [ 'trying to bootstrap %s-*', $libdir ]);
+  $logger->log_debug( [ 'trying to bootstrap %s-*', $libdir ] );
 
-    my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
+  my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
-    if ( scalar @candidates != 1 and not $fallback ) {
-        $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
-        $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-        return;
-    }
-    if ( scalar @candidates != 1 and $fallback ) {
-        $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
-        $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-        return _bootstrap_dir( $cwd->child('lib')->stringify );
-    }
+  if ( scalar @candidates != 1 and not $fallback ) {
+    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
+    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+    return;
+  }
+  if ( scalar @candidates != 1 and $fallback ) {
+    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
+    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+    return _bootstrap_dir( $cwd->child('lib')->stringify );
+  }
 
-    my $found = $candidates[0]->child('lib');
-    $logger->log( [ 'bootstrapping %s', $found->stringify ] );
-    return _bootstrap_dir( $found->stringify );
+  my $found = $candidates[0]->child('lib');
+  $logger->log( [ 'bootstrapping %s', $found->stringify ] );
+  return _bootstrap_dir( $found->stringify );
 }
-
 
 sub register_component {
   my ( $plugin_class, $name, $payload, $section ) = @_;
@@ -232,23 +231,25 @@ sub register_component {
   my $bootstrap_path;
 
   if ( not $payload->{try_built} ) {
-    $bootstrap_path = _bootstrap_source_lib({ cwd => $cwd, logger => $logger });
-  } else {
-    $bootstrap_path = _try_bootstrap_built({ cwd => $cwd, logger => $logger, fallback => $payload->{fallback} , distname => $distname });
+    $bootstrap_path = _bootstrap_source_lib( { cwd => $cwd, logger => $logger } );
+  }
+  else {
+    $bootstrap_path =
+      _try_bootstrap_built( { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname } );
   }
 
   return unless defined $bootstrap_path;
 
   my $root = Path::Tiny::path($bootstrap_path);
 
-  my $it = $root->iterator({ recurse => 1 });
+  my $it = $root->iterator( { recurse => 1 } );
 
   while ( my $file = $it->() ) {
-      next unless $file->basename =~ /\.pm$/;
-      my $rpath = $file->relative($root)->stringify;
-      if ( exists $INC{$rpath} ) {
-          $logger->log([ "%s was not bootstrapped. You need to move Bootstrap::lib higher", $rpath]);
-      }
+    next unless $file->basename =~ /[.]pm$/msx;
+    my $rpath = $file->relative($root)->stringify;
+    if ( exists $INC{$rpath} ) {
+      $logger->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
+    }
   }
 
   return 1;
