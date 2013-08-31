@@ -136,7 +136,7 @@
                }
             },
             "name" : "Bootstrap::lib",
-            "version" : null
+            "version" : "0.03000100"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::NextVersion",

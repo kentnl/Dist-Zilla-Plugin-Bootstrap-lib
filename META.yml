@@ -81,7 +81,7 @@ x_Dist_Zilla:
           fallback: 1
           try_built: 1
       name: Bootstrap::lib
-      version: ~
+      version: 0.03000100
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: '@Author::KENTNL/Git::NextVersion'
