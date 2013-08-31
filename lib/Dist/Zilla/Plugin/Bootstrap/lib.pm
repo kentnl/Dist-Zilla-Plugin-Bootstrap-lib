@@ -121,13 +121,13 @@ sub register_component {
       _try_bootstrap_built( { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname } );
   }
 
-  push @{ $zilla->plugins }, bless {
+  push @{ $zilla->plugins }, __PACKAGE__->new({
     config => {
         ( exists $payload->{try_built} ? ( try_built => $payload->{try_built} ): () ),
         ( exists $payload->{fallback} ? ( fallback  => $payload->{fallback} ): () ),
         ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
 
-    }}, __PACKAGE__;
+    }});
 
   return unless defined $bootstrap_path;
 
