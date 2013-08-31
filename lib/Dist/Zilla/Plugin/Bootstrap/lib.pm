@@ -209,7 +209,7 @@ sub _bootstrap_source_lib {
 
   my $libdir = $cwd->child('lib')->stringify;
   $logger->log( [ 'bootstrapping %s', $libdir ] );
-  return _boostrap_dir($libdir);
+  return _bootstrap_dir($libdir);
 }
 
 sub _try_bootstrap_built {

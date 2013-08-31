@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [Bugfix]
+ - accidental typo with boostrap_dir instead of bootstrap_dir
 
 0.03000100 2013-08-31T01:43:36Z
  [!Minor]
