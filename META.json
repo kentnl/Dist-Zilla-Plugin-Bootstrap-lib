@@ -131,8 +131,7 @@
             "class" : "Dist::Zilla::Plugin::Bootstrap::lib",
             "config" : {
                "Dist::Zilla::Plugin::Bootstrap::lib" : {
-                  "fallback" : 1,
-                  "try_built" : "1"
+                  "try_built" : null
                }
             },
             "name" : "Bootstrap::lib",
