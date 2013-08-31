@@ -1,6 +1,8 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.03000101 2013-08-31T01:50:34Z
+0.03000101 2013-08-31T01:52:40Z
+ [Bugfix]
+ - accidental typo with boostrap_dir instead of bootstrap_dir
 
 0.03000100 2013-08-31T01:43:36Z
  [!Minor]

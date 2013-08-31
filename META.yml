@@ -80,7 +80,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Bootstrap::lib:
           try_built: ~
       name: Bootstrap::lib
-      version: ~
+      version: 0.03000101
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: '@Author::KENTNL/Git::NextVersion'
