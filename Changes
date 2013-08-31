@@ -1,6 +1,12 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [!Minor]
+ - Now shows config in metaconfig with a bit of Moo wizzardry.
+
+ [Dependencies::Added / runtime requires]
+ - Moo::HandleMoose::FakeMetaClass
+ - Role::Tiny
 
 0.03000000 2013-08-30T23:46:07Z
  [!Major]

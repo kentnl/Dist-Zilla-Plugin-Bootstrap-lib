@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 # VERSION
 
-version 0.03000001
+version 0.03000100
 
 # SYNOPSIS
 
@@ -23,17 +23,31 @@ the plug-in itself.
 
 # METHODS
 
-## log\_debug
+## `log_debug`
     1;
 
-## plugin\_name
+## `plugin_name`
     'Bootstrap::lib'
 
-## dump\_config
-    sub { }
+## `new`
 
-## register\_component
-    sub { }
+    my $conf = __PACKAGE__->new({ config => \%arbitrary_hash});
+
+## `does`
+
+Lazily invokes Role::Tiny::does\_role on demand.
+
+## `meta`
+
+Lazily creates a meta object using Moo
+
+## `dump_config`
+
+Dumps the configuration of this plugin to `dzil`
+
+## `register_component`
+
+This is where all the real work happens.
 
 # USE CASES
 
