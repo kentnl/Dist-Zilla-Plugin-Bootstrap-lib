@@ -65,7 +65,7 @@
    "provides" : {
       "Dist::Zilla::Plugin::Bootstrap::lib" : {
          "file" : "lib/Dist/Zilla/Plugin/Bootstrap/lib.pm",
-         "version" : "0.03000001"
+         "version" : "0.03000100"
       }
    },
    "release_status" : "stable",
@@ -80,7 +80,7 @@
          "web" : "https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib"
       }
    },
-   "version" : "0.03000001",
+   "version" : "0.03000100",
    "x_BuiltWith" : {
       "modules" : {
          "Cwd" : "3.40",

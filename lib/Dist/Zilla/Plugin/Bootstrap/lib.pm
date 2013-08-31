@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000001';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000100';
 }
 ## use critic;
 
@@ -28,11 +28,13 @@ sub new {
   return bless $_[1], $_[0];
 }
 
+
 sub does {
   require Role::Tiny;
   { no warnings 'redefine'; *does = \&Role::Tiny::does_role }
   goto &Role::Tiny::does_role;
 }
+
 
 sub meta {
   require Moo::HandleMoose::FakeMetaClass;
@@ -40,8 +42,8 @@ sub meta {
   return bless( { name => $class }, 'Moo::HandleMoose::FakeMetaClass' );
 }
 
-sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
 
+sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
 
 sub _bootstrap_dir {
   my ($dir) = @_;
@@ -90,6 +92,7 @@ sub _try_bootstrap_built {
   $logger->log( [ 'bootstrapping %s', $found->stringify ] );
   return _bootstrap_dir( $found->stringify );
 }
+
 
 sub register_component {
   my ( $plugin_class, $name, $payload, $section ) = @_;
@@ -163,7 +166,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.03000001
+version 0.03000100
 
 =head1 SYNOPSIS
 
@@ -182,17 +185,31 @@ the plug-in itself.
 
 =head1 METHODS
 
-=head2 log_debug
+=head2 C<log_debug>
     1;
 
-=head2 plugin_name
+=head2 C<plugin_name>
     'Bootstrap::lib'
 
-=head2 dump_config
-    sub { }
+=head2 C<new>
 
-=head2 register_component
-    sub { }
+    my $conf = __PACKAGE__->new({ config => \%arbitrary_hash});
+
+=head2 C<does>
+
+Lazily invokes Role::Tiny::does_role on demand. 
+
+=head2 C<meta>
+
+Lazily creates a meta object using Moo
+
+=head2 C<dump_config>
+
+Dumps the configuration of this plugin to dzil
+
+=head2 C<register_component>
+
+This is where all the real work happens.
 
 =head1 USE CASES
 
