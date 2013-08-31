@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.03000100 2013-08-31T01:43:36Z
  [!Minor]
  - Now shows config in metaconfig with a bit of Moo wizzardry.
 
