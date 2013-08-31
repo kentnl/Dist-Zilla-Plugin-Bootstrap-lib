@@ -153,7 +153,23 @@ sub plugin_name { return 'Bootstrap::lib' }
     sub { }
 =cut
 
-sub dump_config { return }
+sub new {
+  return bless $_[1], $_[0];
+}
+
+sub does {
+  require Role::Tiny;
+  { no warnings 'redefine'; *does = \&Role::Tiny::does_role }
+  goto &Role::Tiny::does_role;
+}
+
+sub meta {
+  require Moo::HandleMoose::FakeMetaClass;
+  my $class = ref( $_[0] ) || $_[0];
+  return bless( { name => $class }, 'Moo::HandleMoose::FakeMetaClass' );
+}
+
+sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
 
 =method register_component
     sub { }
@@ -237,6 +253,17 @@ sub register_component {
     $bootstrap_path =
       _try_bootstrap_built( { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname } );
   }
+
+  push @{ $zilla->plugins }, __PACKAGE__->new(
+    {
+      config => {
+        ( exists $payload->{try_built}   ? ( try_built   => $payload->{try_built} )   : () ),
+        ( exists $payload->{fallback}    ? ( fallback    => $payload->{fallback} )    : () ),
+        ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
+
+      }
+    }
+  );
 
   return unless defined $bootstrap_path;
 
