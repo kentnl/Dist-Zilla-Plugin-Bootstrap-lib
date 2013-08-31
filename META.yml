@@ -75,7 +75,9 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Bootstrap::lib::Config
       config:
-        Dist::Zilla::Plugin::Bootstrap::lib::Config: {}
+        Dist::Zilla::Plugin::Bootstrap::lib::Config:
+          fallback: 1
+          try_built: 1
       name: Bootstrap::lib
       version: ~
     -

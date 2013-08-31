@@ -125,6 +125,11 @@ sub register_component {
   push @{ $zilla->plugins }, Dist::Zilla::Plugin::Bootstrap::lib::Config->new(
     plugin_name => $name,
     zilla => $zilla,
+    config => {
+        ( exists $payload->{try_built} ? ( try_built => $payload->{try_built} ): () ),
+        ( exists $payload->{fallback} ? ( fallback  => $payload->{fallback} ): () ),
+        ( exists  $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
+    }
   );
   return 1;
 
