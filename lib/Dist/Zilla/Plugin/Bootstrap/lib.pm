@@ -106,6 +106,18 @@ sub register_component {
       _try_bootstrap_built( { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname } );
   }
 
+  require Dist::Zilla::Plugin::Bootstrap::lib::Config;
+  push @{ $zilla->plugins }, Dist::Zilla::Plugin::Bootstrap::lib::Config->new(
+    plugin_name => $name,
+    zilla => $zilla,
+    config => {
+        ( exists $payload->{try_built} ? ( try_built => $payload->{try_built} ): () ),
+        ( exists $payload->{fallback} ? ( fallback  => $payload->{fallback} ): () ),
+        ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
+
+    }
+  );
+
   return unless defined $bootstrap_path;
 
   my $root = Path::Tiny::path($bootstrap_path);
@@ -121,16 +133,6 @@ sub register_component {
   }
 
 
-  require Dist::Zilla::Plugin::Bootstrap::lib::Config;
-  push @{ $zilla->plugins }, Dist::Zilla::Plugin::Bootstrap::lib::Config->new(
-    plugin_name => $name,
-    zilla => $zilla,
-    config => {
-        ( exists $payload->{try_built} ? ( try_built => $payload->{try_built} ): () ),
-        ( exists $payload->{fallback} ? ( fallback  => $payload->{fallback} ): () ),
-        ( exists  $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
-    }
-  );
   return 1;
 
 }
