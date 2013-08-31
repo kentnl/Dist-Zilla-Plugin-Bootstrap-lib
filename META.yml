@@ -75,6 +75,14 @@ x_Dist_Zilla:
     version: 5.018000
   plugins:
     -
+      class: Dist::Zilla::Plugin::Bootstrap::lib
+      config:
+        Dist::Zilla::Plugin::Bootstrap::lib:
+          fallback: 1
+          try_built: 1
+      name: Bootstrap::lib
+      version: ~
+    -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: '@Author::KENTNL/Git::NextVersion'
       version: 2.014
