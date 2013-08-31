@@ -137,25 +137,33 @@ L<< C<Dist::Zilla>|Dist::Zilla >> C<API> changes.
 
 use Cwd qw( cwd );
 
-=method log_debug
+=method C<log_debug>
     1;
 =cut
 
 sub log_debug { return 1; }
 
-=method plugin_name
+=method C<plugin_name>
     'Bootstrap::lib'
 =cut
 
 sub plugin_name { return 'Bootstrap::lib' }
 
-=method dump_config
-    sub { }
+=method C<new>
+
+    my $conf = __PACKAGE__->new({ config => \%arbitrary_hash});
+
 =cut
 
 sub new {
   return bless $_[1], $_[0];
 }
+
+=method C<does>
+
+Lazily invokes Role::Tiny::does_role on demand. 
+
+=cut
 
 sub does {
   require Role::Tiny;
@@ -163,17 +171,25 @@ sub does {
   goto &Role::Tiny::does_role;
 }
 
+=method C<meta>
+
+Lazily creates a meta object using Moo
+
+=cut
+
 sub meta {
   require Moo::HandleMoose::FakeMetaClass;
   my $class = ref( $_[0] ) || $_[0];
   return bless( { name => $class }, 'Moo::HandleMoose::FakeMetaClass' );
 }
 
-sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
+=method C<dump_config>
 
-=method register_component
-    sub { }
+Dumps the configuration of this plugin to dzil
+
 =cut
+
+sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
 
 sub _bootstrap_dir {
   my ($dir) = @_;
@@ -222,6 +238,12 @@ sub _try_bootstrap_built {
   $logger->log( [ 'bootstrapping %s', $found->stringify ] );
   return _bootstrap_dir( $found->stringify );
 }
+
+=method C<register_component>
+
+This is where all the real work happens.
+
+=cut
 
 sub register_component {
   my ( $plugin_class, $name, $payload, $section ) = @_;
