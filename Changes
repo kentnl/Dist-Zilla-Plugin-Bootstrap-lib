@@ -1,6 +1,12 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.03000100 2013-08-31T01:38:21Z
+0.03000100 2013-08-31T01:40:14Z
+ [!Minor]
+ - Now shows config in metaconfig with a bit of Moo wizzardry.
+
+ [Dependencies::Added / runtime requires]
+ - Moo::HandleMoose::FakeMetaClass
+ - Role::Tiny
 
 0.03000000 2013-08-30T23:46:07Z
  [!Major]
