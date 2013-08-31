@@ -3,7 +3,7 @@ NAME
     Dist::Zilla Plug-ins.
 
 VERSION
-    version 0.03000001
+    version 0.03000100
 
 SYNOPSIS
         [Bootstrap::lib]

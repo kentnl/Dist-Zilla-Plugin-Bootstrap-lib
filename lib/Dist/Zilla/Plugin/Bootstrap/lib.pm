@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000001';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000100';
 }
 ## use critic;
 
@@ -25,21 +25,22 @@ sub plugin_name { return 'Bootstrap::lib' }
 
 
 sub new {
-    return bless $_[1], $_[0];
+  return bless $_[1], $_[0];
 }
+
 sub does {
-    require Role::Tiny;
-    { no warnings 'redefine'; *does = \&Role::Tiny::does_role }
-    goto &Role::Tiny::does_role;
+  require Role::Tiny;
+  { no warnings 'redefine'; *does = \&Role::Tiny::does_role }
+  goto &Role::Tiny::does_role;
 }
 
 sub meta {
-   require Moo::HandleMoose::FakeMetaClass;
-   my $class = ref($_[0])||$_[0];
-   return bless({ name => $class }, 'Moo::HandleMoose::FakeMetaClass');
+  require Moo::HandleMoose::FakeMetaClass;
+  my $class = ref( $_[0] ) || $_[0];
+  return bless( { name => $class }, 'Moo::HandleMoose::FakeMetaClass' );
 }
 
-sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} }}
+sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
 
 
 sub _bootstrap_dir {
@@ -121,13 +122,16 @@ sub register_component {
       _try_bootstrap_built( { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname } );
   }
 
-  push @{ $zilla->plugins }, __PACKAGE__->new({
-    config => {
-        ( exists $payload->{try_built} ? ( try_built => $payload->{try_built} ): () ),
-        ( exists $payload->{fallback} ? ( fallback  => $payload->{fallback} ): () ),
+  push @{ $zilla->plugins }, __PACKAGE__->new(
+    {
+      config => {
+        ( exists $payload->{try_built}   ? ( try_built   => $payload->{try_built} )   : () ),
+        ( exists $payload->{fallback}    ? ( fallback    => $payload->{fallback} )    : () ),
         ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
 
-    }});
+      }
+    }
+  );
 
   return unless defined $bootstrap_path;
 
@@ -142,7 +146,6 @@ sub register_component {
       $logger->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
     }
   }
-
 
   return 1;
 
@@ -160,7 +163,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.03000001
+version 0.03000100
 
 =head1 SYNOPSIS
 
