@@ -32,7 +32,7 @@ METHODS
     Lazily creates a meta object using Moo
 
   "dump_config"
-    Dumps the configuration of this plugin to dzil
+    Dumps the configuration of this plugin to "dzil"
 
   "register_component"
     This is where all the real work happens.

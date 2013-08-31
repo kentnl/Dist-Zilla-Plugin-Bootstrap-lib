@@ -24,6 +24,7 @@ sub log_debug { return 1; }
 sub plugin_name { return 'Bootstrap::lib' }
 
 
+## no critic (RequireArgUnpacking)
 sub new {
   return bless $_[1], $_[0];
 }
@@ -31,15 +32,17 @@ sub new {
 
 sub does {
   require Role::Tiny;
+  ## no critic (ProhibitNoWarnings)
   { no warnings 'redefine'; *does = \&Role::Tiny::does_role }
   goto &Role::Tiny::does_role;
 }
 
 
+## no critic (RequireArgUnpacking)
 sub meta {
   require Moo::HandleMoose::FakeMetaClass;
   my $class = ref( $_[0] ) || $_[0];
-  return bless( { name => $class }, 'Moo::HandleMoose::FakeMetaClass' );
+  return bless { name => $class }, 'Moo::HandleMoose::FakeMetaClass';
 }
 
 
@@ -197,7 +200,7 @@ the plug-in itself.
 
 =head2 C<does>
 
-Lazily invokes Role::Tiny::does_role on demand. 
+Lazily invokes Role::Tiny::does_role on demand.
 
 =head2 C<meta>
 
@@ -205,7 +208,7 @@ Lazily creates a meta object using Moo
 
 =head2 C<dump_config>
 
-Dumps the configuration of this plugin to dzil
+Dumps the configuration of this plugin to C<dzil>
 
 =head2 C<register_component>
 
