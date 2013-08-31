@@ -1,5 +1,9 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.03000101 2013-08-31T01:52:46Z
+ [Bugfix]
+ - accidental typo with boostrap_dir instead of bootstrap_dir
+
 0.03000100 2013-08-31T01:43:36Z
  [!Minor]
  - Now shows config in metaconfig with a bit of Moo wizzardry.
