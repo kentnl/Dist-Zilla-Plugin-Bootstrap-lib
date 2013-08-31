@@ -3,7 +3,7 @@ NAME
     Dist::Zilla Plug-ins.
 
 VERSION
-    version 0.03000000
+    version 0.03000100
 
 SYNOPSIS
         [Bootstrap::lib]
@@ -18,14 +18,25 @@ DESCRIPTION
     itself.
 
 METHODS
-  log_debug
+  "log_debug"
     1;
-  plugin_name
+  "plugin_name"
     'Bootstrap::lib'
-  dump_config
-    sub { }
-  register_component
-    sub { }
+  "new"
+        my $conf = __PACKAGE__->new({ config => \%arbitrary_hash});
+
+  "does"
+    Lazily invokes Role::Tiny::does_role on demand.
+
+  "meta"
+    Lazily creates a meta object using Moo
+
+  "dump_config"
+    Dumps the configuration of this plugin to "dzil"
+
+  "register_component"
+    This is where all the real work happens.
+
 USE CASES
   Simple single-phase self-dependency
     This module really is only useful in the case where you need to use

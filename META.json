@@ -45,7 +45,9 @@
       "runtime" : {
          "requires" : {
             "Cwd" : "0",
+            "Moo::HandleMoose::FakeMetaClass" : "0",
             "Path::Tiny" : "0",
+            "Role::Tiny" : "0",
             "lib" : "0",
             "perl" : "5.006",
             "strict" : "0",
@@ -63,7 +65,7 @@
    "provides" : {
       "Dist::Zilla::Plugin::Bootstrap::lib" : {
          "file" : "lib/Dist/Zilla/Plugin/Bootstrap/lib.pm",
-         "version" : "0.03000000"
+         "version" : "0.03000100"
       }
    },
    "release_status" : "stable",
@@ -78,7 +80,7 @@
          "web" : "https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib"
       }
    },
-   "version" : "0.03000000",
+   "version" : "0.03000100",
    "x_BuiltWith" : {
       "modules" : {
          "Cwd" : "3.40",
@@ -87,8 +89,10 @@
          "IO::Handle" : "1.34",
          "IPC::Open3" : "1.13",
          "Module::Build" : "0.4007",
+         "Moo::HandleMoose::FakeMetaClass" : "NA(undef)",
          "Path::Tiny" : "0.031",
          "Pod::Coverage::TrustPod" : "0.100002",
+         "Role::Tiny" : "1.003001",
          "Test::CPAN::Changes" : "0.23",
          "Test::CPAN::Meta" : "0.23",
          "Test::Kwalitee" : "1.13",
@@ -123,6 +127,17 @@
          "version" : "5.018000"
       },
       "plugins" : [
+         {
+            "class" : "Dist::Zilla::Plugin::Bootstrap::lib",
+            "config" : {
+               "Dist::Zilla::Plugin::Bootstrap::lib" : {
+                  "fallback" : 1,
+                  "try_built" : "1"
+               }
+            },
+            "name" : "Bootstrap::lib",
+            "version" : "0.03000100"
+         },
          {
             "class" : "Dist::Zilla::Plugin::Git::NextVersion",
             "name" : "@Author::KENTNL/Git::NextVersion",
