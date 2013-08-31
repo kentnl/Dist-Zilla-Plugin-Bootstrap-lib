@@ -120,6 +120,12 @@ sub register_component {
     }
   }
 
+
+  require Dist::Zilla::Plugin::Bootstrap::lib::Config;
+  push @{ $zilla->plugins }, Dist::Zilla::Plugin::Bootstrap::lib::Config->new(
+    plugin_name => $name,
+    zilla => $zilla,
+  );
   return 1;
 
 }

@@ -45,6 +45,7 @@
       "runtime" : {
          "requires" : {
             "Cwd" : "0",
+            "Dist::Zilla::Plugin::Bootstrap::lib::Config" : "0",
             "Path::Tiny" : "0",
             "lib" : "0",
             "perl" : "5.006",
@@ -82,6 +83,7 @@
    "x_BuiltWith" : {
       "modules" : {
          "Cwd" : "3.40",
+         "Dist::Zilla::Plugin::Bootstrap::lib::Config" : "NA(undef)",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "1.8.3",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "NA(possibly not installed)",
          "IO::Handle" : "1.34",
@@ -123,6 +125,14 @@
          "version" : "5.018000"
       },
       "plugins" : [
+         {
+            "class" : "Dist::Zilla::Plugin::Bootstrap::lib::Config",
+            "config" : {
+               "Dist::Zilla::Plugin::Bootstrap::lib::Config" : {}
+            },
+            "name" : "Bootstrap::lib",
+            "version" : null
+         },
          {
             "class" : "Dist::Zilla::Plugin::Git::NextVersion",
             "name" : "@Author::KENTNL/Git::NextVersion",

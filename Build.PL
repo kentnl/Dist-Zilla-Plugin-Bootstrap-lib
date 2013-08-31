@@ -24,6 +24,7 @@ my %module_build_args = (
   "recursive_test_files" => 1,
   "requires" => {
     "Cwd" => 0,
+    "Dist::Zilla::Plugin::Bootstrap::lib::Config" => 0,
     "Path::Tiny" => 0,
     "lib" => 0,
     "perl" => "5.006",
