@@ -1,6 +1,14 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [!Minor]
+ - Add tests
+ - Minor refactor
+
+ [Dependencies::Added / test requires]
+ - Dist::Zilla
+ - File::Copy::Recursive
+ - Path::FindDev
 
 0.03000101 2013-08-31T01:52:46Z
  [Bugfix]
