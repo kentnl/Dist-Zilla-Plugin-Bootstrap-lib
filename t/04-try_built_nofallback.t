@@ -7,7 +7,7 @@ use Path::Tiny;
 use Cwd qw( cwd );
 use File::Copy::Recursive qw( rcopy );
 
-my $source = find_dev('./')->child('corpus')->child('fake_dist_03');
+my $source = find_dev('./')->child('corpus')->child('fake_dist_04');
 my $tempdir = Path::Tiny->tempdir;
 
 rcopy( "$source", "$tempdir" );
