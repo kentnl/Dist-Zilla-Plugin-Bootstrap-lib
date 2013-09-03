@@ -49,12 +49,15 @@ sub pmver {
 }
 
 eval { $v .= pmver('Cwd','any version') };
+eval { $v .= pmver('Dist::Zilla','any version') };
 eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL','v1.8.3') };
 eval { $v .= pmver('Dist::Zilla::PluginBundle::Author::KENTNL::Lite','v1.3.0') };
+eval { $v .= pmver('File::Copy::Recursive','any version') };
 eval { $v .= pmver('IO::Handle','any version') };
 eval { $v .= pmver('IPC::Open3','any version') };
 eval { $v .= pmver('Module::Build','0.4007') };
 eval { $v .= pmver('Moo::HandleMoose::FakeMetaClass','any version') };
+eval { $v .= pmver('Path::FindDev','any version') };
 eval { $v .= pmver('Path::Tiny','any version') };
 eval { $v .= pmver('Pod::Coverage::TrustPod','any version') };
 eval { $v .= pmver('Role::Tiny','any version') };
