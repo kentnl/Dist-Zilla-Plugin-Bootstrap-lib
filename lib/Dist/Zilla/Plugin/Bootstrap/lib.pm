@@ -6,7 +6,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000101';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000200';
 }
 ## use critic;
 
@@ -25,9 +25,7 @@ sub plugin_name { return 'Bootstrap::lib' }
 
 
 ## no critic (RequireArgUnpacking)
-sub new {
-  return bless $_[1], $_[0];
-}
+sub new { return bless $_[1], $_[0] }
 
 
 sub does {
@@ -48,24 +46,6 @@ sub meta {
 
 sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
 
-sub _bootstrap_dir {
-  my ($dir) = @_;
-  require lib;
-  lib->import($dir);
-  return $dir;
-}
-
-sub _bootstrap_source_lib {
-  my ($config) = @_;
-
-  my $cwd    = $config->{cwd};
-  my $logger = $config->{logger};
-
-  my $libdir = $cwd->child('lib')->stringify;
-  $logger->log( [ 'bootstrapping %s', $libdir ] );
-  return _bootstrap_dir($libdir);
-}
-
 sub _try_bootstrap_built {
   my ($config) = @_;
 
@@ -74,26 +54,24 @@ sub _try_bootstrap_built {
   my $cwd      = $config->{cwd};
   my $fallback = $config->{fallback};
 
-  my $libdir = $cwd->child($distname)->stringify;
+  my $libdir = $cwd->child($distname);
 
   $logger->log_debug( [ 'trying to bootstrap %s-*', $libdir ] );
 
   my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
 
-  if ( scalar @candidates != 1 and not $fallback ) {
+  if ( scalar @candidates == 1 ) {
+    return $candidates[0]->child('lib');
+  }
+  $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
+
+  if ( not $fallback ) {
     $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
-    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
     return;
   }
-  if ( scalar @candidates != 1 and $fallback ) {
-    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback to boostrapping lib/', 0 + @candidates ] );
-    $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-    return _bootstrap_dir( $cwd->child('lib')->stringify );
-  }
 
-  my $found = $candidates[0]->child('lib');
-  $logger->log( [ 'bootstrapping %s', $found->stringify ] );
-  return _bootstrap_dir( $found->stringify );
+  $logger->log( [ 'candidates for bootstrap (%s) != 1, fallback to boostrapping lib/', 0 + @candidates ] );
+  return $cwd->child('lib');
 }
 
 
@@ -121,33 +99,36 @@ sub register_component {
   my $bootstrap_path;
 
   if ( not $payload->{try_built} ) {
-    $bootstrap_path = _bootstrap_source_lib( { cwd => $cwd, logger => $logger } );
+    $bootstrap_path = $cwd->child('lib');
   }
   else {
-    $bootstrap_path =
-      _try_bootstrap_built( { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname } );
+    my $config = { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname };
+    $bootstrap_path = _try_bootstrap_built($config);
   }
 
-  push @{ $zilla->plugins }, __PACKAGE__->new(
-    {
-      config => {
-        ( exists $payload->{try_built}   ? ( try_built   => $payload->{try_built} )   : () ),
-        ( exists $payload->{fallback}    ? ( fallback    => $payload->{fallback} )    : () ),
-        ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
+  if ( defined $bootstrap_path ) {
+    require lib;
+    lib->import("$bootstrap_path");
+    $logger->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
+  }
 
-      }
+  my $plugin_config = {
+    config => {
+      ( exists $payload->{try_built}   ? ( try_built   => $payload->{try_built} )   : () ),
+      ( exists $payload->{fallback}    ? ( fallback    => $payload->{fallback} )    : () ),
+      ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
     }
-  );
+  };
+
+  push @{ $zilla->plugins }, $plugin_class->new($plugin_config);
 
   return unless defined $bootstrap_path;
 
-  my $root = Path::Tiny::path($bootstrap_path);
-
-  my $it = $root->iterator( { recurse => 1 } );
+  my $it = $bootstrap_path->iterator( { recurse => 1 } );
 
   while ( my $file = $it->() ) {
     next unless $file->basename =~ /[.]pm$/msx;
-    my $rpath = $file->relative($root)->stringify;
+    my $rpath = $file->relative($bootstrap_path)->stringify;
     if ( exists $INC{$rpath} ) {
       $logger->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
     }
@@ -169,7 +150,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.03000101
+version 0.03000200
 
 =head1 SYNOPSIS
 

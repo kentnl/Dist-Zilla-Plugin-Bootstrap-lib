@@ -3,9 +3,12 @@ abstract: 'A minimal boot-strapping for Dist::Zilla Plug-ins.'
 author:
   - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
+  Dist::Zilla: 0
+  File::Copy::Recursive: 0
   IO::Handle: 0
   IPC::Open3: 0
   Module::Build: 0.4007
+  Path::FindDev: 0
   Test::More: 0.98
 configure_requires:
   Module::Build: 0.4007
@@ -19,7 +22,7 @@ name: Dist-Zilla-Plugin-Bootstrap-lib
 provides:
   Dist::Zilla::Plugin::Bootstrap::lib:
     file: lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
-    version: 0.03000101
+    version: 0.03000200
 requires:
   Cwd: 0
   Moo::HandleMoose::FakeMetaClass: 0
@@ -33,16 +36,19 @@ resources:
   bugtracker: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib/issues
   homepage: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib
   repository: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib.git
-version: 0.03000101
+version: 0.03000200
 x_BuiltWith:
   modules:
     Cwd: 3.40
+    Dist::Zilla: 4.300037
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.8.3
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
+    File::Copy::Recursive: 0.38
     IO::Handle: 1.34
     IPC::Open3: 1.13
     Module::Build: 0.4007
     Moo::HandleMoose::FakeMetaClass: NA(undef)
+    Path::FindDev: 0.2.0
     Path::Tiny: 0.031
     Pod::Coverage::TrustPod: 0.100002
     Role::Tiny: 1.003001
@@ -80,7 +86,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Bootstrap::lib:
           try_built: ~
       name: Bootstrap::lib
-      version: 0.03000101
+      version: 0.03000200
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
       name: '@Author::KENTNL/Git::NextVersion'
@@ -328,9 +334,9 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::Prereqs
       config:
         Dist::Zilla::Plugin::Prereqs:
-          phase: runtime
+          phase: test
           type: requires
-      name: Prereqs
+      name: TestRequires
       version: 4.300037
     -
       class: Dist::Zilla::Plugin::FinderCode

@@ -1,5 +1,15 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.03000200 2013-09-03T03:36:10Z
+ [!Minor]
+ - Add tests
+ - Minor refactor
+
+ [Dependencies::Added / test requires]
+ - Dist::Zilla
+ - File::Copy::Recursive
+ - Path::FindDev
+
 0.03000101 2013-08-31T01:52:46Z
  [Bugfix]
  - accidental typo with boostrap_dir instead of bootstrap_dir

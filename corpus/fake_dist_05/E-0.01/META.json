@@ -1,0 +1,96 @@
+{
+   "abstract" : "Fake dist stub",
+   "author" : [
+      "Kent Fredric"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300037, CPAN::Meta::Converter version 2.132140",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "E",
+   "prereqs" : {},
+   "release_status" : "stable",
+   "version" : "0.01",
+   "x_Dist_Zilla" : {
+      "perl" : {
+         "version" : "5.018000"
+      },
+      "plugins" : [
+         {
+            "class" : "Dist::Zilla::Plugin::Bootstrap::lib",
+            "config" : {
+               "Dist::Zilla::Plugin::Bootstrap::lib" : {
+                  "fallback" : null,
+                  "no_fallback" : "1",
+                  "try_built" : "1"
+               }
+            },
+            "name" : "Bootstrap::lib",
+            "version" : "0.03000101"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::MetaConfig",
+            "name" : "MetaConfig",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::MetaJSON",
+            "name" : "MetaJSON",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::GatherDir",
+            "name" : "GatherDir",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "E",
+            "name" : "=E",
+            "version" : null
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::FinderCode",
+            "name" : ":InstallModules",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::FinderCode",
+            "name" : ":IncModules",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::FinderCode",
+            "name" : ":TestFiles",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::FinderCode",
+            "name" : ":ExecFiles",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::FinderCode",
+            "name" : ":ShareFiles",
+            "version" : "4.300037"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::FinderCode",
+            "name" : ":MainModule",
+            "version" : "4.300037"
+         }
+      ],
+      "zilla" : {
+         "class" : "Dist::Zilla::Dist::Builder",
+         "config" : {
+            "is_trial" : "0"
+         },
+         "version" : "4.300037"
+      }
+   }
+}
+
