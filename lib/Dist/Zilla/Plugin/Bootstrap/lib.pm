@@ -260,7 +260,7 @@ sub register_component {
   if ( defined $bootstrap_path ) {
     require lib;
     lib->import("$bootstrap_path");
-    $logger->log( [ "Bootstrapping %s", "$bootstrap_path" ] );
+    $logger->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
   }
 
   my $plugin_config = {
