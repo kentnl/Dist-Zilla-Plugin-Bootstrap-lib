@@ -1,7 +1,7 @@
 {
    "abstract" : "Fake dist stub",
    "author" : [
-      "Kent Fredric <kentfredric@gmail.com>"
+      "Kent Fredric"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Dist::Zilla version 4.300037, CPAN::Meta::Converter version 2.132140",

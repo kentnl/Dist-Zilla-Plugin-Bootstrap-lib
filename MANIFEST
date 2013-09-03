@@ -13,9 +13,6 @@ corpus/fake_dist_02/dist.ini
 corpus/fake_dist_02/lib/E.pm
 corpus/fake_dist_03/dist.ini
 corpus/fake_dist_03/lib/E.pm
-corpus/fake_dist_04/E-0.01/E-0.01/META.json
-corpus/fake_dist_04/E-0.01/E-0.01/dist.ini
-corpus/fake_dist_04/E-0.01/E-0.01/lib/E.pm
 corpus/fake_dist_04/E-0.01/META.json
 corpus/fake_dist_04/E-0.01/dist.ini
 corpus/fake_dist_04/E-0.01/lib/E.pm
