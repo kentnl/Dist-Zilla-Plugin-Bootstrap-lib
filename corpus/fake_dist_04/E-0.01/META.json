@@ -25,7 +25,9 @@
             "class" : "Dist::Zilla::Plugin::Bootstrap::lib",
             "config" : {
                "Dist::Zilla::Plugin::Bootstrap::lib" : {
-                  "try_built" : null
+                  "fallback" : null,
+                  "no_fallback" : "1",
+                  "try_built" : "1"
                }
             },
             "name" : "Bootstrap::lib",
