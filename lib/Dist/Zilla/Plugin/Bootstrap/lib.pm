@@ -32,7 +32,7 @@ sub bootstrap {
 
   my $bootstrap_root = $self->_bootstrap_root;
 
-  if ( not $bootstrap_path ) {
+  if ( not $bootstrap_root ) {
       return;
   }
 
@@ -45,7 +45,7 @@ sub bootstrap {
     next unless $file->basename =~ /[.]pm$/msx;
     my $rpath = $file->relative($bootstrap_path)->stringify;
     if ( exists $INC{$rpath} ) {
-      $logger->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
+      $self->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
     }
   }
 
