@@ -134,14 +134,12 @@
          {
             "class" : "Dist::Zilla::Plugin::Bootstrap::lib",
             "config" : {
-               "Dist::Zilla::Role::Bootstrap" : {
-                  "distname" : "Dist-Zilla-Plugin-Bootstrap-lib",
-                  "fallback" : "1",
+               "Dist::Zilla::Plugin::Bootstrap::lib" : {
                   "try_built" : null
                }
             },
             "name" : "Bootstrap::lib",
-            "version" : null
+            "version" : "0.03000200"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::NextVersion",
