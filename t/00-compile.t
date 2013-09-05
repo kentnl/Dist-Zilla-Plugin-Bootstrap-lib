@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.023
+# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.025
 
 use Test::More  tests => 1 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 

@@ -1,12 +1,13 @@
 use strict;
 use warnings;
+
 ## no critic ( NamingConventions::Capitalization )
 package Dist::Zilla::Plugin::Bootstrap::lib;
 BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000200';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000201';
 }
 ## use critic;
 
@@ -15,114 +16,28 @@ BEGIN {
 
 
 
-use Cwd qw( cwd );
+use Moose;
+with 'Dist::Zilla::Role::Bootstrap';
 
 
-sub log_debug { return 1; }
+around dump_config => sub {
+    my ( $orig, $self, @args ) = @_;
+    my $config  = $self->$orig( @args );
+    $config->{q{} . __PACKAGE__ } = {};
 
+};
 
-sub plugin_name { return 'Bootstrap::lib' }
+sub bootstrap {
+  my ( $self ) = @_;
 
+  my $bootstrap_root = $self->_bootstrap_root;
 
-## no critic (RequireArgUnpacking)
-sub new { return bless $_[1], $_[0] }
-
-
-sub does {
-  require Role::Tiny;
-  ## no critic (ProhibitNoWarnings)
-  { no warnings 'redefine'; *does = \&Role::Tiny::does_role }
-  goto &Role::Tiny::does_role;
-}
-
-
-## no critic (RequireArgUnpacking)
-sub meta {
-  require Moo::HandleMoose::FakeMetaClass;
-  my $class = ref( $_[0] ) || $_[0];
-  return bless { name => $class }, 'Moo::HandleMoose::FakeMetaClass';
-}
-
-
-sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
-
-sub _try_bootstrap_built {
-  my ($config) = @_;
-
-  my $logger   = $config->{logger};
-  my $distname = $config->{distname};
-  my $cwd      = $config->{cwd};
-  my $fallback = $config->{fallback};
-
-  my $libdir = $cwd->child($distname);
-
-  $logger->log_debug( [ 'trying to bootstrap %s-*', $libdir ] );
-
-  my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
-
-  if ( scalar @candidates == 1 ) {
-    return $candidates[0]->child('lib');
-  }
-  $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-
-  if ( not $fallback ) {
-    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
-    return;
+  if ( not $bootstrap_path ) {
+      return;
   }
 
-  $logger->log( [ 'candidates for bootstrap (%s) != 1, fallback to boostrapping lib/', 0 + @candidates ] );
-  return $cwd->child('lib');
-}
-
-
-sub register_component {
-  my ( $plugin_class, $name, $payload, $section ) = @_;
-  my $zilla  = $section->sequence->assembler->zilla;
-  my $logger = $zilla->chrome->logger->proxy(
-    {
-      proxy_prefix => '[' . $name . '] ',
-    }
-  );
-  my $distname = $zilla->name;
-  $logger->log_debug( [ 'online, %s v%s', $plugin_class, $plugin_class->VERSION || 0 ] );
-
-  $payload->{try_built} = undef if not exists $payload->{try_built};
-
-  if ( $payload->{try_built} ) {
-    $payload->{fallback} = 1     if not exists $payload->{fallback};
-    $payload->{fallback} = undef if exists $payload->{no_fallback};
-  }
-
-  require Path::Tiny;
-  my $cwd = Path::Tiny::path(cwd);
-
-  my $bootstrap_path;
-
-  if ( not $payload->{try_built} ) {
-    $bootstrap_path = $cwd->child('lib');
-  }
-  else {
-    my $config = { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname };
-    $bootstrap_path = _try_bootstrap_built($config);
-  }
-
-  if ( defined $bootstrap_path ) {
-    require lib;
-    lib->import("$bootstrap_path");
-    $logger->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
-  }
-
-  my $plugin_config = {
-    config => {
-      ( exists $payload->{try_built}   ? ( try_built   => $payload->{try_built} )   : () ),
-      ( exists $payload->{fallback}    ? ( fallback    => $payload->{fallback} )    : () ),
-      ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
-    }
-  };
-
-  push @{ $zilla->plugins }, $plugin_class->new($plugin_config);
-
-  return unless defined $bootstrap_path;
+  my $bootstrap_path = $bootstrap_root->child('lib');
+  $self->_add_inc( "$bootstrap_path" );
 
   my $it = $bootstrap_path->iterator( { recurse => 1 } );
 
@@ -150,7 +65,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.03000200
+version 0.03000201
 
 =head1 SYNOPSIS
 
@@ -169,31 +84,9 @@ the plug-in itself.
 
 =head1 METHODS
 
-=head2 C<log_debug>
-    1;
-
-=head2 C<plugin_name>
-    'Bootstrap::lib'
-
-=head2 C<new>
-
-    my $conf = __PACKAGE__->new({ config => \%arbitrary_hash});
-
-=head2 C<does>
-
-Lazily invokes Role::Tiny::does_role on demand.
-
-=head2 C<meta>
-
-Lazily creates a meta object using Moo
-
 =head2 C<dump_config>
 
 Dumps the configuration of this plugin to C<dzil>
-
-=head2 C<register_component>
-
-This is where all the real work happens.
 
 =head1 USE CASES
 
