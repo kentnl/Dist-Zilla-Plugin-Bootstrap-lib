@@ -31,7 +31,7 @@ sub bootstrap {
 
   my $bootstrap_path = $bootstrap_root->child('lib');
   $self->_add_inc("$bootstrap_path");
-
+  $self->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
   my $it = $bootstrap_path->iterator( { recurse => 1 } );
 
   while ( my $file = $it->() ) {
