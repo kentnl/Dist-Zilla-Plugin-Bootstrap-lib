@@ -24,6 +24,8 @@ corpus/fake_dist_05/E-0.01/lib/E.pm
 corpus/fake_dist_05/dist.ini
 corpus/fake_dist_05/lib/E.pm
 dist.ini
+layout/self_structure.dot
+layout/self_structure.png
 lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
 perlcritic.rc
 t/00-compile.t

@@ -16,20 +16,21 @@ BEGIN {
 
 
 
+
 use Moose;
 with 'Dist::Zilla::Role::Bootstrap';
 
 sub bootstrap {
-  my ( $self ) = @_;
+  my ($self) = @_;
 
   my $bootstrap_root = $self->_bootstrap_root;
 
   if ( not $bootstrap_root ) {
-      return;
+    return;
   }
 
   my $bootstrap_path = $bootstrap_root->child('lib');
-  $self->_add_inc( "$bootstrap_path" );
+  $self->_add_inc("$bootstrap_path");
 
   my $it = $bootstrap_path->iterator( { recurse => 1 } );
 
@@ -44,6 +45,9 @@ sub bootstrap {
   return 1;
 
 }
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
 
@@ -174,6 +178,17 @@ standard Dist::Zilla Plugins in that it doesn't partake in normal phase order, a
 which is more or less a different name and implementation of C<BUILD>, in that C<bootstrap> is invoked after C<plugin_from_config> is called ( where C<new> is called ), which occurs somewhere in the middle of C<register_component>
 
 This module also appears on the plugin stash, and responds naturally to metaconfig requests.
+
+=begin MetaPOD::JSON v1.1.0
+
+{
+    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
+    "interface":"class",
+    "does":"Dist::Zilla::Role::Bootstrap"
+}
+
+
+=end MetaPOD::JSON
 
 =head1 AUTHOR
 
