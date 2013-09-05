@@ -1,6 +1,9 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [!Major and API breaking Changes]
+ - no_fallback deprecated in favour of fallback = 0/1
+ - reimplemented in terms of a proper Moose class and ::Role::Bootstrap
 
 0.03000200 2013-09-03T03:36:10Z
  [!Minor]
