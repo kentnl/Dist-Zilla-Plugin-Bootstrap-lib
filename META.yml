@@ -80,6 +80,11 @@ x_Dist_Zilla:
   plugins:
     -
       class: Dist::Zilla::Plugin::Bootstrap::lib
+      config:
+        Dist::Zilla::Role::Bootstrap:
+          distname: Dist-Zilla-Plugin-Bootstrap-lib
+          fallback: 1
+          try_built: ~
       name: Bootstrap::lib
       version: ~
     -

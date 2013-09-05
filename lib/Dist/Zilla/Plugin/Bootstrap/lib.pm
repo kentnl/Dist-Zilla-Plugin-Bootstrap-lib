@@ -19,14 +19,6 @@ BEGIN {
 use Moose;
 with 'Dist::Zilla::Role::Bootstrap';
 
-
-around dump_config => sub {
-    my ( $orig, $self, @args ) = @_;
-    my $config  = $self->$orig( @args );
-    $config->{q{} . __PACKAGE__ } = {};
-
-};
-
 sub bootstrap {
   my ( $self ) = @_;
 
@@ -71,22 +63,15 @@ version 0.03000201
 
     [Bootstrap::lib]
     try_built   = 1  ; try using an existing built distribution named Dist-Name-*
-    no_fallback = 1  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap
+    fallback    = 0  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap
                      ; using lib/ instead
 
 =head1 DESCRIPTION
 
-This module does the very simple task of
-injecting the distributions 'lib' directory into @INC
-at the point of its inclusion, so that you can use
-plug-ins you're writing for L<< C<Dist::Zilla>|Dist::Zilla >>, to release
-the plug-in itself.
+This module exists for loading either C</lib> or C</Dist-Name-$VERSION/lib> into your C<@INC> early on.
 
-=head1 METHODS
-
-=head2 C<dump_config>
-
-Dumps the configuration of this plugin to C<dzil>
+This is mostly useful for writing L<< C<Dist::Zilla>|Dist::Zilla >> plug-ins, so that you may build and release
+a plug-in using itself.
 
 =head1 USE CASES
 
@@ -115,7 +100,7 @@ For that
 
     [Bootstap::lib]
     try_built   = 1
-    no_fallback = 1
+    fallback    = 0
 
 Will do what you want.
 
@@ -184,15 +169,11 @@ The only way of working around that I can envision is adding parameters to C<Boo
 
 =head2 STILL NOT REALLY A PLUGIN
 
-Though the interface is getting more plugin-like every day, all of the behaviour is still implemented at construction time, practically as soon as the underlying Config::MVP engine has parsed it from the configuration.
+Starting at version 0.04000000 ( read: 0.04_0000_00 aka 0.04 + 0 x 4 + 0 x 2 ) this module is a fully fledged class, different only from 
+standard Dist::Zilla Plugins in that it doesn't partake in normal phase order, and only executes during a special custom C<::Bootstrap> phase,
+which is more or less a different name and implementation of C<BUILD>, in that C<bootstrap> is invoked after C<plugin_from_config> is called ( where C<new> is called ), which occurs somewhere in the middle of C<register_component>
 
-As such, it is completely removed from the real plugin execution phases, and unlike real plugins which appear on the plugin stash, this module does not appear there.
-
-=head2 GOOD LUCK
-
-I wrote this plug-in, mostly because I was boiler-plating the code into every dist I had that needed it, and
-it became annoying, especially having to update the code across distributions to handle
-L<< C<Dist::Zilla>|Dist::Zilla >> C<API> changes.
+This module also appears on the plugin stash, and responds naturally to metaconfig requests.
 
 =head1 AUTHOR
 
