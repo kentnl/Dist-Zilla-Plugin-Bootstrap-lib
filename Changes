@@ -1,5 +1,28 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.04000000 2013-09-05T08:17:38Z
+ [!Major and API breaking Changes]
+ - no_fallback deprecated in favour of fallback = 0/1
+ - reimplemented in terms of a proper Moose class and ::Role::Bootstrap
+
+ [!Minor]
+ - add metapod and related info
+
+ [Dependencies::Added / runtime requires]
+ - Dist::Zilla::Role::Bootstrap
+ - Moose
+
+ [Dependencies::Added / test requires]
+ - Cwd
+ - Path::Tiny
+
+ [Dependencies::Removed / runtime requires]
+ - Cwd
+ - Moo::HandleMoose::FakeMetaClass
+ - Path::Tiny
+ - Role::Tiny
+ - lib
+
 0.03000200 2013-09-03T03:36:10Z
  [!Minor]
  - Add tests

@@ -1,12 +1,13 @@
 use strict;
 use warnings;
+
 ## no critic ( NamingConventions::Capitalization )
 package Dist::Zilla::Plugin::Bootstrap::lib;
 BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000200';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.04000000';
 }
 ## use critic;
 
@@ -15,128 +16,38 @@ BEGIN {
 
 
 
-use Cwd qw( cwd );
 
+use Moose;
+with 'Dist::Zilla::Role::Bootstrap';
 
-sub log_debug { return 1; }
+sub bootstrap {
+  my ($self) = @_;
 
+  my $bootstrap_root = $self->_bootstrap_root;
 
-sub plugin_name { return 'Bootstrap::lib' }
-
-
-## no critic (RequireArgUnpacking)
-sub new { return bless $_[1], $_[0] }
-
-
-sub does {
-  require Role::Tiny;
-  ## no critic (ProhibitNoWarnings)
-  { no warnings 'redefine'; *does = \&Role::Tiny::does_role }
-  goto &Role::Tiny::does_role;
-}
-
-
-## no critic (RequireArgUnpacking)
-sub meta {
-  require Moo::HandleMoose::FakeMetaClass;
-  my $class = ref( $_[0] ) || $_[0];
-  return bless { name => $class }, 'Moo::HandleMoose::FakeMetaClass';
-}
-
-
-sub dump_config { return { q{} . __PACKAGE__, $_[0]->{config} } }
-
-sub _try_bootstrap_built {
-  my ($config) = @_;
-
-  my $logger   = $config->{logger};
-  my $distname = $config->{distname};
-  my $cwd      = $config->{cwd};
-  my $fallback = $config->{fallback};
-
-  my $libdir = $cwd->child($distname);
-
-  $logger->log_debug( [ 'trying to bootstrap %s-*', $libdir ] );
-
-  my (@candidates) = grep { $_->basename =~ /^\Q$distname\E-/ } grep { $_->is_dir } $cwd->children;
-
-  if ( scalar @candidates == 1 ) {
-    return $candidates[0]->child('lib');
-  }
-  $logger->log_debug( [ 'candidate: %s', $_->basename ] ) for @candidates;
-
-  if ( not $fallback ) {
-    $logger->log( [ 'candidates for bootstrap (%s) != 1, and fallback disabled. not bootstrapping', 0 + @candidates ] );
+  if ( not $bootstrap_root ) {
     return;
   }
 
-  $logger->log( [ 'candidates for bootstrap (%s) != 1, fallback to boostrapping lib/', 0 + @candidates ] );
-  return $cwd->child('lib');
-}
-
-
-sub register_component {
-  my ( $plugin_class, $name, $payload, $section ) = @_;
-  my $zilla  = $section->sequence->assembler->zilla;
-  my $logger = $zilla->chrome->logger->proxy(
-    {
-      proxy_prefix => '[' . $name . '] ',
-    }
-  );
-  my $distname = $zilla->name;
-  $logger->log_debug( [ 'online, %s v%s', $plugin_class, $plugin_class->VERSION || 0 ] );
-
-  $payload->{try_built} = undef if not exists $payload->{try_built};
-
-  if ( $payload->{try_built} ) {
-    $payload->{fallback} = 1     if not exists $payload->{fallback};
-    $payload->{fallback} = undef if exists $payload->{no_fallback};
-  }
-
-  require Path::Tiny;
-  my $cwd = Path::Tiny::path(cwd);
-
-  my $bootstrap_path;
-
-  if ( not $payload->{try_built} ) {
-    $bootstrap_path = $cwd->child('lib');
-  }
-  else {
-    my $config = { cwd => $cwd, logger => $logger, fallback => $payload->{fallback}, distname => $distname };
-    $bootstrap_path = _try_bootstrap_built($config);
-  }
-
-  if ( defined $bootstrap_path ) {
-    require lib;
-    lib->import("$bootstrap_path");
-    $logger->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
-  }
-
-  my $plugin_config = {
-    config => {
-      ( exists $payload->{try_built}   ? ( try_built   => $payload->{try_built} )   : () ),
-      ( exists $payload->{fallback}    ? ( fallback    => $payload->{fallback} )    : () ),
-      ( exists $payload->{no_fallback} ? ( no_fallback => $payload->{no_fallback} ) : () ),
-    }
-  };
-
-  push @{ $zilla->plugins }, $plugin_class->new($plugin_config);
-
-  return unless defined $bootstrap_path;
-
+  my $bootstrap_path = $bootstrap_root->child('lib');
+  $self->_add_inc("$bootstrap_path");
+  $self->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
   my $it = $bootstrap_path->iterator( { recurse => 1 } );
 
   while ( my $file = $it->() ) {
     next unless $file->basename =~ /[.]pm$/msx;
     my $rpath = $file->relative($bootstrap_path)->stringify;
     if ( exists $INC{$rpath} ) {
-      $logger->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
+      $self->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
     }
   }
 
   return 1;
 
 }
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
 
 1;
 
@@ -150,50 +61,21 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.03000200
+version 0.04000000
 
 =head1 SYNOPSIS
 
     [Bootstrap::lib]
     try_built   = 1  ; try using an existing built distribution named Dist-Name-*
-    no_fallback = 1  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap
+    fallback    = 0  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap
                      ; using lib/ instead
 
 =head1 DESCRIPTION
 
-This module does the very simple task of
-injecting the distributions 'lib' directory into @INC
-at the point of its inclusion, so that you can use
-plug-ins you're writing for L<< C<Dist::Zilla>|Dist::Zilla >>, to release
-the plug-in itself.
+This module exists for loading either C</lib> or C</Dist-Name-$VERSION/lib> into your C<@INC> early on.
 
-=head1 METHODS
-
-=head2 C<log_debug>
-    1;
-
-=head2 C<plugin_name>
-    'Bootstrap::lib'
-
-=head2 C<new>
-
-    my $conf = __PACKAGE__->new({ config => \%arbitrary_hash});
-
-=head2 C<does>
-
-Lazily invokes Role::Tiny::does_role on demand.
-
-=head2 C<meta>
-
-Lazily creates a meta object using Moo
-
-=head2 C<dump_config>
-
-Dumps the configuration of this plugin to C<dzil>
-
-=head2 C<register_component>
-
-This is where all the real work happens.
+This is mostly useful for writing L<< C<Dist::Zilla>|Dist::Zilla >> plug-ins, so that you may build and release
+a plug-in using itself.
 
 =head1 USE CASES
 
@@ -222,7 +104,7 @@ For that
 
     [Bootstap::lib]
     try_built   = 1
-    no_fallback = 1
+    fallback    = 0
 
 Will do what you want.
 
@@ -291,15 +173,22 @@ The only way of working around that I can envision is adding parameters to C<Boo
 
 =head2 STILL NOT REALLY A PLUGIN
 
-Though the interface is getting more plugin-like every day, all of the behaviour is still implemented at construction time, practically as soon as the underlying Config::MVP engine has parsed it from the configuration.
+Starting at version 0.04000000 ( read: 0.04_0000_00 aka 0.04 + 0 x 4 + 0 x 2 ) this module is a fully fledged class, different only from
+standard Dist::Zilla Plugins in that it doesn't partake in normal phase order, and only executes during a special custom C<::Bootstrap> phase,
+which is more or less a different name and implementation of C<BUILD>, in that C<bootstrap> is invoked after C<plugin_from_config> is called ( where C<new> is called ), which occurs somewhere in the middle of C<register_component>
 
-As such, it is completely removed from the real plugin execution phases, and unlike real plugins which appear on the plugin stash, this module does not appear there.
+This module also appears on the plugin stash, and responds naturally to C<metaconfig> requests.
 
-=head2 GOOD LUCK
+=begin MetaPOD::JSON v1.1.0
 
-I wrote this plug-in, mostly because I was boiler-plating the code into every dist I had that needed it, and
-it became annoying, especially having to update the code across distributions to handle
-L<< C<Dist::Zilla>|Dist::Zilla >> C<API> changes.
+{
+    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
+    "interface":"class",
+    "does":"Dist::Zilla::Role::Bootstrap"
+}
+
+
+=end MetaPOD::JSON
 
 =head1 AUTHOR
 

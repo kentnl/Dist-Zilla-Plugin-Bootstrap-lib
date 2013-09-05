@@ -3,39 +3,20 @@ NAME
     Dist::Zilla Plug-ins.
 
 VERSION
-    version 0.03000200
+    version 0.04000000
 
 SYNOPSIS
         [Bootstrap::lib]
         try_built   = 1  ; try using an existing built distribution named Dist-Name-*
-        no_fallback = 1  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap
+        fallback    = 0  ; if try_built can't find a built distribution, or there's more than one, don't bootstrap
                          ; using lib/ instead
 
 DESCRIPTION
-    This module does the very simple task of injecting the distributions
-    'lib' directory into @INC at the point of its inclusion, so that you can
-    use plug-ins you're writing for "Dist::Zilla", to release the plug-in
-    itself.
+    This module exists for loading either "/lib" or
+    "/Dist-Name-$VERSION/lib" into your @INC early on.
 
-METHODS
-  "log_debug"
-    1;
-  "plugin_name"
-    'Bootstrap::lib'
-  "new"
-        my $conf = __PACKAGE__->new({ config => \%arbitrary_hash});
-
-  "does"
-    Lazily invokes Role::Tiny::does_role on demand.
-
-  "meta"
-    Lazily creates a meta object using Moo
-
-  "dump_config"
-    Dumps the configuration of this plugin to "dzil"
-
-  "register_component"
-    This is where all the real work happens.
+    This is mostly useful for writing "Dist::Zilla" plug-ins, so that you
+    may build and release a plug-in using itself.
 
 USE CASES
   Simple single-phase self-dependency
@@ -62,7 +43,7 @@ USE CASES
 
         [Bootstap::lib]
         try_built   = 1
-        no_fallback = 1
+        fallback    = 0
 
     Will do what you want.
 
@@ -134,20 +115,17 @@ PRECAUTIONS
     discover that, and hard-code those values in "dist.ini" to start with.
 
   STILL NOT REALLY A PLUGIN
-    Though the interface is getting more plugin-like every day, all of the
-    behaviour is still implemented at construction time, practically as soon
-    as the underlying Config::MVP engine has parsed it from the
-    configuration.
+    Starting at version 0.04000000 ( read: 0.04_0000_00 aka 0.04 + 0 x 4 + 0
+    x 2 ) this module is a fully fledged class, different only from standard
+    Dist::Zilla Plugins in that it doesn't partake in normal phase order,
+    and only executes during a special custom "::Bootstrap" phase, which is
+    more or less a different name and implementation of "BUILD", in that
+    "bootstrap" is invoked after "plugin_from_config" is called ( where
+    "new" is called ), which occurs somewhere in the middle of
+    "register_component"
 
-    As such, it is completely removed from the real plugin execution phases,
-    and unlike real plugins which appear on the plugin stash, this module
-    does not appear there.
-
-  GOOD LUCK
-    I wrote this plug-in, mostly because I was boiler-plating the code into
-    every dist I had that needed it, and it became annoying, especially
-    having to update the code across distributions to handle "Dist::Zilla"
-    "API" changes.
+    This module also appears on the plugin stash, and responds naturally to
+    "metaconfig" requests.
 
 AUTHOR
     Kent Fredric <kentnl@cpan.org>
