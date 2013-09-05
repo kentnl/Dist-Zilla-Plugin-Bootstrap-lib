@@ -117,6 +117,14 @@ which is more or less a different name and implementation of `BUILD`, in that `b
 
 This module also appears on the plugin stash, and responds naturally to metaconfig requests.
 
+{
+    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
+    "interface":"class",
+    "does":"Dist::Zilla::Role::Bootstrap"
+}
+
+
+
 # AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
