@@ -7,7 +7,7 @@ BEGIN {
   $Dist::Zilla::Plugin::Bootstrap::lib::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.03000201';
+  $Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '0.04000000';
 }
 ## use critic;
 
@@ -57,7 +57,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 0.03000201
+version 0.04000000
 
 =head1 SYNOPSIS
 
