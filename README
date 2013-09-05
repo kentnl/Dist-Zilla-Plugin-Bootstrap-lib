@@ -125,7 +125,7 @@ PRECAUTIONS
     "register_component"
 
     This module also appears on the plugin stash, and responds naturally to
-    metaconfig requests.
+    "metaconfig" requests.
 
 AUTHOR
     Kent Fredric <kentnl@cpan.org>
