@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.04000001 2013-09-10T12:40:02Z
+
 0.04000000 2013-09-05T08:17:38Z
  [!Major and API breaking Changes]
  - no_fallback deprecated in favour of fallback = 0/1

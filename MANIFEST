@@ -27,6 +27,9 @@ dist.ini
 layout/self_structure.dot
 layout/self_structure.png
 lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
+maint-travis-ci/README.mkdn
+maint-travis-ci/sterilize_env.pl
+maint-travis-ci/sync_tree.pl
 perlcritic.rc
 t/00-compile.t
 t/000-report-versions-tiny.t
