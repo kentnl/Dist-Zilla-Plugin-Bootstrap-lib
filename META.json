@@ -139,7 +139,7 @@
                "Dist::Zilla::Role::Bootstrap" : {
                   "distname" : "Dist-Zilla-Plugin-Bootstrap-lib",
                   "fallback" : "1",
-                  "try_built" : "1",
+                  "try_built" : null,
                   "try_built_method" : "mtime"
                }
             },
