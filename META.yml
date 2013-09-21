@@ -27,7 +27,7 @@ provides:
     file: lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
     version: 0.04000001
 requires:
-  Dist::Zilla::Role::Bootstrap: 0
+  Dist::Zilla::Role::Bootstrap: v0.2.0
   Moose: 0
   perl: 5.006
   strict: 0
@@ -342,6 +342,40 @@ x_Dist_Zilla:
             - Test::More
             - Dist::Zilla::PluginBundle::Author::KENTNL
       name: '@Author::KENTNL/Prereqs::MatchInstalled'
+      version: 0.1.2
+    -
+      class: Dist::Zilla::Plugin::Prereqs::MatchInstalled
+      config:
+        Dist::Zilla::Plugin::Prereqs::MatchInstalled:
+          applyto:
+            - build.requires
+            - build.recommends
+            - build.suggests
+            - test.requires
+            - test.recommends
+            - test.suggests
+            - runtime.requires
+            - runtime.recommends
+            - runtime.suggests
+            - configure.requires
+            - configure.recommends
+            - configure.suggests
+            - develop.requires
+            - develop.recommends
+            - develop.suggests
+          applyto_phase:
+            - build
+            - test
+            - runtime
+            - configure
+            - develop
+          applyto_relation:
+            - requires
+            - recommends
+            - suggests
+          modules:
+            - Dist::Zilla::Role::Bootstrap
+      name: Prereqs::MatchInstalled
       version: 0.1.2
     -
       class: Dist::Zilla::Plugin::Prereqs
