@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.04000001 2013-09-24T16:22:46Z
  [Bugfix]
  - Attempt to solve the problem of CPAN Smokers not having dzil in path by using Test::DZil instead.
 
