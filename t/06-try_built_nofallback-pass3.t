@@ -9,7 +9,7 @@ use File::Copy::Recursive qw( rcopy );
 use Test::DZil;
 use Test::Fatal;
 
-my $dist = 'fake_dist_03';
+my $dist = 'fake_dist_06';
 
 my $source  = find_dev('./')->child('corpus')->child($dist);
 my $tempdir = Path::Tiny->tempdir;

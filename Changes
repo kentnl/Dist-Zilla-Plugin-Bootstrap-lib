@@ -1,5 +1,21 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+0.04000001 2013-09-24T16:22:46Z
+ [Bugfix]
+ - Attempt to solve the problem of CPAN Smokers not having dzil in path by using Test::DZil instead.
+
+ [Dependencies::Added / test requires]
+ - File::Spec
+ - Test::DZil
+ - Test::Fatal
+
+ [Dependencies::Removed / test requires]
+ - Dist::Zilla
+
+ [Tests]
+ - additional test for new ::Role::Bootstrap behaviour
+ - update compile test
+
 0.04000000 2013-09-05T08:17:38Z
  [!Major and API breaking Changes]
  - no_fallback deprecated in favour of fallback = 0/1
