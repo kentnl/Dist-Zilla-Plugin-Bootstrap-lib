@@ -23,7 +23,7 @@ my %module_build_args = (
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
-    "Dist::Zilla::Role::Bootstrap" => "v0.2.0",
+    "Dist::Zilla::Role::Bootstrap" => 0,
     "Moose" => 0,
     "perl" => "5.006",
     "strict" => 0,
@@ -32,13 +32,14 @@ my %module_build_args = (
   "script_files" => [],
   "test_requires" => {
     "Cwd" => 0,
-    "Dist::Zilla" => 0,
     "File::Copy::Recursive" => 0,
     "File::Spec" => 0,
     "IO::Handle" => 0,
     "IPC::Open3" => 0,
     "Path::FindDev" => 0,
     "Path::Tiny" => 0,
+    "Test::DZil" => 0,
+    "Test::Fatal" => 0,
     "Test::More" => "0.98"
   }
 );
