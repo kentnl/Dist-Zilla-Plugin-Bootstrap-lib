@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 # VERSION
 
-version 0.04000001
+version 0.04000002
 
 # SYNOPSIS
 
@@ -17,7 +17,7 @@ version 0.04000001
 
 This module exists for loading either `/lib` or `/Dist-Name-$VERSION/lib` into your `@INC` early on.
 
-This is mostly useful for writing [`Dist::Zilla`](http://search.cpan.org/perldoc?Dist::Zilla) plug-ins, so that you may build and release
+This is mostly useful for writing [`Dist::Zilla`](https://metacpan.org/pod/Dist::Zilla) plug-ins, so that you may build and release
 a plug-in using itself.
 
 # USE CASES
@@ -28,7 +28,7 @@ This module really is only useful in the case where you need to use something li
 
     dzil -Ilib
 
-For _every_ call to [`Dist::Zilla`](http://search.cpan.org/perldoc?Dist::Zilla), and this is mainly a convenience.
+For _every_ call to [`Dist::Zilla`](https://metacpan.org/pod/Dist::Zilla), and this is mainly a convenience.
 
 For that
 
