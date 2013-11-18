@@ -38,10 +38,10 @@ version: 0.04000002
 x_BuiltWith:
   modules:
     Cwd: 3.45
-    Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl: 2.002000
+    Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl: 2.002001
     Dist::Zilla::Plugin::Authority: 1.006
     Dist::Zilla::Plugin::AutoPrereqs: 5.006
-    Dist::Zilla::Plugin::CheckExtraTests: 0.015
+    Dist::Zilla::Plugin::CheckExtraTests: 0.016
     Dist::Zilla::Plugin::ConfirmRelease: 5.006
     Dist::Zilla::Plugin::EOLTests: 0.02
     Dist::Zilla::Plugin::Git::Check: 2.017
@@ -80,9 +80,9 @@ x_BuiltWith:
     Dist::Zilla::Plugin::TestRelease: 5.006
     Dist::Zilla::Plugin::Twitter: 0.023
     Dist::Zilla::Plugin::UploadToCPAN: 5.006
-    Dist::Zilla::PluginBundle::Author::KENTNL: 2.002000
+    Dist::Zilla::PluginBundle::Author::KENTNL: 2.002001
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 1.7.2
-    Dist::Zilla::Role::Bootstrap: 0.2.1
+    Dist::Zilla::Role::Bootstrap: 0.2.2
     File::Copy::Recursive: 0.38
     Module::Build: 0.4200
     Moose: 2.1106
@@ -364,7 +364,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl
       name: '@Author::KENTNL/Author::KENTNL::MinimumPerl'
-      version: 2.002000
+      version: 2.002001
     -
       class: Dist::Zilla::Plugin::Authority
       name: '@Author::KENTNL/Authority'
@@ -388,7 +388,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::CheckExtraTests
       name: '@Author::KENTNL/CheckExtraTests'
-      version: 0.015
+      version: 0.016
     -
       class: Dist::Zilla::Plugin::TestRelease
       name: '@Author::KENTNL/TestRelease'
