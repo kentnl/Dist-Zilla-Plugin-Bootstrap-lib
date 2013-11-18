@@ -1,6 +1,6 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-0.04000002 2013-11-18T07:18:15Z
+0.04000002 2013-11-18T07:22:31Z
  [00 Minor/Bugfix]
  - Regenerate files to try avoid a few failures
  - Use Compile::PerFile
