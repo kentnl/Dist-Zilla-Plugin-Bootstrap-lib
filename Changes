@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.04000002 2013-11-18T07:22:31Z
  [00 Minor/Bugfix]
  - Regenerate files to try avoid a few failures
  - Use Compile::PerFile
