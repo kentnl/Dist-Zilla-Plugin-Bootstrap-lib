@@ -5,6 +5,7 @@
  - Regenerate files to try avoid a few failures
  - Use Compile::PerFile
  - Use latest Module::Build magic
+ - Rewrite tests to avoid stacked operators for 5.8 compat.
 
  [Dependencies::Added / develop requires]
  - Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl
