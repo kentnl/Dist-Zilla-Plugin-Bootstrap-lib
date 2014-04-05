@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.000001 2014-04-05T06:28:28Z
+
 1.000000 2014-04-05T06:23:20Z
  [00 Major]
  - This release contains mostly packaging changes that will be invisible to

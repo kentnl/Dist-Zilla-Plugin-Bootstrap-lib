@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-use Path::FindDev qw( find_dev );
+use FindBin;
 use Path::Tiny;
 use Cwd qw( cwd );
 use File::Copy::Recursive qw( rcopy );
@@ -11,7 +11,7 @@ use Test::Fatal;
 
 my $dist = 'fake_dist_03';
 
-my $source  = find_dev('./')->child('corpus')->child($dist);
+my $source  = path("$FindBin::Bin")->parent->child('corpus')->child($dist);
 my $tempdir = Path::Tiny->tempdir;
 
 rcopy( "$source", "$tempdir" );
