@@ -147,7 +147,7 @@ This module also appears on the plugin stash, and responds naturally to C<metaco
 
 =cut
 
-use Moose;
+use Moose qw( with );
 with 'Dist::Zilla::Role::Bootstrap';
 
 sub bootstrap {
