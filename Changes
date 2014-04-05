@@ -1,5 +1,35 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.000000 2014-04-05T06:23:20Z
+ [00 Major]
+ - This release contains mostly packaging changes that will be invisible to
+   CPAN users.
+ - However, it may require attention for downstream non-CPAN tooling.
+
+ [01 Version Scheme]
+ - Version Scheme is shortened from a mantissa of 8 to a mantissa of 6
+ - This is the primary reason for the 1.xxx release.
+
+ [02 Tooling is MakeMaker based]
+ - Tooling is now switched to ExtUtils::MakeMaker
+ - instead of coercing users into installing the latest EUMM/TestMore/MB
+   when not even necessary, that is now only the recommended course of
+   action.
+
+ [Dependencies::Aggregate]
+ - 5.008: 204 → 207
+ - 5.010: 184 → 186
+ - 5.019: 168 → 167
+
+ [Dependencies::Stats]
+ - Dependencies changed since 0.04000002, see Changes.deps{,.all,.dev} for
+   details
+ - build: -1
+ - configure: +1 -1 (recommends: +1)
+ - develop: +7 ↑1 -9
+ - runtime: +1 ↑1
+ - test: +4 ↓1 (recommends: +4)
+
 0.04000002 2013-11-18T07:22:31Z
  [00 Minor/Bugfix]
  - Regenerate files to try avoid a few failures
@@ -7,79 +37,13 @@
  - Use latest Module::Build magic
  - Rewrite tests to avoid stacked operators for 5.8 compat.
 
- [Dependencies::Added / develop requires]
- - Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl
- - Dist::Zilla::Plugin::Authority 1.006
- - Dist::Zilla::Plugin::AutoPrereqs
- - Dist::Zilla::Plugin::CheckExtraTests
- - Dist::Zilla::Plugin::ConfirmRelease
- - Dist::Zilla::Plugin::EOLTests
- - Dist::Zilla::Plugin::Git::Check
- - Dist::Zilla::Plugin::Git::Commit
- - Dist::Zilla::Plugin::Git::CommitBuild
- - Dist::Zilla::Plugin::Git::GatherDir
- - Dist::Zilla::Plugin::Git::NextVersion
- - Dist::Zilla::Plugin::Git::Tag
- - Dist::Zilla::Plugin::GithubMeta
- - Dist::Zilla::Plugin::License
- - Dist::Zilla::Plugin::Manifest
- - Dist::Zilla::Plugin::ManifestSkip
- - Dist::Zilla::Plugin::MetaConfig
- - Dist::Zilla::Plugin::MetaData::BuiltWith
- - Dist::Zilla::Plugin::MetaJSON
- - Dist::Zilla::Plugin::MetaProvides::Package 1.14000001
- - Dist::Zilla::Plugin::MetaTests
- - Dist::Zilla::Plugin::MetaYAML
- - Dist::Zilla::Plugin::ModuleBuild
- - Dist::Zilla::Plugin::NextRelease
- - Dist::Zilla::Plugin::PkgVersion
- - Dist::Zilla::Plugin::PodCoverageTests
- - Dist::Zilla::Plugin::PodSyntaxTests
- - Dist::Zilla::Plugin::PodWeaver
- - Dist::Zilla::Plugin::Prereqs
- - Dist::Zilla::Plugin::Prereqs::MatchInstalled
- - Dist::Zilla::Plugin::PruneCruft
- - Dist::Zilla::Plugin::ReadmeAnyFromPod
- - Dist::Zilla::Plugin::ReadmeFromPod
- - Dist::Zilla::Plugin::ReportVersions::Tiny
- - Dist::Zilla::Plugin::Test::CPAN::Changes
- - Dist::Zilla::Plugin::Test::Compile::PerFile
- - Dist::Zilla::Plugin::Test::Kwalitee
- - Dist::Zilla::Plugin::Test::MinimumVersion
- - Dist::Zilla::Plugin::Test::Perl::Critic
- - Dist::Zilla::Plugin::TestRelease
- - Dist::Zilla::Plugin::Twitter
- - Dist::Zilla::Plugin::UploadToCPAN
- - Dist::Zilla::PluginBundle::Author::KENTNL 2.002001
-
- [Dependencies::Added / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL::Lite v1.3.0
-
- [Dependencies::Changed / build requires]
- - Module::Build 0.4007 → 0.4200
-
- [Dependencies::Changed / configure requires]
- - Module::Build 0.4007 → 0.4200
-
- [Dependencies::Changed / develop requires]
- - Test::Kwalitee 1.08 → 1.12
-
- [Dependencies::Changed / test requires]
- - Test::More 0.98 → 1.001002
-
- [Dependencies::Removed / develop recommends]
- - Dist::Zilla::PluginBundle::Author::KENTNL::Lite v1.3.0
-
- [Dependencies::Removed / develop requires]
- - Dist::Zilla::PluginBundle::Author::KENTNL::Lite
-
- [Dependencies::Removed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.8.3
-
- [Dependencies::Removed / test requires]
- - File::Spec
- - IO::Handle
- - IPC::Open3
+ [Dependencies::Stats]
+ - Dependencies changed since 0.04000001, see Changes.deps{,.all,.dev} for
+   details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +43 ↑1 -1 (recommends: -1, suggests: +1 -1)
+ - test: ↑1 -3
 
  [Documentation]
  - README.mkdn points to metacpan
@@ -89,13 +53,10 @@
  - Attempt to solve the problem of CPAN Smokers not having dzil in path by
    using Test::DZil instead.
 
- [Dependencies::Added / test requires]
- - File::Spec
- - Test::DZil
- - Test::Fatal
-
- [Dependencies::Removed / test requires]
- - Dist::Zilla
+ [Dependencies::Stats]
+ - Dependencies changed since 0.04000000, see Changes.deps{,.all,.dev} for
+   details
+ - test: +3 -1
 
  [Tests]
  - additional test for new ::Role::Bootstrap behaviour
@@ -109,30 +70,21 @@
  [!Minor]
  - add metapod and related info
 
- [Dependencies::Added / runtime requires]
- - Dist::Zilla::Role::Bootstrap
- - Moose
-
- [Dependencies::Added / test requires]
- - Cwd
- - Path::Tiny
-
- [Dependencies::Removed / runtime requires]
- - Cwd
- - Moo::HandleMoose::FakeMetaClass
- - Path::Tiny
- - Role::Tiny
- - lib
+ [Dependencies::Stats]
+ - Dependencies changed since 0.03000200, see Changes.deps{,.all,.dev} for
+   details
+ - runtime: +2 -5
+ - test: +2
 
 0.03000200 2013-09-03T03:36:10Z
  [!Minor]
  - Add tests
  - Minor refactor
 
- [Dependencies::Added / test requires]
- - Dist::Zilla
- - File::Copy::Recursive
- - Path::FindDev
+ [Dependencies::Stats]
+ - Dependencies changed since 0.03000101, see Changes.deps{,.all,.dev} for
+   details
+ - test: +3
 
 0.03000101 2013-08-31T01:52:46Z
  [Bugfix]
@@ -142,9 +94,10 @@
  [!Minor]
  - Now shows config in metaconfig with a bit of Moo wizzardry.
 
- [Dependencies::Added / runtime requires]
- - Moo::HandleMoose::FakeMetaClass
- - Role::Tiny
+ [Dependencies::Stats]
+ - Dependencies changed since 0.03000000, see Changes.deps{,.all,.dev} for
+   details
+ - runtime: +2
 
 0.03000000 2013-08-30T23:46:07Z
  [!Major]
@@ -153,29 +106,14 @@
    already loaded in %INC ( closes gh #1 )
  - Tests regenerated with newer tools
 
- [Dependencies::Added / develop requires]
- - Test::CPAN::Changes 0.19
- - Test::Kwalitee 1.08
-
- [Dependencies::Added / runtime requires]
- - lib
-
- [Dependencies::Added / test requires]
- - IO::Handle
- - IPC::Open3
-
- [Dependencies::Changed / build requires]
- - Module::Build 0.4004 → 0.4007
-
- [Dependencies::Changed / configure requires]
- - Module::Build 0.4004 → 0.4007
-
- [Dependencies::Changed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.7.2 → v1.8.3
-
- [Dependencies::Removed / test requires]
- - File::Find
- - File::Temp
+ [Dependencies::Stats]
+ - Dependencies changed since 0.02000100, see Changes.deps{,.all,.dev} for
+   details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +2 (suggests: ↑1)
+ - runtime: +1
+ - test: +2 -2
 
 0.02000100 2013-04-06T09:53:45Z
  [Bugs]
@@ -197,38 +135,21 @@
    form ( this is the default )
  - `no_fallback = 1` disables `fallback`
 
- [Dependencies::Added / runtime requires]
- - Path::Tiny
- - Cwd
-
- [Dependencies::Removed / runtime requires]
- - File::Spec
- - Carp
+ [Dependencies::Stats]
+ - Dependencies changed since 0.01023602, see Changes.deps{,.all,.dev} for
+   details
+ - runtime: +2 -2
 
 0.01023602 2013-04-06T08:37:50Z
  - Maintenance Release
 
- [Dependencies::Added / develop requires]
- - Pod::Coverage::TrustPod
- - Test::CPAN::Meta
- - Test::POD 1.41
- - Test::POD::Coverage 1.08
- - version 0.9901
-
- [Dependencies::Changed / build requires]
- - Module::Build 0.3601 → 0.4004
-
- [Dependencies::Changed / configure requires]
- - Module::Build 0.3601 → 0.4004
-
- [Dependencies::Changed / develop recommends]
- - Dist::Zilla::PluginBundle::Author::KENTNL::Lite 0.01009803 → v1.3.0
-
- [Dependencies::Changed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.2.0 → v1.7.2
-
- [Dependencies::Changed / test requires]
- - Test::More 0.88 → 0.98
+ [Dependencies::Stats]
+ - Dependencies changed since 0.01023601, see Changes.deps{,.all,.dev} for
+   details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +5 (recommends: ↑1, suggests: ↑1)
+ - test: ↑1
 
  [Documentation]
  - Update Ⓒ year.
@@ -243,17 +164,12 @@
 0.01023601 2012-02-02T19:41:29Z
  - Maintenance Release
 
- [Dependencies::Changed]
- - develop suggests : Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0 ->
-   v1.2.0
-
- [Dependencies::New]
- - runtime requires : perl 5.006
- - runtime requires : strict
- - runtime requires : warnings
-
- [Dependencies::Removed]
- - test requires : English
+ [Dependencies::Stats]
+ - Dependencies changed since 0.01023600, see Changes.deps{,.all,.dev} for
+   details
+ - develop: (suggests: ↑1)
+ - runtime: +3
+ - test: -1
 
  [Internals]
  - Packages declare $AUTHOR
@@ -269,8 +185,10 @@
 0.01023600 2011-04-04T15:58:33Z
  - Retooling release only.
 
- [Dependencies::Devel]
- - Advertises development pluginbundles.
+ [Dependencies::Stats]
+ - Dependencies changed since 0.01000003, see Changes.deps{,.all,.dev} for
+   details
+ - develop: +1 (recommends: +1, suggests: +1)
 
  [Packaging]
  - Move to @Author::KENTNL
