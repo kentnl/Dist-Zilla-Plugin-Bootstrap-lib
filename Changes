@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.000001 2014-04-05T11:36:12Z
  [00 Test Fixes]
  - Drop dependency on Path::FindDev
 
