@@ -176,7 +176,7 @@
          "Dist::Zilla::Plugin::UploadToCPAN" : "5.015",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.012002",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "1.7.2",
-         "Dist::Zilla::Role::Bootstrap" : "0.2.3",
+         "Dist::Zilla::Role::Bootstrap" : "1.000000",
          "ExtUtils::MakeMaker" : "6.94",
          "File::Copy::Recursive" : "0.38",
          "File::Spec::Functions" : "3.47",
