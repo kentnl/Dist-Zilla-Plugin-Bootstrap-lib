@@ -9,6 +9,8 @@ package Dist::Zilla::Plugin::Bootstrap::lib;
 
 # ABSTRACT: A minimal boot-strapping for Dist::Zilla Plug-ins.
 
+# AUTHORITY
+
 =head1 SYNOPSIS
 
     [Bootstrap::lib]
