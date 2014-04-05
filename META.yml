@@ -26,7 +26,7 @@ name: Dist-Zilla-Plugin-Bootstrap-lib
 provides:
   Dist::Zilla::Plugin::Bootstrap::lib:
     file: lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
-    version: '0.040000'
+    version: '1.000000'
 requires:
   Dist::Zilla::Role::Bootstrap: '0'
   Moose: '0'
@@ -38,7 +38,7 @@ resources:
   bugtracker: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib/issues
   homepage: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib
   repository: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib.git
-version: '0.040000'
+version: '1.000000'
 x_BuiltWith:
   modules:
     CPAN::Meta: '2.140640'
