@@ -1,6 +1,21 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Major]
+ - This release contains mostly packaging changes that will be invisible to
+   CPAN users.
+ - However, it may require attention for downstream non-CPAN tooling.
+
+ [01 Version Scheme]
+ - Version Scheme is shortened from a mantissa of 8 to a mantissa of 6
+ - This is the primary reason for the 1.xxx release.
+
+ [02 Tooling is MakeMaker based]
+ - Tooling is now switched to ExtUtils::MakeMaker
+ - instead of coercing users into installing the latest EUMM/TestMore/MB
+   when not even necessary, that is now only the recommended course of
+   action.
+
  [Dependencies::Stats]
  - Dependencies changed since 0.04000002, see Changes.deps{,.all,.dev} for
    details
