@@ -1,5 +1,19 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.000001 2014-04-05T11:36:12Z
+ [00 Test Fixes]
+ - Drop dependency on Path::FindDev
+
+ [Dependencies::Aggregate]
+ - 5.008 : 207 → 204
+ - 5.010 : 186 → 183
+ - 5.019 : 167 → 164
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.000000, see Changes.deps{,.all,.dev} for
+   details
+ - test: +1 -1
+
 1.000000 2014-04-05T06:23:20Z
  [00 Major]
  - This release contains mostly packaging changes that will be invisible to
