@@ -4,6 +4,11 @@
  [00 Test Fixes]
  - Drop dependency on Path::FindDev
 
+ [Dependencies::Aggregate]
+ - 5.008 : 207 → 204
+ - 5.010 : 186 → 183
+ - 5.019 : 167 → 164
+
  [Dependencies::Stats]
  - Dependencies changed since 1.000000, see Changes.deps{,.all,.dev} for
    details
