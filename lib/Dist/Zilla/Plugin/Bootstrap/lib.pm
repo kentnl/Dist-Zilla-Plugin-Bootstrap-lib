@@ -316,7 +316,7 @@ in C<dist.ini> to start with.
 Starting at version 0.04000000 ( read: 0.04_0000_00 aka 0.04 + 0 x 4 + 0 x 2 ) this module is a fully fledged class, different
 only from standard Dist::Zilla Plugins in that it doesn't partake in normal phase order, and only executes during a special
 custom C<::Bootstrap> phase, which is more or less a different name and implementation of C<BUILD>, in that C<bootstrap> is
-invoked after C<plugin_from_config> is called ( where C<new> is called ), which occurs somewhere in the middle of 
+invoked after C<plugin_from_config> is called ( where C<new> is called ), which occurs somewhere in the middle of
 C<register_component>
 
 This module also appears on the plugin stash, and responds naturally to C<metaconfig> requests.
