@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 # VERSION
 
-version 1.000000
+version 1.000001
 
 # SYNOPSIS
 
