@@ -16,6 +16,11 @@
    when not even necessary, that is now only the recommended course of
    action.
 
+ [Dependencies::Aggregate]
+ - 5.008: 204 → 207
+ - 5.010: 184 → 186
+ - 5.019: 168 → 167
+
  [Dependencies::Stats]
  - Dependencies changed since 0.04000002, see Changes.deps{,.all,.dev} for
    details
