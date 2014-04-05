@@ -103,7 +103,7 @@ PRECAUTIONS
     from even being able to bootstrap.
 
     Even as it is, us using "zilla->name" means that if your dist relies on
-    some process to divine its name, the module that does this must
+    some process to divine its name, the module that does this must:
 
     *   be loaded and declared prior to "Bootstrap::lib" in the "dist.ini"
 
