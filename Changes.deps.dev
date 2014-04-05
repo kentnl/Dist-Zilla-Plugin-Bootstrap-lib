@@ -1,4 +1,6 @@
-1.000000
+1.000001
+
+1.000000 2014-04-05T06:23:20Z
  [Added / develop requires]
  - Dist::Zilla::Plugin::Git::NextRelease
  - Dist::Zilla::Plugin::Git::NextVersion::Sanitized

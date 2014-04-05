@@ -1,4 +1,11 @@
-1.000000
+1.000001
+ [Added / test requires]
+ - FindBin
+
+ [Removed / test requires]
+ - Path::FindDev
+
+1.000000 2014-04-05T06:23:20Z
  [Added / configure recommends]
  - ExtUtils::MakeMaker 6.94
 
