@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 # VERSION
 
-version 0.04000002
+version 1.000000
 
 # SYNOPSIS
 
@@ -123,21 +123,13 @@ invoked after `plugin_from_config` is called ( where `new` is called ), which oc
 
 This module also appears on the plugin stash, and responds naturally to `metaconfig` requests.
 
-{
-    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
-    "interface":"class",
-    "does":"Dist::Zilla::Role::Bootstrap"
-}
-
-
-
 # AUTHOR
 
 Kent Fredric <kentnl@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Kent Fredric <kentnl@cpan.org>.
+This software is copyright (c) 2014 by Kent Fredric <kentnl@cpan.org>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
