@@ -30,8 +30,9 @@ provides:
 requires:
   Dist::Zilla::Role::Bootstrap: '0'
   Moose: '0'
-  perl: '5.006'
+  perl: '5.008'
   strict: '0'
+  utf8: '0'
   warnings: '0'
 resources:
   bugtracker: https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib/issues
@@ -104,6 +105,7 @@ x_BuiltWith:
     Test::Pod: '1.48'
     Test::Pod::Coverage: '1.08'
     strict: '1.08'
+    utf8: '1.13'
     version: '0.9908'
     warnings: '1.23'
   perl:

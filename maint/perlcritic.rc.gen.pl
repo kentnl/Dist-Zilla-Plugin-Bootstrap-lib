@@ -19,6 +19,7 @@ $bundle->configure;
 
 my @stopwords = (
   qw(
+    pre
     )
 );
 for my $wordlist (@stopwords) {
