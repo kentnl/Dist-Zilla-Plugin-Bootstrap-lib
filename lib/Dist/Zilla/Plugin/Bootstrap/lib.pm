@@ -1,5 +1,7 @@
+use 5.008;    # utf8
 use strict;
 use warnings;
+use utf8;
 
 ## no critic ( NamingConventions::Capitalization )
 package Dist::Zilla::Plugin::Bootstrap::lib;
