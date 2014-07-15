@@ -16,6 +16,7 @@ toolkit           = eumm
 toolkit_hardness  = soft
 copyfiles         = LICENSE
 srcreadme         = mkdn
+bumpversions      = 1
 
 ;version_major     = 0
 ;version_minor     = 1

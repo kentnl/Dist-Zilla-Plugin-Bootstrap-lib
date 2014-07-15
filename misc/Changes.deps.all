@@ -2,7 +2,9 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
 
 1.000002
  [Added / develop requires]
+ - Dist::Zilla::Plugin::BumpVersionAfterRelease
  - Dist::Zilla::Plugin::CopyFilesFromBuild
+ - Dist::Zilla::Plugin::RewriteVersion::Sanitized
 
  [Added / develop suggests]
  - Dist::Zilla::App::Command::bakeini 0.001001
@@ -15,6 +17,8 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - ExtUtils::MakeMaker 6.94 → 6.98
 
  [Removed / develop requires]
+ - Dist::Zilla::Plugin::Git::NextVersion::Sanitized
+ - Dist::Zilla::Plugin::PkgVersion
  - Dist::Zilla::PluginBundle::Author::KENTNL 2.012002
 
  [Removed / develop suggests]

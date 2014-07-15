@@ -4,7 +4,7 @@
  [Dependencies::Stats]
  - Dependencies changed since 1.000001, see misc/*.deps* for details
  - configure: (recommends: ↑1)
- - develop: +1 -1 (suggests: +2 -1)
+ - develop: +3 -3 (suggests: +2 -1)
  - test: (recommends: ↑1)
 
 1.000001 2014-04-05T11:36:12Z
