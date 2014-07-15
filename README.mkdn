@@ -4,7 +4,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 # VERSION
 
-version 1.000001
+version 1.000002
 
 # SYNOPSIS
 
@@ -73,7 +73,7 @@ Then
 
 ## DO NOT
 
-__DO NOT__ use this library from inside a bundle. It will not likely work as expected, and you __DO NOT__ want
+**DO NOT** use this library from inside a bundle. It will not likely work as expected, and you **DO NOT** want
 to bootstrap everything in all cases.
 
 ## NO VERSION
@@ -83,7 +83,7 @@ On its own,
     [Bootstrap::lib]
 
 At present, using this module in conjunction with a module with no explicitly defined version in the
-source will result in the _executed_ instance of that plug-in _also_ having __NO VERSION__.
+source will result in the _executed_ instance of that plug-in _also_ having **NO VERSION**.
 
 If this is a problem for you, then its suggested you try either variation of using
 
