@@ -1,5 +1,15 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.000002 2014-07-15T07:33:24Z
+ [00 Trivial]
+ - Misc packaging cleanups
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.000001, see misc/*.deps* for details
+ - configure: (recommends: ↑1)
+ - develop: +3 -3 (suggests: +2 -1)
+ - test: (recommends: ↑1)
+
 1.000001 2014-04-05T11:36:12Z
  [00 Test Fixes]
  - Drop dependency on Path::FindDev
@@ -10,14 +20,12 @@
  - 5.019 : 167 → 164
 
  [Dependencies::Stats]
- - Dependencies changed since 1.000000, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 1.000000, see misc/*.deps* for details
  - test: +1 -1
 
 1.000000 2014-04-05T06:23:20Z
  [00 Major]
- - This release contains mostly packaging changes that will be invisible to
-   CPAN users.
+ - This release contains mostly packaging changes that will be invisible to CPAN users.
  - However, it may require attention for downstream non-CPAN tooling.
 
  [01 Version Scheme]
@@ -26,9 +34,8 @@
 
  [02 Tooling is MakeMaker based]
  - Tooling is now switched to ExtUtils::MakeMaker
- - instead of coercing users into installing the latest EUMM/TestMore/MB
-   when not even necessary, that is now only the recommended course of
-   action.
+ - instead of coercing users into installing the latest EUMM/TestMore/MB when not even necessary, that is now only the
+   recommended course of action.
 
  [Dependencies::Aggregate]
  - 5.008: 204 → 207
@@ -36,8 +43,7 @@
  - 5.019: 168 → 167
 
  [Dependencies::Stats]
- - Dependencies changed since 0.04000002, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.04000002, see misc/*.deps* for details
  - build: -1
  - configure: +1 -1 (recommends: +1)
  - develop: +7 ↑1 -9
@@ -52,8 +58,7 @@
  - Rewrite tests to avoid stacked operators for 5.8 compat.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.04000001, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.04000001, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
  - develop: +43 ↑1 -1 (recommends: -1, suggests: +1 -1)
@@ -64,12 +69,10 @@
 
 0.04000001 2013-09-24T16:22:46Z
  [Bugfix]
- - Attempt to solve the problem of CPAN Smokers not having dzil in path by
-   using Test::DZil instead.
+ - Attempt to solve the problem of CPAN Smokers not having dzil in path by using Test::DZil instead.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.04000000, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.04000000, see misc/*.deps* for details
  - test: +3 -1
 
  [Tests]
@@ -85,8 +88,7 @@
  - add metapod and related info
 
  [Dependencies::Stats]
- - Dependencies changed since 0.03000200, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.03000200, see misc/*.deps* for details
  - runtime: +2 -5
  - test: +2
 
@@ -96,8 +98,7 @@
  - Minor refactor
 
  [Dependencies::Stats]
- - Dependencies changed since 0.03000101, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.03000101, see misc/*.deps* for details
  - test: +3
 
 0.03000101 2013-08-31T01:52:46Z
@@ -109,20 +110,17 @@
  - Now shows config in metaconfig with a bit of Moo wizzardry.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.03000000, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.03000000, see misc/*.deps* for details
  - runtime: +2
 
 0.03000000 2013-08-30T23:46:07Z
  [!Major]
  - Less noisy in general usage.
- - Now warns if paths that would be boostraped contain modules that are
-   already loaded in %INC ( closes gh #1 )
+ - Now warns if paths that would be boostraped contain modules that are already loaded in %INC ( closes gh #1 )
  - Tests regenerated with newer tools
 
  [Dependencies::Stats]
- - Dependencies changed since 0.02000100, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.02000100, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
  - develop: +2 (suggests: ↑1)
@@ -131,35 +129,27 @@
 
 0.02000100 2013-04-06T09:53:45Z
  [Bugs]
- - 2 fallback conditions were accidentally using the same logic, so only
-   one would ever work.
- - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted
-   in a "fallthrough" to system.
+ - 2 fallback conditions were accidentally using the same logic, so only one would ever work.
+ - satisfactory build dirs accidentally lacked a 'lib' suffix, so resulted in a "fallthrough" to system.
 
 0.02000000 2013-04-06T09:38:52Z
  [!Noteworthy Changes]
- - @INC mutation now done slightly later at C<register_component>, which
-   lets us get payload parameters out, while still executing the real work
-   long before anything else. Though execution order still matters
-   profusely.
+ - @INC mutation now done slightly later at C<register_component>, which lets us get payload parameters out, while
+   still executing the real work long before anything else. Though execution order still matters profusely.
  - 3 new parameters,
- - `try_built` tries to use a previous build instead of a "undef version"
-   based bootstrap
- - `fallback = 1` enables `try_built` to fall back to the `bootstrap lib`
-   form ( this is the default )
+ - `try_built` tries to use a previous build instead of a "undef version" based bootstrap
+ - `fallback = 1` enables `try_built` to fall back to the `bootstrap lib` form ( this is the default )
  - `no_fallback = 1` disables `fallback`
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01023602, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01023602, see misc/*.deps* for details
  - runtime: +2 -2
 
 0.01023602 2013-04-06T08:37:50Z
  - Maintenance Release
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01023601, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01023601, see misc/*.deps* for details
  - build: ↑1
  - configure: ↑1
  - develop: +5 (recommends: ↑1, suggests: ↑1)
@@ -179,8 +169,7 @@
  - Maintenance Release
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01023600, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01023600, see misc/*.deps* for details
  - develop: (suggests: ↑1)
  - runtime: +3
  - test: -1
@@ -200,8 +189,7 @@
  - Retooling release only.
 
  [Dependencies::Stats]
- - Dependencies changed since 0.01000003, see Changes.deps{,.all,.dev} for
-   details
+ - Dependencies changed since 0.01000003, see misc/*.deps* for details
  - develop: +1 (recommends: +1, suggests: +1)
 
  [Packaging]

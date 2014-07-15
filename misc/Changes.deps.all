@@ -1,6 +1,43 @@
-1.000001
+This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL dependencies for all phases (configure/build/runtime/test/develop)
+
+1.000002
+ [Added / develop requires]
+ - Dist::Zilla::Plugin::BumpVersionAfterRelease
+ - Dist::Zilla::Plugin::CopyFilesFromBuild
+ - Dist::Zilla::Plugin::RewriteVersion::Sanitized
+
+ [Added / develop suggests]
+ - Dist::Zilla::App::Command::bakeini 0.001001
+ - Dist::Zilla::PluginBundle::Author::KENTNL 2.016002
+
+ [Changed / configure recommends]
+ - ExtUtils::MakeMaker 6.94 → 6.98
+
+ [Changed / test recommends]
+ - ExtUtils::MakeMaker 6.94 → 6.98
+
+ [Removed / develop requires]
+ - Dist::Zilla::Plugin::Git::NextVersion::Sanitized
+ - Dist::Zilla::Plugin::PkgVersion
+ - Dist::Zilla::PluginBundle::Author::KENTNL 2.012002
+
+ [Removed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL::Lite v1.3.0
+
+1.000001 2014-04-05T11:36:12Z
+ [Added / test requires]
+ - FindBin
+
+ [Removed / test requires]
+ - Path::FindDev
 
 1.000000 2014-04-05T06:23:20Z
+ [Added / configure recommends]
+ - ExtUtils::MakeMaker 6.94
+
+ [Added / configure requires]
+ - ExtUtils::MakeMaker 6.30
+
  [Added / develop requires]
  - Dist::Zilla::Plugin::Git::NextRelease
  - Dist::Zilla::Plugin::Git::NextVersion::Sanitized
@@ -10,8 +47,35 @@
  - Dist::Zilla::Plugin::RunExtraTests
  - Dist::Zilla::Plugin::Test::ReportPrereqs
 
+ [Added / runtime requires]
+ - utf8
+
+ [Added / test recommends]
+ - CPAN::Meta
+ - CPAN::Meta::Requirements 2.120900
+ - ExtUtils::MakeMaker 6.94
+ - Test::More 1.001003
+
+ [Added / test requires]
+ - ExtUtils::MakeMaker
+ - File::Spec::Functions
+ - List::Util
+ - version
+
  [Changed / develop requires]
  - Dist::Zilla::PluginBundle::Author::KENTNL 2.002001 → 2.012002
+
+ [Changed / runtime requires]
+ - perl 5.006 → 5.008
+
+ [Changed / test requires]
+ - Test::More 1.001002 → 0.89
+
+ [Removed / build requires]
+ - Module::Build 0.4200
+
+ [Removed / configure requires]
+ - Module::Build 0.4200
 
  [Removed / develop requires]
  - Dist::Zilla::Plugin::Author::KENTNL::MinimumPerl
@@ -73,8 +137,17 @@
  [Added / develop suggests]
  - Dist::Zilla::PluginBundle::Author::KENTNL::Lite v1.3.0
 
+ [Changed / build requires]
+ - Module::Build 0.4007 → 0.4200
+
+ [Changed / configure requires]
+ - Module::Build 0.4007 → 0.4200
+
  [Changed / develop requires]
  - Test::Kwalitee 1.08 → 1.12
+
+ [Changed / test requires]
+ - Test::More 0.98 → 1.001002
 
  [Removed / develop recommends]
  - Dist::Zilla::PluginBundle::Author::KENTNL::Lite v1.3.0
@@ -85,27 +158,84 @@
  [Removed / develop suggests]
  - Dist::Zilla::PluginBundle::Author::KENTNL v1.8.3
 
+ [Removed / test requires]
+ - File::Spec
+ - IO::Handle
+ - IPC::Open3
+
 0.04000001 2013-09-24T16:22:46Z
+ [Added / test requires]
+ - File::Spec
+ - Test::DZil
+ - Test::Fatal
+
+ [Removed / test requires]
+ - Dist::Zilla
 
 0.04000000 2013-09-05T08:17:38Z
+ [Added / runtime requires]
+ - Dist::Zilla::Role::Bootstrap
+ - Moose
+
+ [Added / test requires]
+ - Cwd
+ - Path::Tiny
+
+ [Removed / runtime requires]
+ - Cwd
+ - Moo::HandleMoose::FakeMetaClass
+ - Path::Tiny
+ - Role::Tiny
+ - lib
 
 0.03000200 2013-09-03T03:36:10Z
+ [Added / test requires]
+ - Dist::Zilla
+ - File::Copy::Recursive
+ - Path::FindDev
 
 0.03000101 2013-08-31T01:52:46Z
 
 0.03000100 2013-08-31T01:43:36Z
+ [Added / runtime requires]
+ - Moo::HandleMoose::FakeMetaClass
+ - Role::Tiny
 
 0.03000000 2013-08-30T23:46:07Z
  [Added / develop requires]
  - Test::CPAN::Changes 0.19
  - Test::Kwalitee 1.08
 
+ [Added / runtime requires]
+ - lib
+
+ [Added / test requires]
+ - IO::Handle
+ - IPC::Open3
+
+ [Changed / build requires]
+ - Module::Build 0.4004 → 0.4007
+
+ [Changed / configure requires]
+ - Module::Build 0.4004 → 0.4007
+
  [Changed / develop suggests]
  - Dist::Zilla::PluginBundle::Author::KENTNL v1.7.2 → v1.8.3
+
+ [Removed / test requires]
+ - File::Find
+ - File::Temp
 
 0.02000100 2013-04-06T09:53:45Z
 
 0.02000000 2013-04-06T09:38:52Z
+ [Added / runtime requires]
+ - Cwd
+ - Path::Tiny
+
+ [Removed / runtime requires]
+ - Carp
+ - File::Spec
 
 0.01023602 2013-04-06T08:37:50Z
  [Added / develop requires]
@@ -115,15 +245,32 @@
  - Test::Pod::Coverage 1.08
  - version 0.9901
 
+ [Changed / build requires]
+ - Module::Build 0.3601 → 0.4004
+
+ [Changed / configure requires]
+ - Module::Build 0.3601 → 0.4004
+
  [Changed / develop recommends]
  - Dist::Zilla::PluginBundle::Author::KENTNL::Lite 0.01009803 → v1.3.0
 
  [Changed / develop suggests]
  - Dist::Zilla::PluginBundle::Author::KENTNL v1.2.0 → v1.7.2
 
+ [Changed / test requires]
+ - Test::More 0.88 → 0.98
+
 0.01023601 2012-02-02T19:41:29Z
+ [Added / runtime requires]
+ - perl 5.006
+ - strict
+ - warnings
+
  [Changed / develop suggests]
  - Dist::Zilla::PluginBundle::Author::KENTNL v1.0.0 → v1.2.0
+
+ [Removed / test requires]
+ - English
 
 0.01023600 2011-04-04T15:58:33Z
  [Added / develop recommends]
