@@ -6,7 +6,9 @@ use utf8;
 ## no critic ( NamingConventions::Capitalization )
 package Dist::Zilla::Plugin::Bootstrap::lib;
 ## use critic;
-$Dist::Zilla::Plugin::Bootstrap::lib::VERSION = '1.000002';
+
+our $VERSION = '1.000002';
+
 # ABSTRACT: A minimal boot-strapping for Dist::Zilla Plug-ins.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
