@@ -1,6 +1,13 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ [00 Trivial]
+ - use newer Role::Bootstrap ( closes #1 )
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.000002, see misc/*.deps* for details
+ - develop: (suggests: ↑1)
+ - runtime: ↑1
 
 1.000002 2014-07-15T07:33:24Z
  [00 Trivial]
