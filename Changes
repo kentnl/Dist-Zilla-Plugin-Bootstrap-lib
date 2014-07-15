@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.000004 2014-07-15T13:19:47Z
+
 1.000003 2014-07-15T12:39:08Z
  [00 Trivial]
  - use newer Role::Bootstrap ( closes #1 )
