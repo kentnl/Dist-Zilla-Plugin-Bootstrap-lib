@@ -18,6 +18,9 @@ copyfiles         = LICENSE
 srcreadme         = mkdn
 bumpversions      = 1
 
+[Prereqs]
+Dist::Zilla::Role::Bootstrap = 1.000000
+
 ;version_major     = 0
 ;version_minor     = 1
 ; the following data denotes when this minor was minted

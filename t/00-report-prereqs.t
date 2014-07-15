@@ -104,12 +104,12 @@ my $static_prereqs = do { my $x = {
                                     },
                       'suggests' => {
                                       'Dist::Zilla::App::Command::bakeini' => '0.001001',
-                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016002'
+                                      'Dist::Zilla::PluginBundle::Author::KENTNL' => '2.016003'
                                     }
                     },
        'runtime' => {
                       'requires' => {
-                                      'Dist::Zilla::Role::Bootstrap' => '0',
+                                      'Dist::Zilla::Role::Bootstrap' => '1.000000',
                                       'Moose' => '0',
                                       'perl' => '5.008',
                                       'strict' => '0',

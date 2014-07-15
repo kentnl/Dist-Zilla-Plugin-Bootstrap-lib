@@ -75,12 +75,12 @@
          },
          "suggests" : {
             "Dist::Zilla::App::Command::bakeini" : "0.001001",
-            "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.016002"
+            "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.016003"
          }
       },
       "runtime" : {
          "requires" : {
-            "Dist::Zilla::Role::Bootstrap" : "0",
+            "Dist::Zilla::Role::Bootstrap" : "1.000000",
             "Moose" : "0",
             "perl" : "5.008",
             "strict" : "0",
@@ -113,22 +113,22 @@
    "provides" : {
       "Dist::Zilla::Plugin::Bootstrap::lib" : {
          "file" : "lib/Dist/Zilla/Plugin/Bootstrap/lib.pm",
-         "version" : "1.000002"
+         "version" : "1.000003"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib/issues"
+         "web" : "https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib/issues"
       },
-      "homepage" : "https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib",
+      "homepage" : "https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib.git",
-         "web" : "https://github.com/kentfredric/Dist-Zilla-Plugin-Bootstrap-lib"
+         "url" : "https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib.git",
+         "web" : "https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib"
       }
    },
-   "version" : "1.000002",
+   "version" : "1.000003",
    "x_BuiltWith" : {
       "modules" : {
          "CPAN::Meta" : "2.141520",
@@ -177,8 +177,8 @@
          "Dist::Zilla::Plugin::TestRelease" : "5.019",
          "Dist::Zilla::Plugin::Twitter" : "0.025",
          "Dist::Zilla::Plugin::UploadToCPAN" : "5.019",
-         "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.016002",
-         "Dist::Zilla::Role::Bootstrap" : "1.000001",
+         "Dist::Zilla::PluginBundle::Author::KENTNL" : "2.016003",
+         "Dist::Zilla::Role::Bootstrap" : "1.000002",
          "ExtUtils::MakeMaker" : "6.98",
          "File::Copy::Recursive" : "0.38",
          "File::Spec::Functions" : "3.48",
@@ -233,7 +233,7 @@
                }
             },
             "name" : "Bootstrap::lib",
-            "version" : "1.000001"
+            "version" : "1.000002"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaConfig",
@@ -635,7 +635,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "1.000002-source",
+                  "tag" : "1.000003-source",
                   "tag_format" : "%v-source",
                   "tag_message" : "v%v",
                   "time_zone" : "local"
@@ -706,7 +706,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : "releases",
                   "signed" : 0,
-                  "tag" : "1.000002",
+                  "tag" : "1.000003",
                   "tag_format" : "%v",
                   "tag_message" : "v%v",
                   "time_zone" : "local"
@@ -783,6 +783,17 @@
                }
             },
             "name" : "@Author::KENTNL/::Role::BundleDeps",
+            "version" : "5.019"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Prereqs",
+            "config" : {
+               "Dist::Zilla::Plugin::Prereqs" : {
+                  "phase" : "runtime",
+                  "type" : "requires"
+               }
+            },
+            "name" : "Prereqs",
             "version" : "5.019"
          },
          {

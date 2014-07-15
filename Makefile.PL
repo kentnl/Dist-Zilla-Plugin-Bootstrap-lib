@@ -20,7 +20,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Dist::Zilla::Plugin::Bootstrap::lib",
   "PREREQ_PM" => {
-    "Dist::Zilla::Role::Bootstrap" => 0,
+    "Dist::Zilla::Role::Bootstrap" => "1.000000",
     "Moose" => 0,
     "strict" => 0,
     "utf8" => 0,
@@ -39,7 +39,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.89",
     "version" => 0
   },
-  "VERSION" => "1.000002",
+  "VERSION" => "1.000003",
   "test" => {
     "TESTS" => "t/*.t t/00-compile/*.t"
   }
@@ -48,7 +48,7 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "Cwd" => 0,
-  "Dist::Zilla::Role::Bootstrap" => 0,
+  "Dist::Zilla::Role::Bootstrap" => "1.000000",
   "ExtUtils::MakeMaker" => 0,
   "File::Copy::Recursive" => 0,
   "File::Spec::Functions" => 0,
