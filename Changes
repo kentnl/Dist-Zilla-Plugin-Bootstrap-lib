@@ -1,5 +1,7 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.000005 2014-08-03T12:30:53Z
+
 1.000004 2014-08-03T12:29:48Z
  [Dependencies::Stats]
  - Dependencies changed since 1.000003, see misc/*.deps* for details
