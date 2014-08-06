@@ -130,7 +130,7 @@ x_Dist_Zilla:
           try_built: ~
           try_built_method: mtime
       name: Bootstrap::lib
-      version: '1.000003'
+      version: '1.000004'
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@Author::KENTNL/MetaConfig'
