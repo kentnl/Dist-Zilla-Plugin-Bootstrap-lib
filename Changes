@@ -3,7 +3,7 @@
 1.000005 2014-08-03T12:31:58Z
  [Dependencies::Stats]
  - Dependencies changed since 1.000004, see misc/*.deps* for details
- - develop: (suggests: ↑1)
+ - develop: +1 (suggests: ↑1)
 
 1.000004 2014-08-03T12:29:48Z
  [Dependencies::Stats]
