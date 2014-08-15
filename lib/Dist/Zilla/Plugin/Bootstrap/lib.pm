@@ -13,6 +13,52 @@ our $VERSION = '1.000005';
 
 # AUTHORITY
 
+=begin MetaPOD::JSON v1.1.0
+
+{
+    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
+    "interface":"class",
+    "does":"Dist::Zilla::Role::Bootstrap"
+}
+
+=end MetaPOD::JSON
+
+=cut
+
+use Moose qw( with );
+with 'Dist::Zilla::Role::Bootstrap';
+
+sub bootstrap {
+  my ($self) = @_;
+
+  my $bootstrap_root = $self->_bootstrap_root;
+
+  if ( not $bootstrap_root ) {
+    return;
+  }
+
+  my $bootstrap_path = $bootstrap_root->child('lib');
+  $self->_add_inc("$bootstrap_path");
+  $self->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
+  my $it = $bootstrap_path->iterator( { recurse => 1 } );
+
+  while ( my $file = $it->() ) {
+    next unless $file->basename =~ /[.]pm$/msx;
+    my $rpath = $file->relative($bootstrap_path)->stringify;
+    if ( exists $INC{$rpath} ) {
+      $self->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
+    }
+  }
+
+  return 1;
+
+}
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
+
+1;
+
 =head1 SYNOPSIS
 
     [Bootstrap::lib]
@@ -142,49 +188,3 @@ C<register_component>
 This module also appears on the plugin stash, and responds naturally to C<metaconfig> requests.
 
 =cut
-
-=begin MetaPOD::JSON v1.1.0
-
-{
-    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
-    "interface":"class",
-    "does":"Dist::Zilla::Role::Bootstrap"
-}
-
-=end MetaPOD::JSON
-
-=cut
-
-use Moose qw( with );
-with 'Dist::Zilla::Role::Bootstrap';
-
-sub bootstrap {
-  my ($self) = @_;
-
-  my $bootstrap_root = $self->_bootstrap_root;
-
-  if ( not $bootstrap_root ) {
-    return;
-  }
-
-  my $bootstrap_path = $bootstrap_root->child('lib');
-  $self->_add_inc("$bootstrap_path");
-  $self->log( [ 'Bootstrapping %s', "$bootstrap_path" ] );
-  my $it = $bootstrap_path->iterator( { recurse => 1 } );
-
-  while ( my $file = $it->() ) {
-    next unless $file->basename =~ /[.]pm$/msx;
-    my $rpath = $file->relative($bootstrap_path)->stringify;
-    if ( exists $INC{$rpath} ) {
-      $self->log( [ '%s was not bootstrapped. You need to move Bootstrap::lib higher', $rpath ] );
-    }
-  }
-
-  return 1;
-
-}
-
-__PACKAGE__->meta->make_immutable;
-no Moose;
-
-1;
