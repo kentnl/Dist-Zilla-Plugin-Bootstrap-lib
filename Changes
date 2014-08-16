@@ -1,5 +1,18 @@
 ﻿Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.000005 2014-08-15T21:16:17Z
+ [00 Trivial]
+ - CPANDAY!
+ - no code changes.
+ - whitespace reduction.
+
+ [Dependencies::Stats]
+ - Dependencies changed since 1.000004, see misc/*.deps* for details
+ - develop: +1 (suggests: ↑1)
+
+ [Misc]
+ - Improve source side POD to reduce build side whitespace.
+
 1.000004 2014-08-03T12:29:48Z
  [Dependencies::Stats]
  - Dependencies changed since 1.000003, see misc/*.deps* for details
@@ -9,7 +22,7 @@
 
  [Misc]
  - use -SingleEncoding
- - Get newer Test::ReportVersions
+ - Get newer Test::ReportPrereqs
 
 1.000003 2014-07-15T12:39:08Z
  [00 Trivial]

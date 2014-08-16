@@ -7,141 +7,11 @@ use utf8;
 package Dist::Zilla::Plugin::Bootstrap::lib;
 ## use critic;
 
-our $VERSION = '1.000004';
+our $VERSION = '1.000005';
 
 # ABSTRACT: A minimal boot-strapping for Dist::Zilla Plug-ins.
 
 our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -201,7 +71,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 1.000004
+version 1.000005
 
 =head1 SYNOPSIS
 
@@ -216,6 +86,17 @@ This module exists for loading either C</lib> or C</Dist-Name-$VERSION/lib> into
 
 This is mostly useful for writing L<< C<Dist::Zilla>|Dist::Zilla >> plug-ins, so that you may build and release
 a plug-in using itself.
+
+=begin MetaPOD::JSON v1.1.0
+
+{
+    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
+    "interface":"class",
+    "does":"Dist::Zilla::Role::Bootstrap"
+}
+
+
+=end MetaPOD::JSON
 
 =head1 USE CASES
 
@@ -324,17 +205,6 @@ invoked after C<plugin_from_config> is called ( where C<new> is called ), which 
 C<register_component>
 
 This module also appears on the plugin stash, and responds naturally to C<metaconfig> requests.
-
-=begin MetaPOD::JSON v1.1.0
-
-{
-    "namespace":"Dist::Zilla::Plugin::Bootstrap::lib",
-    "interface":"class",
-    "does":"Dist::Zilla::Role::Bootstrap"
-}
-
-
-=end MetaPOD::JSON
 
 =head1 AUTHOR
 
