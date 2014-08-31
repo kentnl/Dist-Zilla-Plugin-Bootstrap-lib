@@ -1,6 +1,8 @@
 ﻿Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.001000 2014-08-31T19:36:06Z
  [00 Minor]
  - Test refactor.
 
