@@ -28,4 +28,6 @@ $t->add_file( 'E-0.01/lib/E.pm', $epm );
 
 $t->build_ok;
 
+note explain $t->builder->log_messages;
+
 done_testing;
