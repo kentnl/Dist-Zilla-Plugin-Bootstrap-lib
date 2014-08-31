@@ -3,7 +3,7 @@ abstract: 'A minimal boot-strapping for Dist::Zilla Plug-ins.'
 author:
   - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
-  Cwd: '0'
+  Dist::Zilla::Util::Test::KENTNL: '1.003001'
   ExtUtils::MakeMaker: '0'
   File::Copy::Recursive: '0'
   File::Spec: '0'
@@ -40,7 +40,6 @@ version: '1.001000'
 x_BuiltWith:
   modules:
     CPAN::Meta: '2.142060'
-    Cwd: '3.49'
     Dist::Zilla::App::Command::bakeini: '0.001002'
     Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes: '0.003001'
     Dist::Zilla::Plugin::Authority: '1.006'
@@ -88,6 +87,7 @@ x_BuiltWith:
     Dist::Zilla::Plugin::UploadToCPAN: '5.020'
     Dist::Zilla::PluginBundle::Author::KENTNL: '2.020000'
     Dist::Zilla::Role::Bootstrap: '1.000003'
+    Dist::Zilla::Util::Test::KENTNL: '1.003001'
     ExtUtils::MakeMaker: '6.98'
     File::Copy::Recursive: '0.38'
     File::Spec: '3.49'

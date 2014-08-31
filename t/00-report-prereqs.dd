@@ -82,7 +82,7 @@ do { my $x = {
                                      'Test::More' => '1.001003'
                                    },
                    'requires' => {
-                                   'Cwd' => '0',
+                                   'Dist::Zilla::Util::Test::KENTNL' => '1.003001',
                                    'ExtUtils::MakeMaker' => '0',
                                    'File::Copy::Recursive' => '0',
                                    'File::Spec' => '0',
