@@ -8,7 +8,7 @@ copyright_holder = Kent Fredric <kentnl@cpan.org>
 ;try_built = 1
 
 [@Author::KENTNL]
-git_versions = 1
+:version          = 2.020
 twitter_hash_tags = #perl #cpan
 normal_form       = numify
 mantissa          = 6
