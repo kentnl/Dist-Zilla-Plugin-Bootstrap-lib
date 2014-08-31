@@ -16,6 +16,10 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
 
  [Removed / test requires]
  - Cwd
+ - File::Copy::Recursive
+ - FindBin
+ - Path::Tiny
+ - Test::Fatal
 
 1.000005 2014-08-15T21:16:17Z
  [Added / develop requires]
