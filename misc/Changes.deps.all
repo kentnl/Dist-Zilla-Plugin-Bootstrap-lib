@@ -25,6 +25,7 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
 
  [Changed / develop requires]
  - Dist::Zilla::Plugin::Git::NextRelease 0 → 0.004000
+ - Dist::Zilla::Plugin::MetaData::BuiltWith 0 → 1.004000
 
  [Changed / develop suggests]
  - Dist::Zilla::App::Command::bakeini 0.001002 → 0.002005
