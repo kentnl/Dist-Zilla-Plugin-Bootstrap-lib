@@ -1,6 +1,8 @@
-﻿Revision history for {{$dist->name}}
+Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+1.001001 2017-03-01T21:09:23Z d39d30d
  [Bugfix]
  - Update tooling to avoid .-missing-in-INC bugs in tests
  - Closes https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib/issues/3
