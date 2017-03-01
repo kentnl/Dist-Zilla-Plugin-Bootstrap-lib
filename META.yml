@@ -23,6 +23,8 @@ provides:
   Dist::Zilla::Plugin::Bootstrap::lib:
     file: lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
     version: '1.001001'
+recommends:
+  Moose: '2.000'
 requires:
   Dist::Zilla::Role::Bootstrap: '1.000000'
   Moose: '0'

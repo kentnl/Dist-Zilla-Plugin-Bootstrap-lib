@@ -1,7 +1,7 @@
 do { my $x = {
        'configure' => {
                         'recommends' => {
-                                          'ExtUtils::MakeMaker' => '7.24'
+                                          'ExtUtils::MakeMaker' => '7.00'
                                         },
                         'requires' => {
                                         'ExtUtils::MakeMaker' => '0',
@@ -10,7 +10,7 @@ do { my $x = {
                       },
        'develop' => {
                       'recommends' => {
-                                        'Test::More' => '1.302073'
+                                        'Test::More' => '0.99'
                                       },
                       'requires' => {
                                       'Dist::Zilla' => '5',
@@ -47,6 +47,7 @@ do { my $x = {
                                       'Dist::Zilla::Plugin::Prereqs' => '0',
                                       'Dist::Zilla::Plugin::Prereqs::AuthorDeps' => '0',
                                       'Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled' => '0',
+                                      'Dist::Zilla::Plugin::Prereqs::Upgrade' => '0',
                                       'Dist::Zilla::Plugin::Readme::Brief' => '0',
                                       'Dist::Zilla::Plugin::ReadmeAnyFromPod' => '0',
                                       'Dist::Zilla::Plugin::RewriteVersion::Sanitized' => '0',
@@ -79,6 +80,9 @@ do { my $x = {
                                     }
                     },
        'runtime' => {
+                      'recommends' => {
+                                        'Moose' => '2.000'
+                                      },
                       'requires' => {
                                       'Dist::Zilla::Role::Bootstrap' => '1.000000',
                                       'Moose' => '0',
@@ -91,8 +95,8 @@ do { my $x = {
        'test' => {
                    'recommends' => {
                                      'CPAN::Meta' => '2.120900',
-                                     'ExtUtils::MakeMaker' => '7.24',
-                                     'Test::More' => '1.302073'
+                                     'ExtUtils::MakeMaker' => '7.00',
+                                     'Test::More' => '0.99'
                                    },
                    'requires' => {
                                    'Dist::Zilla::Util::Test::KENTNL' => '1.003001',
