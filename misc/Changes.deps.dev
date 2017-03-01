@@ -12,6 +12,9 @@ This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and 
  - Test::MinimumVersion
  - Test::More 0.96
 
+ [Changed / develop requires]
+ - Dist::Zilla::Plugin::Git::NextRelease 0 → 0.004000
+
  [Changed / develop suggests]
  - Dist::Zilla::App::Command::bakeini 0.001002 → 0.002005
  - Dist::Zilla::PluginBundle::Author::KENTNL 2.020000 → 2.025020
