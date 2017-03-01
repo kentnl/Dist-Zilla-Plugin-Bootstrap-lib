@@ -5,7 +5,7 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - perl 5.008
 
  [Added / develop recommends]
- - Test::More 1.302073
+ - Test::More 0.99
 
  [Added / develop requires]
  - Dist::Zilla 5
@@ -13,6 +13,7 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Dist::Zilla::Plugin::Bootstrap::lib
  - Dist::Zilla::Plugin::MetaYAML::Minimal
  - Dist::Zilla::Plugin::Prereqs::AuthorDeps
+ - Dist::Zilla::Plugin::Prereqs::Upgrade
  - Dist::Zilla::Plugin::Readme::Brief
  - Dist::Zilla::Plugin::Test::EOL
  - English
@@ -21,11 +22,14 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Test::MinimumVersion
  - Test::More 0.96
 
+ [Added / runtime recommends]
+ - Moose 2.000
+
  [Added / test requires]
  - perl 5.008
 
  [Changed / configure recommends]
- - ExtUtils::MakeMaker 6.98 → 7.24
+ - ExtUtils::MakeMaker 6.98 → 7.00
 
  [Changed / develop requires]
  - Dist::Zilla::Plugin::Git::NextRelease 0 → 0.004000
@@ -37,8 +41,8 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Dist::Zilla::PluginBundle::Author::KENTNL 2.020000 → 2.025020
 
  [Changed / test recommends]
- - ExtUtils::MakeMaker 6.98 → 7.24
- - Test::More 1.001003 → 1.302073
+ - ExtUtils::MakeMaker 6.98 → 7.00
+ - Test::More 1.001003 → 0.99
 
  [Changed / test requires]
  - Test::More 0.89 → 0
