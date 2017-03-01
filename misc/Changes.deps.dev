@@ -5,6 +5,7 @@ This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and 
  - Test::More 1.302073
 
  [Added / develop requires]
+ - Dist::Zilla::Plugin::Readme::Brief
  - Dist::Zilla::Plugin::Test::EOL
  - English
  - Test::EOL
@@ -17,6 +18,7 @@ This file contains changes to DEVELOPMENT dependencies only ( both REQUIRED and 
 
  [Removed / develop requires]
  - Dist::Zilla::Plugin::EOLTests
+ - Dist::Zilla::Plugin::ReadmeFromPod
 
 1.001000 2014-08-31T19:36:06Z
  [Added / develop requires]
