@@ -18,6 +18,7 @@ misc/Changes.deps
 misc/Changes.deps.all
 misc/Changes.deps.dev
 misc/Changes.deps.opt
+misc/built_with.json
 misc/perlcritic.deps
 perlcritic.rc
 t/00-compile/lib_Dist_Zilla_Plugin_Bootstrap_lib_pm.t
