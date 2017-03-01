@@ -14,6 +14,7 @@ do { my $x = {
                                       },
                       'requires' => {
                                       'Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes' => '0.001001',
+                                      'Dist::Zilla::Plugin::Author::KENTNL::TravisCI' => '0.001002',
                                       'Dist::Zilla::Plugin::Authority' => '1.006',
                                       'Dist::Zilla::Plugin::AutoPrereqs' => '0',
                                       'Dist::Zilla::Plugin::BumpVersionAfterRelease' => '0',

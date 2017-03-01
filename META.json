@@ -29,6 +29,7 @@
          },
          "requires" : {
             "Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes" : "0.001001",
+            "Dist::Zilla::Plugin::Author::KENTNL::TravisCI" : "0.001002",
             "Dist::Zilla::Plugin::Authority" : "1.006",
             "Dist::Zilla::Plugin::AutoPrereqs" : "0",
             "Dist::Zilla::Plugin::BumpVersionAfterRelease" : "0",
@@ -138,6 +139,7 @@
          "CPAN::Meta" : "2.150010",
          "Dist::Zilla::App::Command::bakeini" : "0.002005",
          "Dist::Zilla::Plugin::Author::KENTNL::RecommendFixes" : "0.005002",
+         "Dist::Zilla::Plugin::Author::KENTNL::TravisCI" : "0.001003",
          "Dist::Zilla::Plugin::Authority" : "1.009",
          "Dist::Zilla::Plugin::AutoPrereqs" : "6.008",
          "Dist::Zilla::Plugin::BumpVersionAfterRelease" : "0.015",
@@ -357,6 +359,19 @@
             "class" : "Dist::Zilla::Plugin::Manifest",
             "name" : "@Author::KENTNL/Manifest",
             "version" : "6.008"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::Author::KENTNL::TravisCI",
+            "config" : {
+               "Dist::Zilla::Plugin::Author::KENTNL::TravisCI" : {
+                  "fail_perls" : [
+                     "5.8"
+                  ],
+                  "skip_perls" : []
+               }
+            },
+            "name" : "@Author::KENTNL/Author::KENTNL::TravisCI",
+            "version" : "0.001003"
          },
          {
             "class" : "Dist::Zilla::Plugin::CopyFilesFromBuild",
