@@ -792,7 +792,7 @@
             "class" : "Dist::Zilla::Plugin::Git::CommitBuild",
             "config" : {
                "Dist::Zilla::Plugin::Git::CommitBuild" : {
-                  "branch" : "build/%b",
+                  "branch" : "builds",
                   "build_root" : null,
                   "message" : "Build results of %h (on %b)",
                   "multiple_inheritance" : 0,
