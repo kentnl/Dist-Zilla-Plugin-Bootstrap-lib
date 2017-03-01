@@ -21,6 +21,9 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  [Changed / configure recommends]
  - ExtUtils::MakeMaker 6.98 → 7.24
 
+ [Changed / develop requires]
+ - Dist::Zilla::Plugin::Git::NextRelease 0 → 0.004000
+
  [Changed / develop suggests]
  - Dist::Zilla::App::Command::bakeini 0.001002 → 0.002005
  - Dist::Zilla::PluginBundle::Author::KENTNL 2.020000 → 2.025020
