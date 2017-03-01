@@ -45,7 +45,6 @@ x_BuiltWith:
     Dist::Zilla::Plugin::BumpVersionAfterRelease: '0.015'
     Dist::Zilla::Plugin::ConfirmRelease: '6.008'
     Dist::Zilla::Plugin::CopyFilesFromBuild: '0.163040'
-    Dist::Zilla::Plugin::EOLTests: '0.19'
     Dist::Zilla::Plugin::Git::Check: '2.041'
     Dist::Zilla::Plugin::Git::Commit: '2.041'
     Dist::Zilla::Plugin::Git::CommitBuild: '2.041'
@@ -70,12 +69,13 @@ x_BuiltWith:
     Dist::Zilla::Plugin::PodWeaver: '4.008'
     Dist::Zilla::Plugin::Prereqs: '6.008'
     Dist::Zilla::Plugin::Prereqs::Recommend::MatchInstalled: '0.003001'
+    Dist::Zilla::Plugin::Readme::Brief: '0.003000'
     Dist::Zilla::Plugin::ReadmeAnyFromPod: '0.163250'
-    Dist::Zilla::Plugin::ReadmeFromPod: '0.35'
     Dist::Zilla::Plugin::RewriteVersion::Sanitized: '0.001005'
     Dist::Zilla::Plugin::RunExtraTests: '0.029'
     Dist::Zilla::Plugin::Test::CPAN::Changes: '0.012'
     Dist::Zilla::Plugin::Test::Compile::PerFile: '0.003902'
+    Dist::Zilla::Plugin::Test::EOL: '0.19'
     Dist::Zilla::Plugin::Test::Kwalitee: '2.12'
     Dist::Zilla::Plugin::Test::MinimumVersion: '2.000007'
     Dist::Zilla::Plugin::Test::Perl::Critic: '3.000'
@@ -254,17 +254,16 @@ x_Dist_Zilla:
       name: '@Author::KENTNL/Test::Kwalitee'
       version: '2.12'
     -
-      class: Dist::Zilla::Plugin::EOLTests
+      class: Dist::Zilla::Plugin::Test::EOL
       config:
         Dist::Zilla::Plugin::Test::EOL:
-          filename: xt/release/eol.t
+          filename: xt/author/eol.t
           finder:
             - ':ExecFiles'
             - ':InstallModules'
             - ':TestFiles'
           trailing_whitespace: '1'
-          version: '0.19'
-      name: '@Author::KENTNL/EOLTests'
+      name: '@Author::KENTNL/Test::EOL'
       version: '0.19'
     -
       class: Dist::Zilla::Plugin::Test::MinimumVersion
@@ -433,9 +432,9 @@ x_Dist_Zilla:
       name: '@Author::KENTNL/Author::KENTNL::RecommendFixes'
       version: '0.005002'
     -
-      class: Dist::Zilla::Plugin::ReadmeFromPod
-      name: '@Author::KENTNL/ReadmeFromPod'
-      version: '0.35'
+      class: Dist::Zilla::Plugin::Readme::Brief
+      name: '@Author::KENTNL/ShippedReadme'
+      version: '0.003000'
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       config:

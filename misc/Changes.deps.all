@@ -8,6 +8,8 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Test::More 1.302073
 
  [Added / develop requires]
+ - Dist::Zilla::Plugin::Readme::Brief
+ - Dist::Zilla::Plugin::Test::EOL
  - English
  - Test::EOL
  - Test::MinimumVersion
@@ -29,6 +31,10 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
 
  [Changed / test requires]
  - Test::More 0.89 → 0
+
+ [Removed / develop requires]
+ - Dist::Zilla::Plugin::EOLTests
+ - Dist::Zilla::Plugin::ReadmeFromPod
 
 1.001000 2014-08-31T19:36:06Z
  [Added / develop requires]
