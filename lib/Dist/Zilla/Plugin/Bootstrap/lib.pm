@@ -7,7 +7,7 @@ use utf8;
 package Dist::Zilla::Plugin::Bootstrap::lib;
 ## use critic;
 
-our $VERSION = '1.001001';
+our $VERSION = '1.001002';
 
 # ABSTRACT: A minimal boot-strapping for Dist::Zilla Plug-ins.
 
@@ -71,7 +71,7 @@ Dist::Zilla::Plugin::Bootstrap::lib - A minimal boot-strapping for Dist::Zilla P
 
 =head1 VERSION
 
-version 1.001001
+version 1.001002
 
 =head1 SYNOPSIS
 

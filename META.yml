@@ -22,7 +22,7 @@ name: Dist-Zilla-Plugin-Bootstrap-lib
 provides:
   Dist::Zilla::Plugin::Bootstrap::lib:
     file: lib/Dist/Zilla/Plugin/Bootstrap/lib.pm
-    version: '1.001001'
+    version: '1.001002'
 recommends:
   Moose: '2.000'
 requires:
@@ -36,4 +36,4 @@ resources:
   bugtracker: https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib/issues
   homepage: https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib
   repository: https://github.com/kentnl/Dist-Zilla-Plugin-Bootstrap-lib.git
-version: '1.001001'
+version: '1.001002'

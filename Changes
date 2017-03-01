@@ -1,5 +1,7 @@
 Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
+1.001002 2017-03-01T21:47:55Z 583d00f
+
 1.001001 2017-03-01T21:09:23Z d39d30d
  [Bugfix]
  - Update tooling to avoid .-missing-in-INC bugs in tests
