@@ -8,11 +8,15 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  - Test::More 1.302073
 
  [Added / develop requires]
+ - Dist::Zilla 5
  - Dist::Zilla::Plugin::Author::KENTNL::TravisCI 0.001002
+ - Dist::Zilla::Plugin::Bootstrap::lib
  - Dist::Zilla::Plugin::MetaYAML::Minimal
+ - Dist::Zilla::Plugin::Prereqs::AuthorDeps
  - Dist::Zilla::Plugin::Readme::Brief
  - Dist::Zilla::Plugin::Test::EOL
  - English
+ - Software::License::Perl_5
  - Test::EOL
  - Test::MinimumVersion
  - Test::More 0.96
@@ -26,6 +30,7 @@ This file contains ALL changes in dependencies in both REQUIRED / OPTIONAL depen
  [Changed / develop requires]
  - Dist::Zilla::Plugin::Git::NextRelease 0 → 0.004000
  - Dist::Zilla::Plugin::MetaData::BuiltWith 0 → 1.004000
+ - Dist::Zilla::Plugin::Test::Compile::PerFile 0 → 0.003902
 
  [Changed / develop suggests]
  - Dist::Zilla::App::Command::bakeini 0.001002 → 0.002005
