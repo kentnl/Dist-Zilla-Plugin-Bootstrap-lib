@@ -20,7 +20,7 @@
          },
          "requires" : {
             "ExtUtils::MakeMaker" : "0",
-            "perl" : "5.008"
+            "perl" : "5.006"
          }
       },
       "develop" : {
@@ -101,9 +101,8 @@
          "requires" : {
             "Dist::Zilla::Role::Bootstrap" : "1.000000",
             "Moose" : "0",
-            "perl" : "5.008",
+            "perl" : "5.006",
             "strict" : "0",
-            "utf8" : "0",
             "warnings" : "0"
          }
       },
@@ -118,7 +117,7 @@
             "File::Spec" : "0",
             "Test::DZil" : "0",
             "Test::More" : "0",
-            "perl" : "5.008"
+            "perl" : "5.006"
          }
       }
    },
