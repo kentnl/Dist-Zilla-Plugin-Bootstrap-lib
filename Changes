@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Plugin-Bootstrap-lib
 
-1.001002 2017-03-18T04:54:51Z 26a63b6
+1.001002 2017-03-18T04:55:16Z 94567f3
  - Stop using Test::KENTNL/dztest
 
  [Dependencies::Stats]

@@ -28,6 +28,9 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 use Moose qw( with );
 with 'Dist::Zilla::Role::Bootstrap';
 
+__PACKAGE__->meta->make_immutable;
+no Moose;
+
 sub bootstrap {
   my ($self) = @_;
 
@@ -53,9 +56,6 @@ sub bootstrap {
   return 1;
 
 }
-
-__PACKAGE__->meta->make_immutable;
-no Moose;
 
 1;
 
