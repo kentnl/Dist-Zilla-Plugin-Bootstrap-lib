@@ -24,8 +24,18 @@ our $AUTHORITY = 'cpan:KENTNL'; # AUTHORITY
 
 
 
-use Moose qw( with );
+use Moose qw( with around );
 with 'Dist::Zilla::Role::Bootstrap';
+
+around dump_config => sub {
+  my ( $orig, $self, @args ) = @_;
+  my $config    = $self->$orig(@args);
+  my $localconf = {};
+
+  $localconf->{ q[$] . __PACKAGE__ . '::VERSION' } = $VERSION unless __PACKAGE__ eq ref $self;
+  $config->{ +__PACKAGE__ } = $localconf if keys %{$localconf};
+  return $config;
+};
 
 __PACKAGE__->meta->make_immutable;
 no Moose;
