@@ -1,3 +1,4 @@
-.build
-Dist-Zilla-Plugin-Bootstrap-lib*
+/.build
+/Dist-Zilla-Plugin-Bootstrap-lib-*
+/tmp/
 *.swp
