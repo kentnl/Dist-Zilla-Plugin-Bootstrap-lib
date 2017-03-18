@@ -3,7 +3,6 @@ abstract: 'A minimal boot-strapping for Dist::Zilla Plug-ins.'
 author:
   - 'Kent Fredric <kentnl@cpan.org>'
 build_requires:
-  Dist::Zilla::Util::Test::KENTNL: '1.003001'
   ExtUtils::MakeMaker: '0'
   File::Spec: '0'
   Test::DZil: '0'

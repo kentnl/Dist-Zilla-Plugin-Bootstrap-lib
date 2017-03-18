@@ -1,20 +1,17 @@
 use strict;
 use warnings;
 
-use Test::More;
-use Test::DZil qw( simple_ini );
-use Dist::Zilla::Util::Test::KENTNL 1.003001 qw(dztest);
+use Test::More tests => 1;
+use Test::DZil qw( simple_ini Builder );
 require Dist::Zilla::Plugin::Bootstrap::lib;
 
-my $t = dztest();
-$t->add_file(
-  'dist.ini' => simple_ini(
+my $files = {};
+$files->{'source/dist.ini'} = simple_ini(
     { name => 'E' },
     [ 'Bootstrap::lib', { try_built => 1 } ],    #
     ['=E'],
-  )
 );
-$t->add_file( 'lib/E.pm', <<'EOF');
+$files->{'source/lib/E.pm'} = <<'EOF';
 use strict;
 use warnings;
 package E;
@@ -24,8 +21,11 @@ sub register_component {}
 1;
 EOF
 
-$t->build_ok;
+my $test =
+  Builder->from_config( { dist_root => 'invalid' }, { add_files => $files } );
+$test->chrome->logger->set_debug(1);
+$test->build;
 
-note explain $t->builder->log_messages;
+pass("build ok");
 
-done_testing;
+note explain $test->log_messages;

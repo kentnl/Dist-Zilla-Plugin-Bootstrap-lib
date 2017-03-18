@@ -1,6 +1,8 @@
 This file contains changes in REQUIRED dependencies for standard CPAN phases (configure/build/runtime/test)
 
 1.001002
+ [Removed / test requires]
+ - Dist::Zilla::Util::Test::KENTNL 1.003001
 
 1.001001 2017-03-01T21:09:23Z
  [Added / configure requires]
